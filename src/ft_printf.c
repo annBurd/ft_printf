@@ -1,0 +1,74 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/04 18:26:16 by aburdeni          #+#    #+#             */
+/*   Updated: 2018/09/30 20:11:45 by aburdeni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../inc/ft_printf.h"
+
+void		start_handle(t_print *aq)
+{
+	WIDTH == -1 && (WIDTH = (short)va_arg(aq->va, int));
+	PREC == -1 && (PREC = (short)va_arg(aq->va, int));
+	if ((TY == 'b') && (BASE = 2))
+		handle_i(aq);
+	else if ((TY == 'o' || TY == 'O') && (BASE = 8))
+		handle_i(aq);
+	else if ((DEC || TY == 'u' || TY == 'U') && (BASE = 10))
+		handle_i(aq);
+	else if ((HEX || TY == 'p') && (BASE = 16))
+		handle_i(aq);
+//	else if (TY == '%' || (!LEN && (TY == 'c' || TY == 's')))
+//	 	handle_c(pr, mark);
+//	else if (WC || WS)
+//		handle_wc(pr, mark);
+}
+
+void		explore(t_print *aq, const char *format)
+{
+	char *line;
+	char *point;
+
+	line = (char*)format;
+	point = (char*)format;
+	while (*line)
+	{
+		if (*line == '%')
+		{
+			if (line - point > 0)
+				pr_join(aq, point, line - point);
+			line++;
+			ft_bzero(&aq->sp, sizeof(t_sp));
+			set_flag(&line, &aq->sp);
+			point = line;
+			start_handle(aq);
+		}
+		if (!*(line + 1) && line - point > 0)
+			pr_join(aq, point, line - point);
+		line++;
+	}
+}
+
+int			ft_printf(const char *format, ...)
+{
+	static t_print	aq;
+
+	ft_bzero(&aq, sizeof(t_print));
+	if (format)
+	{
+		va_start(aq.va, format);
+		explore(&aq, format);
+		va_end(aq.va);
+	}
+	aq.out[aq.i] = 0;
+	write(1, aq.out, aq.i);
+	write(1, "\n", 1);
+	aq.size += (int)aq.i;
+	return (aq.size);
+}
