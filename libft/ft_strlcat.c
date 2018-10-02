@@ -18,9 +18,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	long	j;
 	long	n;
 	size_t	sum;
-	char	*sorc;
 
-	sorc = (char*)src;
 	j = 0;
 	i = ft_strlen(dst);
 	if (dstsize <= ft_strlen(dst))
@@ -34,6 +32,6 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 		j++;
 		i++;
 	}
-	dst[i] = '\0';
+	dst[i] = 0;
 	return (sum);
 }
