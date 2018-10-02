@@ -14,17 +14,22 @@
 
 void		start_handle(t_print *aq)
 {
-	WIDTH == -1 && (WIDTH = (short)va_arg(aq->va, int));
-	PREC == -1 && (PREC = (short)va_arg(aq->va, int));
-	if ((TY == 'b') && (BASE = 2))
+	if (S.width == -1)
+		S.width = (short)va_arg(aq->va, int);
+	if (S.prec == -1)
+		S.prec = (short)va_arg(aq->va, int);
+	if ((S.ty == 'b') && (S.base = 2))
 		handle_i(aq);
-	else if ((TY == 'o' || TY == 'O') && (BASE = 8))
+	else if ((S.ty == 'o' || S.ty == 'O') && (S.base = 8))
 		handle_i(aq);
-	else if ((DEC || TY == 'u' || TY == 'U') && (BASE = 10))
+	else if (S.ty == 'i' || S.ty == 'd' || S.ty == 'D' || S.ty == 'u' || S.ty == 'U')
+	{
+		S.base = 10;
 		handle_i(aq);
-	else if ((HEX || TY == 'p') && (BASE = 16))
+	}
+	else if ((S.ty == 'x' || S.ty == 'X' || S.ty == 'p') && (S.base = 16))
 		handle_i(aq);
-//	else if (TY == '%' || (!LEN && (TY == 'c' || TY == 's')))
+//	else if (S.ty == 'c' || S.ty == 's')
 //	 	handle_c(pr, mark);
 //	else if (WC || WS)
 //		handle_wc(pr, mark);

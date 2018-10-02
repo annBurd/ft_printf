@@ -14,94 +14,98 @@
 
 void	extract_i(t_print *aq, intmax_t *t, uintmax_t *ut)
 {
-	if (DEC && LEN == 0)
+	if ((S.ty == 'i' || S.ty == 'd') && S.length == 0)
 		*t = (va_arg(aq->va, int));
-	else if (DEC && LEN == h)
+	else if ((S.ty == 'i' || S.ty == 'd') && S.length == h)
 		*t = (short)va_arg(aq->va, int);
-	else if (DEC && LEN == hh)
+	else if ((S.ty == 'i' || S.ty == 'd') && S.length == hh)
 		*t = (signed char)va_arg(aq->va, int);
-	else if (DEC && LEN == l)
+	else if ((S.ty == 'i' || S.ty == 'd') && S.length == l)
 		*t = (va_arg(aq->va, long int));
-	else if (DEC && LEN == ll)
+	else if ((S.ty == 'i' || S.ty == 'd') && S.length == ll)
 		*t = (va_arg(aq->va, long long int));
-	else if (DEC && LEN == j)
+	else if ((S.ty == 'i' || S.ty == 'd') && S.length == j)
 		*t = (va_arg(aq->va, intmax_t));
-	else if (LEN == 0)
+	else if (S.length == 0)
 		*ut = va_arg(aq->va, unsigned int);
-	else if (LEN == h)
+	else if (S.length == h)
 		*ut = (unsigned short)va_arg(aq->va, unsigned int);
-	else if (LEN == hh)
+	else if (S.length == hh)
 		*ut = (unsigned char)va_arg(aq->va, unsigned int);
-	else if (LEN == l)
+	else if (S.length == l)
 		*ut = (va_arg(aq->va, unsigned long int));
-	else if (LEN == ll)
+	else if (S.length == ll)
 		*ut = (va_arg(aq->va, unsigned long long int));
-	else if (LEN == j)
+	else if (S.length == j)
 		*ut = (va_arg(aq->va, uintmax_t));
 }
 
 void		get_i(t_print *aq, intmax_t *t, uintmax_t *ut)
 {
 	*t = 0;
-	if (LEN == z)
+	if (S.length == z)
 		*ut = (uintmax_t)va_arg(aq->va, size_t);
-	else if (DEC && LEN != z)
+	else if ((S.ty == 'i' || S.ty == 'd') && S.length != z)
 	{
 		extract_i(aq, t, ut);
 		*ut = (uintmax_t)(*t < 0 ? *t * -1 : *t);
 	}
-	else if (TY == 'p')
+	else if (S.ty == 'p')
 		*ut = (uintmax_t)va_arg(aq->va, void*);
 	else
 		extract_i(aq, t, ut);
-	*ut && (SIGN = (short)(*t < 0 ? -1 : 1));
-	NLEN = ft_nbrulen(*ut, BASE);
-	APOST && (APOST = (short)(NLEN / 3 - (NLEN % 3 ? 0 : 1)));
-	NLEN += APOST;
+	*ut && (S.v = (short)(*t < 0 ? -1 : 1));
+	S.ln = ft_nbrulen(*ut, S.base);
+	if (S.apost)
+		S.apost = (short)(S.ln / 3 - (S.ln % 3 ? 0 : 1));
+	S.ln += S.apost;
 }
 
 void		set_flag_i(t_print *aq)
 {
-	!DEC && (PLUS = 0);
-	!DEC && (SPC = 0);
-	if (HASH && SIGN && TY == 'o')
-		HASH = 1;
-	else if ((HASH && SIGN && HEX) || TY == 'p')
-		HASH = 2;
+	if (S.ty != 'i' && S.ty != 'd')
+	{
+		S.plus = 0;
+		S.spc = 0;
+	}
+	if (S.hash && S.v && S.ty == 'o')
+		S.hash = 1;
+	else if ((S.hash && S.v && HEX) || S.ty == 'p')
+		S.hash = 2;
 	else
-		HASH = 0;
+		S.hash = 0;
 	FREE = WIDTH;
-	FREE -= PREC > (short)(NLEN + HASH) ? PREC : NLEN + /*(!SIGN ? 0 :*/ HASH;
-	(SIGN < 0 || PLUS || SPC) && (FREE--);
-	!SIGN && !PREC && (FREE++);
+	FREE -= PREC > (short)(S.ln + S.hash) ? PREC : S.ln + /*(!SIGN ? 0 :*/ S.hash;
+	(S.v < 0 || S.plus || S.spc) && (FREE--);
+	!S.v && !PREC && (FREE++);
 	FREE < 0 && (FREE = 0);
 }
 
 void		set_format_i(t_print *aq, uintmax_t *ut)
 {
-	if (!MINUS && FREE && !(ZERO && PREC == -2))
+	if (!S.minus && FREE && !(S.zero && PREC == -2))
 	{
 		pr_set(aq, ' ', (size_t)FREE);
 		FREE = 0;
 	}
-	if (SIGN < 0)
+	if (S.v < 0)
 		aq->out[aq->i++] = '-';
-	else if (PLUS)
+	else if (S.plus)
 		aq->out[aq->i++] = '+';
-	else if (SPC)
+	else if (S.spc)
 		aq->out[aq->i++] = ' ';
-	else if (HASH)
+	else if (S.hash)
 	{
 		aq->out[aq->i++] = '0';
-		(TY == 'x' || TY == 'p') && (aq->out[aq->i++] = 'x');
-		(TY == 'X') && (aq->out[aq->i++] = 'X');
+		(S.ty == 'x' || S.ty == 'p') && (aq->out[aq->i++] = 'x');
+		(S.ty == 'X') && (aq->out[aq->i++] = 'X');
 	}
-	if (ZERO && PREC == -2 && FREE)
+	if (S.zero && PREC == -2 && FREE)
 		pr_set(aq, '0', (size_t)(FREE));
-	else if (PREC > (short)(NLEN + /*(!SIGN ? 0 :*/ HASH/*)*/))
-		pr_set(aq, '0', (size_t)(PREC - NLEN /*- *//*(!SIGN ? 0 :*//* HASH*/));
+	else if (PREC > (short)(S.ln + /*(!SIGN ? 0 :*/ S.hash/*)*/))
+		pr_set(aq, '0', (size_t)(PREC - S.ln /*- *//*(!SIGN ? 0 :*//* S.hash*/));
 	pr_itoa(aq, *ut);
-	if (MINUS && FREE > 0)
+	if (S.minus && FREE > 0)
 		pr_set(aq, ' ', (size_t)FREE);
 }
 
@@ -110,10 +114,10 @@ void		handle_i(t_print *aq)
 	uintmax_t	ut;
 	intmax_t	t;
 
-	if (TY == 'D' || TY == 'O' || TY == 'U')
+	if (S.ty == 'D' || S.ty == 'O' || S.ty == 'U')
 	{
-		LEN = l;
-		TY = (char)ft_tolower(TY);
+		S.length = l;
+		S.ty = (char)ft_tolower(S.ty);
 	}
 	get_i(aq, &t, &ut);
 	set_flag_i(aq);

@@ -30,24 +30,14 @@
 // #define WHITE	"\x1B[37m"
 // #define NORMAL	"\x1B[0m"	//standart
 
-# define HASH	aq->sp.hash
-# define ZERO	aq->sp.zero
-# define MINUS	aq->sp.minus
-# define PLUS	aq->sp.plus
-# define SPC	aq->sp.spc
-# define APOST	aq->sp.apost
-# define WIDTH	aq->sp.width
-# define PREC	aq->sp.prec
-# define LEN	aq->sp.length
-# define SIGN	aq->sp.sign
-# define BASE	aq->sp.base
-# define FREE	aq->sp.free
-# define NLEN	aq->sp.nlen
-# define TY		aq->sp.type
-# define DEC	(TY == 'i' || TY == 'd' || TY == 'D')
-# define HEX	(TY == 'x' || TY == 'X')
-# define WC		(TY == 'C' || (TY == 'c' && TY == l))
-# define WS		(TY == 'S' || (TY == 's' && TY == l))
+# define S		aq->sp
+
+# define WIDTH	S.width
+# define PREC	S.prec
+# define FREE	S.free
+# define HEX	(S.ty == 'x' || S.ty == 'X')
+# define WC		(S.ty == 'C' || (S.ty == 'c' && S.ty == l))
+# define WS		(S.ty == 'S' || (S.ty == 's' && S.ty == l))
 
 # define BUFS	2048
 
@@ -63,13 +53,13 @@ typedef struct	s_sp
 	short		prec;
 	enum
 	{
-		none, h, hh, l, ll, j, z	//, L
+		none, h, hh, l, ll, j, z
 	}			length;
-	short		sign;
+	short		v;
 	short		base;
 	short		free;
-	size_t 		nlen;	// num length without '-' if value < 0
-	char		type;
+	size_t 		ln;
+	char		ty;
 }				t_sp;
 
 typedef struct	s_print
@@ -85,17 +75,12 @@ int				ft_printf(const char *format, ...);
 void			explore(t_print *aq, const char *format);
 void			start_handle(t_print *aq);
 
-//************************
-void	sp_print(t_sp *this);
-//************************
-
-
 void			set_flag(char **line, t_sp *mark);
 void			set_num(char **line, t_sp *mark);
 void			set_length(char **line, t_sp *mark);
 void			set_type(char **line, t_sp *mark);
 
-//size_t			printf_len(wchar_t *s);
+//size_t			pr_wlen(wchar_t *s);
 void			pr_itoa(t_print *aq, uintmax_t value);
 void			pr_join(t_print *aq, char *s, size_t n);
 void			pr_set(t_print *aq, char c, size_t n);

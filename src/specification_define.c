@@ -17,17 +17,15 @@ void	set_type(char **line, t_sp *mark)
 	char c;
 
 	c = **line;
-	if (c == 'b' || c == '%' || c == 's' || c == 'S' || c == 'c' || c == 'C'
-		|| c == 'd' || c == 'D'	|| c == 'p' || c == 'i' || c == 'o' || c == 'O'
+	if (c == '%' || c == 'p' || c == 's' || c == 'S' || c == 'c' || c == 'C'
+		|| c == 'i' || c == 'd' || c == 'D' || c == 'o' || c == 'O' || c == 'b'
 		|| c == 'u' || c == 'U'	|| c == 'x' || c == 'X')
-//		|| c == 'e' || c == 'E' || c == 'f' || c == 'F' || c == 'a' || c == 'A'
-//		|| c == 'g' || c == 'G' || c == 'n' || c == 'k')
 	{
-		mark->type = (char) (c == '%' ? 'c' : c);
+		mark->ty = (char)(c == '%' ? 'c' : c);
 		(*line)++;
 	}
 	else
-		mark->type = 's';
+		mark->ty = 's';
 }
 
 void	set_length(char **line, t_sp *mark)
@@ -41,8 +39,7 @@ void	set_length(char **line, t_sp *mark)
 			(*line)++;
 	(*s == 'j') && (mark->length = j);
 	(*s == 'z') && (mark->length = z);
-	// (*s == 'L') && (LEN = L);
-	if (*s == 'h' || *s == 'l' || *s == 'j' || *s == 'z')	// || *s == 'L')
+	if (*s == 'h' || *s == 'l' || *s == 'j' || *s == 'z')
 		(*line)++;
 	set_type(line, mark);
 }
@@ -71,15 +68,6 @@ void	set_num(char **line, t_sp *mark)
 		mark->prec = -2;
 	set_length(line, mark);
 }
-
-// void	set_color(char **line, t_sp *mark)
-// {
-// 	char	c;
-
-// 	(*line)++;
-// 	c = **line;
-
-// }
 
 void	set_flag(char **line, t_sp *mark)
 {
