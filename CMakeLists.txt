@@ -15,7 +15,8 @@ set(SOURCE_FILES
         src/ft_printf.c
         src/handle_i.c
         src/handle_c.c
-        main.c src/handle_wc.c src/specification_print.c)
+        src/handle_wc.c
+        main.c)
 link_directories(libft) # header directories
 add_executable(_ft_printf ${SOURCE_FILES})
 target_link_libraries(_ft_printf -lft) # linkage
