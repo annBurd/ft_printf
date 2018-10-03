@@ -12,6 +12,13 @@
 
 #include "../inc/ft_printf.h"
 
+void	pr_refresh(t_print *aq)
+{
+	aq->size += write(1, aq->out, aq->i);
+	ft_bzero(aq->out, sizeof(aq->i));
+	aq->i = 0;
+}
+
 void	pr_itoa(t_print *aq, uintmax_t value)
 {
 	size_t	len;
@@ -22,7 +29,9 @@ void	pr_itoa(t_print *aq, uintmax_t value)
 	c = (char)(S.ty == 'X' ? 'A' : 'a');
 	len = S.ln - 1;
 	len_p = len;
-	if (!value && ((!(S.ty == 'i' || S.ty == 'd') && S.hash)
+	if (aq->i + S.ln >= BUFS)
+		pr_refresh(aq);
+	if (!value && ((!DEC && S.hash)
 		|| PREC || (S.plus && PREC < 0)))
 		aq->out[aq->i++] = '0';
 	while (value)
@@ -38,15 +47,6 @@ void	pr_itoa(t_print *aq, uintmax_t value)
 		}
 	}
 	S.v && (aq->i += S.ln);
-}
-
-static void	pr_refresh(t_print *aq)
-{
-	aq->out[aq->i] = 0;
-	write(1, aq->out, aq->i);
-	ft_bzero(aq->out, sizeof(aq->i));
-	aq->size += aq->i;
-	aq->i = 0;
 }
 
 void	pr_join(t_print *aq, char *s, size_t n)
