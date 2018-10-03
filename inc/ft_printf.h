@@ -35,11 +35,12 @@
 # define WIDTH	S.width
 # define PREC	S.prec
 # define FREE	S.free
+# define DEC	(S.ty == 'i' || S.ty == 'd')
 # define HEX	(S.ty == 'x' || S.ty == 'X')
 # define WC		(S.ty == 'C' || (S.ty == 'c' && S.ty == l))
 # define WS		(S.ty == 'S' || (S.ty == 's' && S.ty == l))
 
-# define BUFS	2048
+# define BUFS	20
 
 typedef struct	s_sp
 {
@@ -84,12 +85,13 @@ void			set_type(char **line, t_sp *mark);
 void			pr_itoa(t_print *aq, uintmax_t value);
 void			pr_join(t_print *aq, char *s, size_t n);
 void			pr_set(t_print *aq, char c, size_t n);
+void			pr_refresh(t_print *aq);
 
 void			handle_i(t_print *aq);
 void			get_i(t_print *aq, intmax_t *t, uintmax_t *ut);
 void			extract_i(t_print *aq, intmax_t *t, uintmax_t *ut);
 void			set_flag_i(t_print *aq);
-void			set_format_i(t_print *aq, uintmax_t *ut);
+void			set_format_i(t_print *aq);
 
 void			handle_c(t_print *aq, t_sp *mark);
 
