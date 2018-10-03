@@ -31,8 +31,7 @@ void	pr_itoa(t_print *aq, uintmax_t value)
 	len_p = len;
 	if (aq->i + S.ln >= BUFS)
 		pr_refresh(aq);
-	if (!value && ((!DEC && S.hash)
-		|| PREC || (S.plus && PREC < 0)))
+	if (!value && ((!DEC && S.hash)	|| PREC || (S.plus && PREC < 0)))
 		aq->out[aq->i++] = '0';
 	while (value)
 	{

@@ -21,7 +21,7 @@ void	set_type(char **line, t_sp *mark)
 		|| c == 'i' || c == 'd' || c == 'D' || c == 'o' || c == 'O' || c == 'b'
 		|| c == 'u' || c == 'U'	|| c == 'x' || c == 'X')
 	{
-		mark->ty = (char)(c == '%' ? 'c' : c);
+		mark->ty = c;
 		(*line)++;
 	}
 	else

@@ -25,10 +25,15 @@ void		start_handle(t_print *aq)
 		handle_i(aq);
 	else if ((S.ty == 'x' || S.ty == 'X' || S.ty == 'p') && (S.base = 16))
 		handle_i(aq);
-//	else if (S.ty == 'c' || S.ty == 's')
-//	 	handle_c(pr, mark);
-//	else if (WC || WS)
-//		handle_wc(pr, mark);
+	else if (S.ty == '%' || (!S.length && (S.ty == 'c' || S.ty == 's')))
+	 	handle_c(aq);
+	else if (S.ty == 'C' || S.ty == 'S' ||
+		(S.length == l && (S.ty == 'c' || S.ty == 's')))
+	{
+		if (S.ty == 'C' || S.ty == 'S')
+			S.ty = (char)ft_tolower(S.ty);
+		handle_wc(aq);
+	}
 }
 
 void		explore(t_print *aq, const char *format)

@@ -19,8 +19,6 @@
 # include <wchar.h>
 # include <stdint.h>
 
-#include <stdio.h>
-
 // #define RED		"\x1B[31m"
 // #define GREEN	"\x1B[32m"
 // #define YELLOW	"\x1B[33m"
@@ -37,8 +35,6 @@
 # define FREE	S.free
 # define DEC	(S.ty == 'i' || S.ty == 'd')
 # define HEX	(S.ty == 'x' || S.ty == 'X')
-# define WC		(S.ty == 'C' || (S.ty == 'c' && S.ty == l))
-# define WS		(S.ty == 'S' || (S.ty == 's' && S.ty == l))
 
 # define BUFS	20
 
@@ -93,9 +89,9 @@ void			extract_i(t_print *aq, intmax_t *t, uintmax_t *ut);
 void			set_flag_i(t_print *aq);
 void			set_format_i(t_print *aq);
 
-void			handle_c(t_print *aq, t_sp *mark);
+void			handle_c(t_print *aq);
 
-void			handle_wc(t_print *pr, t_sp *mark);
+void			handle_wc(t_print *aq);
 void			get_bytes(t_sp *mark, wchar_t *arg);
 void			set_bytes(t_sp *mark, char *s, wchar_t *arg);
 void			set_wc(t_sp *mark, char *s, wchar_t arg);
