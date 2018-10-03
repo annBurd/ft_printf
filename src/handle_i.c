@@ -14,17 +14,17 @@
 
 void	extract_i(t_print *aq, intmax_t *t, uintmax_t *ut)
 {
-	if ((S.ty == 'i' || S.ty == 'd') && S.length == 0)
+	if (DEC && S.length == 0)
 		*t = (va_arg(aq->va, int));
-	else if ((S.ty == 'i' || S.ty == 'd') && S.length == h)
+	else if (DEC && S.length == h)
 		*t = (short)va_arg(aq->va, int);
-	else if ((S.ty == 'i' || S.ty == 'd') && S.length == hh)
+	else if (DEC && S.length == hh)
 		*t = (signed char)va_arg(aq->va, int);
-	else if ((S.ty == 'i' || S.ty == 'd') && S.length == l)
+	else if (DEC && S.length == l)
 		*t = (va_arg(aq->va, long int));
-	else if ((S.ty == 'i' || S.ty == 'd') && S.length == ll)
+	else if (DEC && S.length == ll)
 		*t = (va_arg(aq->va, long long int));
-	else if ((S.ty == 'i' || S.ty == 'd') && S.length == j)
+	else if (DEC && S.length == j)
 		*t = (va_arg(aq->va, intmax_t));
 	else if (S.length == 0)
 		*ut = va_arg(aq->va, unsigned int);
@@ -45,7 +45,7 @@ void		get_i(t_print *aq, intmax_t *t, uintmax_t *ut)
 	*t = 0;
 	if (S.length == z)
 		*ut = (uintmax_t)va_arg(aq->va, size_t);
-	else if ((S.ty == 'i' || S.ty == 'd') && S.length != z)
+	else if (DEC && S.length != z)
 	{
 		extract_i(aq, t, ut);
 		*ut = (uintmax_t)(*t < 0 ? *t * -1 : *t);
@@ -81,13 +81,15 @@ void		set_flag_i(t_print *aq)
 	FREE < 0 && (FREE = 0);
 }
 
-void		set_format_i(t_print *aq, uintmax_t *ut)
+void		set_format_i(t_print *aq)
 {
 	if (!S.minus && FREE && !(S.zero && PREC == -2))
 	{
 		pr_set(aq, ' ', (size_t)FREE);
 		FREE = 0;
 	}
+	if (aq->i + 2 >= BUFS)
+		pr_refresh(aq);
 	if (S.v < 0)
 		aq->out[aq->i++] = '-';
 	else if (S.plus)
@@ -104,9 +106,6 @@ void		set_format_i(t_print *aq, uintmax_t *ut)
 		pr_set(aq, '0', (size_t)(FREE));
 	else if (PREC > (short)(S.ln + /*(!SIGN ? 0 :*/ S.hash/*)*/))
 		pr_set(aq, '0', (size_t)(PREC - S.ln /*- *//*(!SIGN ? 0 :*//* S.hash*/));
-	pr_itoa(aq, *ut);
-	if (S.minus && FREE > 0)
-		pr_set(aq, ' ', (size_t)FREE);
 }
 
 void		handle_i(t_print *aq)
@@ -121,5 +120,8 @@ void		handle_i(t_print *aq)
 	}
 	get_i(aq, &t, &ut);
 	set_flag_i(aq);
-	set_format_i(aq, &ut);
+	set_format_i(aq);
+	pr_itoa(aq, ut);
+	if (S.minus && FREE > 0)
+		pr_set(aq, ' ', (size_t)FREE);
 }

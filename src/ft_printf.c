@@ -14,19 +14,15 @@
 
 void		start_handle(t_print *aq)
 {
-	if (S.width == -1)
-		S.width = (short)va_arg(aq->va, int);
-	if (S.prec == -1)
-		S.prec = (short)va_arg(aq->va, int);
+	(S.width == -1) && (S.width = (short)va_arg(aq->va, int));
+	(S.prec == -1) && (S.prec = (short)va_arg(aq->va, int));
 	if ((S.ty == 'b') && (S.base = 2))
 		handle_i(aq);
 	else if ((S.ty == 'o' || S.ty == 'O') && (S.base = 8))
 		handle_i(aq);
-	else if (S.ty == 'i' || S.ty == 'd' || S.ty == 'D' || S.ty == 'u' || S.ty == 'U')
-	{
-		S.base = 10;
+	else if ((S.ty == 'i' || S.ty == 'd' || S.ty == 'D'
+		|| S.ty == 'u' || S.ty == 'U') && (S.base = 10))
 		handle_i(aq);
-	}
 	else if ((S.ty == 'x' || S.ty == 'X' || S.ty == 'p') && (S.base = 16))
 		handle_i(aq);
 //	else if (S.ty == 'c' || S.ty == 's')
@@ -51,8 +47,8 @@ void		explore(t_print *aq, const char *format)
 			line++;
 			ft_bzero(&aq->sp, sizeof(t_sp));
 			set_flag(&line, &aq->sp);
-			point = line;
 			start_handle(aq);
+			point = line;
 		}
 		if (!*(line + 1) && line - point > 0)
 			pr_join(aq, point, line - point);
@@ -71,9 +67,7 @@ int			ft_printf(const char *format, ...)
 		explore(&aq, format);
 		va_end(aq.va);
 	}
-	aq.out[aq.i] = 0;
-	write(1, aq.out, aq.i);
+	aq.size += write(1, aq.out, aq.i);
 	write(1, "\n", 1);
-	aq.size += (int)aq.i;
 	return (aq.size);
 }
