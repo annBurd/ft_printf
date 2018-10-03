@@ -14,7 +14,7 @@
 
 void	extract_i(t_print *aq, intmax_t *t, uintmax_t *ut)
 {
-	if (DEC && S.length == 0)
+	if (DEC && !S.length)
 		*t = (va_arg(aq->va, int));
 	else if (DEC && S.length == h)
 		*t = (short)va_arg(aq->va, int);
@@ -26,7 +26,7 @@ void	extract_i(t_print *aq, intmax_t *t, uintmax_t *ut)
 		*t = (va_arg(aq->va, long long int));
 	else if (DEC && S.length == j)
 		*t = (va_arg(aq->va, intmax_t));
-	else if (S.length == 0)
+	else if (!S.length)
 		*ut = va_arg(aq->va, unsigned int);
 	else if (S.length == h)
 		*ut = (unsigned short)va_arg(aq->va, unsigned int);
