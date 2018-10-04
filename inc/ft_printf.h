@@ -79,9 +79,11 @@ void			set_type(char **line, t_sp *mark);
 
 //size_t			pr_wlen(wchar_t *s);
 void			pr_itoa(t_print *aq, uintmax_t value);
-void			pr_join(t_print *aq, char *s, size_t n);
-void			pr_set(t_print *aq, char c, size_t n);
+//void			pr_join(t_print *aq, char *s, size_t n);
+//void			pr_set(t_print *aq, char c, size_t n);
 void			pr_refresh(t_print *aq);
+size_t			pr_overflow(t_print *aq, char *s, short c, size_t *n);
+void			pr_join(t_print *aq, char *s, short c, size_t n);
 
 void			handle_i(t_print *aq);
 void			get_i(t_print *aq, intmax_t *t, uintmax_t *ut);

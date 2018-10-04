@@ -24,11 +24,16 @@ void	handle_c(t_print *aq)
 	S.ty != 's' && (S.ln = 1);
 	S.ty == 's' && (S.ln = PREC >= 0 ? PREC : ft_strlen(arg));
 	if ((size_t)WIDTH <= S.ln)
-		return (pr_join(aq, arg, S.ln));
+		return (pr_join(aq, arg, 0, S.ln));
+//		return (pr_join(aq, arg, S.ln));
 	S.free = (short)(WIDTH - S.ln < 0 ? 0 : WIDTH - S.ln);
 	if (!S.minus && S.free)
-		pr_set(aq, (char)(S.ty == '%' && S.zero ? '0' : ' '), (size_t)S.free);
-	pr_join(aq, arg, S.ln);
+		pr_join(aq, NULL,
+			(short)(S.ty == '%' && S.zero ? '0' : ' '), (size_t)S.free);
+//		pr_set(aq, (char)(S.ty == '%' && S.zero ? '0' : ' '), (size_t)S.free);
+	pr_join(aq, arg, 0, S.ln);
+//	pr_join(aq, arg, S.ln);
 	if (S.minus && S.free)
-		pr_set(aq, ' ', (size_t)S.free);
+		pr_join(aq, NULL, ' ', (size_t)S.free);
+//		pr_set(aq, ' ', (size_t)S.free);
 }
