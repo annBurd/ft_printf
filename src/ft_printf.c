@@ -27,13 +27,13 @@ void		start_handle(t_print *aq)
 		handle_i(aq);
 	else if (S.ty == '%' || (!S.length && (S.ty == 'c' || S.ty == 's')))
 	 	handle_c(aq);
-//	else if (S.ty == 'C' || S.ty == 'S' ||
-//		(S.length == l && (S.ty == 'c' || S.ty == 's')))
-//	{
-//		if (S.ty == 'C' || S.ty == 'S')
-//			S.ty = (char)ft_tolower(S.ty);
-//		handle_wc(aq);
-//	}
+	else if (S.ty == 'C' || S.ty == 'S' ||
+		(S.length == l && (S.ty == 'c' || S.ty == 's')))
+	{
+		if (S.ty == 'C' || S.ty == 'S')
+			S.ty = (char)ft_tolower(S.ty);
+		handle_wc(aq);
+	}
 }
 
 void		explore(t_print *aq, const char *format)
@@ -48,7 +48,7 @@ void		explore(t_print *aq, const char *format)
 		if (*line == '%')
 		{
 			if (line - point > 0)
-				pr_join(aq, point, 0, line - point);
+				pr_join(aq, point, line - point);
 			line++;
 			ft_bzero(&aq->sp, sizeof(t_sp));
 			set_flag(&line, &aq->sp);
@@ -56,7 +56,7 @@ void		explore(t_print *aq, const char *format)
 			point = line;
 		}
 		if (!*(line + 1) && line - point > 0)
-			pr_join(aq, point, 0, line - point);
+			pr_join(aq, point, line - point);
 		line++;
 	}
 }
@@ -72,6 +72,7 @@ int			ft_printf(const char *format, ...)
 		explore(&aq, format);
 		va_end(aq.va);
 	}
-	aq.size += write(1, aq.out, aq.i) + write(1, "\n", 1);
+	aq.size += write(1, aq.out, aq.i);
+	write(1, "\n", 1);
 	return (aq.size);
 }
