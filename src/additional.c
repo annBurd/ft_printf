@@ -12,31 +12,34 @@
 
 #include "../inc/ft_printf.h"
 
-size_t	pr_overflow(t_print *aq, char *s, short c, size_t *n)
+size_t	pr_overflow_str(t_print *aq, unsigned char *s, size_t *n)
 {
 	const size_t	t = *n > BUFS ? *n - BUFS : *n;
 
 	if (*n > BUFS)
-		pr_join(aq, s, c, t);
+		pr_join_str(aq, s, t);
 	aq->size += write(1, aq->out, (unsigned int)aq->i);
 	ft_bzero(aq->out, sizeof(aq->i));
 	aq->i = 0;
 	if (*n <= BUFS)
-		pr_join(aq, s, c, t);
+		pr_join_str(aq, s, t);
 	*n -= t;
 	return (t);
 }
 
-void	pr_join(t_print *aq, char *s, short c, size_t n)
+size_t	pr_overflow(t_print *aq, unsigned char c, size_t *n)
 {
-	if (!n)
-		return;
-	if (aq->i + n >= BUFS)
-		s += pr_overflow(aq, s, c, &n);
-	while (!c && n--)
-		aq->out[aq->i++] = *(s++);
-	while (c && n--)
-		aq->out[aq->i++] = (char)c;
+	const size_t	t = *n > BUFS ? *n - BUFS : *n;
+
+	if (*n > BUFS)
+		pr_join(aq, c, t);
+	aq->size += write(1, aq->out, (unsigned int)aq->i);
+	ft_bzero(aq->out, sizeof(aq->i));
+	aq->i = 0;
+	if (*n <= BUFS)
+		pr_join(aq, c, t);
+	*n -= t;
+	return (t);
 }
 
 void	pr_refresh(t_print *aq)
@@ -61,7 +64,8 @@ void	pr_itoa(t_print *aq, uintmax_t value)
 	{
 		left = (short)(value % S.base);
 		value /= S.base;
-		aq->out[aq->i + len--] = (char)(left + (left < 10 ? '0' : c - 10));
+		aq->out[aq->i + len--] =
+			(unsigned char)(left + (left < 10 ? '0' : c - 10));
 		if (S.apost && (len_p - len == 3))
 		{
 			aq->out[aq->i + len--] = ',';
@@ -71,42 +75,3 @@ void	pr_itoa(t_print *aq, uintmax_t value)
 	}
 	S.v && (aq->i += S.ln);
 }
-
-//void	pr_join(t_print *aq, char *s, size_t n)
-//{
-//	if (!n || !s)
-//		return;
-//	if (aq->i + n >= BUFS)
-//		s += pr_overflow(aq, s, &n, 1);
-//	while (*s && n-- > 0)
-//		aq->out[aq->i++] = *(s++);
-//}
-//void	pr_set(t_print *aq, char c, size_t n)
-//{
-//	if (!n || !c)
-//		return;
-//	if (aq->i + n >= BUFS)
-//		pr_overflow(aq, &c, &n, 0);
-//	while (n--)
-//		aq->out[aq->i++] = c;
-//}
-
-//size_t pr_wlen(wchar_t *s)
-//{
-//	size_t size;
-//
-//	size = 0;
-//	while (*s)
-//	{
-//		if (*s < 0x80) //128) //2^7 - 1
-//			size += 1;
-//		else if (*s < 0x8000) //32767) //2^15 - 1
-//			size += 2;
-//		else if (*s < 0x800000) //8388607) //2^23 - 1
-//			size += 3;
-//		else
-//			size += 4;
-//		s++;
-//	}
-//	return (size);
-//}
