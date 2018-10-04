@@ -12,7 +12,7 @@
 
 #include "../inc/ft_printf.h"
 
-void	set_type(char **line, t_sp *mark)
+void	set_type(unsigned char **line, t_sp *mark)
 {
 	char c;
 
@@ -28,7 +28,7 @@ void	set_type(char **line, t_sp *mark)
 		mark->ty = 's';
 }
 
-void	set_length(char **line, t_sp *mark)
+void	set_length(unsigned char **line, t_sp *mark)
 {
 	char *s;
 
@@ -44,7 +44,7 @@ void	set_length(char **line, t_sp *mark)
 	set_type(line, mark);
 }
 
-void	set_num(char **line, t_sp *mark)
+void	set_num(unsigned char **line, t_sp *mark)
 {
 	if ((**line >= '1' && **line <= '9') || **line == '*')
 	{
@@ -69,7 +69,7 @@ void	set_num(char **line, t_sp *mark)
 	set_length(line, mark);
 }
 
-void	set_flag(char **line, t_sp *mark)
+void	set_flag(unsigned char **line, t_sp *mark)
 {
 	while (**line == '#' || **line == '0' || **line == '-'
 		|| **line == '+' || **line == ' ' || **line == '`')
