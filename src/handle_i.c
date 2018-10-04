@@ -85,8 +85,7 @@ void		set_format_i(t_print *aq)
 {
 	if (!S.minus && FREE && !(S.zero && PREC == -2))
 	{
-		pr_join(aq, NULL, ' ', (size_t)FREE);
-//		pr_set(aq, ' ', (size_t)FREE);
+		pr_join(aq, ' ', (size_t)FREE);
 		FREE = 0;
 	}
 	if (aq->i + 2 >= BUFS)
@@ -104,11 +103,9 @@ void		set_format_i(t_print *aq)
 		(S.ty == 'X') && (aq->out[aq->i++] = 'X');
 	}
 	if (S.zero && PREC == -2 && FREE)
-		pr_join(aq, NULL, '0', (size_t)FREE);
-//		pr_set(aq, '0', (size_t)(FREE));
+		pr_join(aq, '0', (size_t)FREE);
 	else if (PREC > (short)(S.ln + /*(!SIGN ? 0 :*/ S.hash/*)*/))
-//		pr_set(aq, '0', (size_t)(PREC - S.ln /*- *//*(!SIGN ? 0 :*//* S.hash*/));
-		pr_join(aq, NULL, '0', (size_t)(PREC - S.ln /*- *//*(!SIGN ? 0 :*//* S.hash*/));
+		pr_join(aq, '0', (size_t)(PREC - S.ln /*- *//*(!SIGN ? 0 :*//* S.hash*/));
 }
 
 void		handle_i(t_print *aq)
@@ -128,6 +125,5 @@ void		handle_i(t_print *aq)
 		pr_refresh(aq);
 	pr_itoa(aq, ut);
 	if (S.minus && FREE > 0)
-		pr_join(aq, NULL, ' ', (size_t)FREE);
-//		pr_set(aq, ' ', (size_t)FREE);
+		pr_join(aq, ' ', (size_t)FREE);
 }
