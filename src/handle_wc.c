@@ -58,16 +58,16 @@ size_t	set_wln(t_print *aq, wchar_t *arg)
 		S.ln = get_bytes(arg[i]);
 	else if (S.ty == 's')
 	{
-		if (!PREC)
+		if (!S.prec)
 			S.ln = 0;
-		else if (PREC == -2)
+		else if (S.prec == -2)
 			while (arg[i])
 				S.ln += get_bytes(arg[i++]);
-		else if (PREC > 0)
-			while (arg[i] && S.ln < PREC)
+		else if (S.prec > 0)
+			while (arg[i] && S.ln < S.prec)
 			{
 				S.ln += get_bytes(arg[i++]);
-				S.ln > PREC && (S.ln -= get_bytes(arg[--i]) - S.ln + PREC);
+				S.ln > S.prec && (S.ln -= get_bytes(arg[--i]) - S.ln + S.prec);
 			}
 	}
 	return (i);
@@ -83,7 +83,7 @@ void	handle_wc(t_print *aq)
 		arg = &wc;
 	S.ty == 's' && (arg = va_arg(aq->va, wchar_t*));
 	i = set_wln(aq, arg);
-	S.free = (short)((WIDTH - (short)S.ln) < 0 ? 0 : WIDTH - (short)S.ln);
+	S.free = (short)((S.wi - (short)S.ln) < 0 ? 0 : S.wi - (short)S.ln);
 	if (!S.minus && S.free)
 		pr_join(aq, ' ', (size_t)S.free);
 	if (S.ln)

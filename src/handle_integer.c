@@ -74,19 +74,19 @@ void		set_flag_i(t_print *aq)
 		S.hash = 2;
 	else
 		S.hash = 0;
-	FREE = WIDTH;
-	FREE -= PREC > (short)(S.ln + S.hash) ? PREC : S.ln + /*(!SIGN ? 0 :*/ S.hash;
-	(S.v < 0 || S.plus || S.spc) && (FREE--);
-	!S.v && !PREC && (FREE++);
-	FREE < 0 && (FREE = 0);
+	S.free = S.wi;
+	S.free -= S.prec > (short)(S.ln + S.hash) ? S.prec : S.ln + /*(!SIGN ? 0 :*/ S.hash;
+	(S.v < 0 || S.plus || S.spc) && (S.free--);
+	!S.v && !S.prec && (S.free++);
+	S.free < 0 && (S.free = 0);
 }
 
 void		set_format_i(t_print *aq)
 {
-	if (!S.minus && FREE && !(S.zero && PREC == -2))
+	if (!S.minus && S.free && !(S.zero && S.prec == -2))
 	{
-		pr_join(aq, ' ', (size_t)FREE);
-		FREE = 0;
+		pr_join(aq, ' ', (size_t)S.free);
+		S.free = 0;
 	}
 	if (aq->i + 2 >= BUFS)
 		pr_refresh(aq);
@@ -102,10 +102,10 @@ void		set_format_i(t_print *aq)
 		(S.ty == 'x' || S.ty == 'p') && (aq->out[aq->i++] = 'x');
 		(S.ty == 'X') && (aq->out[aq->i++] = 'X');
 	}
-	if (S.zero && PREC == -2 && FREE)
-		pr_join(aq, '0', (size_t)FREE);
-	else if (PREC > (short)(S.ln + /*(!SIGN ? 0 :*/ S.hash/*)*/))
-		pr_join(aq, '0', (size_t)(PREC - S.ln /*- *//*(!SIGN ? 0 :*//* S.hash*/));
+	if (S.zero && S.prec == -2 && S.free)
+		pr_join(aq, '0', (size_t)S.free);
+	else if (S.prec > (short)(S.ln + /*(!SIGN ? 0 :*/ S.hash/*)*/))
+		pr_join(aq, '0', (size_t)(S.prec - S.ln /*- *//*(!SIGN ? 0 :*//* S.hash*/));
 }
 
 void		handle_i(t_print *aq)
@@ -124,6 +124,6 @@ void		handle_i(t_print *aq)
 	if (aq->i + S.ln >= BUFS)
 		pr_refresh(aq);
 	pr_itoa(aq, ut);
-	if (S.minus && FREE > 0)
-		pr_join(aq, ' ', (size_t)FREE);
+	if (S.minus && S.free > 0)
+		pr_join(aq, ' ', (size_t)S.free);
 }

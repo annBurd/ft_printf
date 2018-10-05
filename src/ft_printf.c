@@ -14,7 +14,7 @@
 
 void		start_handle(t_print *aq)
 {
-	(S.width == -1) && (S.width = (short)va_arg(aq->va, int));
+	(S.wi == -1) && (S.wi = (short)va_arg(aq->va, int));
 	(S.prec == -1) && (S.prec = (short)va_arg(aq->va, int));
 	if ((S.ty == 'b') && (S.base = 2))
 		handle_i(aq);

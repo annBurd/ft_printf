@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_c.c                                         :+:      :+:    :+:   */
+/*   handle_char.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -23,10 +23,10 @@ void	handle_c(t_print *aq)
 	c && (arg = &c);
 	S.ty == 's' && (arg = (unsigned char*)va_arg(aq->va, char*));
 	S.ty != 's' && (S.ln = 1);
-	S.ty == 's' && (S.ln = PREC >= 0 ? PREC : ft_strlen((char*)arg));
-	if ((size_t)WIDTH <= S.ln)
+	S.ty == 's' && (S.ln = S.prec >= 0 ? S.prec : ft_strlen((char*)arg));
+	if ((size_t)S.wi <= S.ln)
 		return (pr_join_str(aq, arg, S.ln));
-	S.free = (short)(WIDTH - (short)S.ln < 0 ? 0 : WIDTH - S.ln);
+	S.free = (short)(S.wi - (short)S.ln < 0 ? 0 : S.wi - S.ln);
 	if (!S.minus && S.free)
 		pr_join(aq, (unsigned char)
 			(S.ty == '%' && S.zero ? '0' : ' '), (size_t)S.free);

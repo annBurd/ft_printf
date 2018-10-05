@@ -12,15 +12,20 @@
 
 #include "../inc/ft_printf.h"
 
+void	pr_refresh(t_print *aq)
+{
+	aq->size += write(1, aq->out, (unsigned int)aq->i);
+	ft_bzero(aq->out, sizeof(aq->i));
+	aq->i = 0;
+}
+
 size_t	pr_overflow_str(t_print *aq, unsigned char *s, size_t *n)
 {
 	const size_t	t = *n > BUFS ? *n - BUFS : *n;
 
 	if (*n > BUFS)
 		pr_join_str(aq, s, t);
-	aq->size += write(1, aq->out, (unsigned int)aq->i);
-	ft_bzero(aq->out, sizeof(aq->i));
-	aq->i = 0;
+	pr_refresh(aq);
 	if (*n <= BUFS)
 		pr_join_str(aq, s, t);
 	*n -= t;
@@ -33,20 +38,11 @@ size_t	pr_overflow(t_print *aq, unsigned char c, size_t *n)
 
 	if (*n > BUFS)
 		pr_join(aq, c, t);
-	aq->size += write(1, aq->out, (unsigned int)aq->i);
-	ft_bzero(aq->out, sizeof(aq->i));
-	aq->i = 0;
+	pr_refresh(aq);
 	if (*n <= BUFS)
 		pr_join(aq, c, t);
 	*n -= t;
 	return (t);
-}
-
-void	pr_refresh(t_print *aq)
-{
-	aq->size += write(1, aq->out, aq->i);
-	ft_bzero(aq->out, sizeof(aq->i));
-	aq->i = 0;
 }
 
 void	pr_itoa(t_print *aq, uintmax_t value)
@@ -58,7 +54,7 @@ void	pr_itoa(t_print *aq, uintmax_t value)
 
 	len = S.ln - 1;
 	len_p = len;
-	if (!value && ((!DEC && S.hash) || PREC || (S.plus && PREC < 0)))
+	if (!value && ((!DEC && S.hash) || S.prec || (S.plus && S.prec < 0)))
 		aq->out[aq->i++] = '0';
 	while (value)
 	{

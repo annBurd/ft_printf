@@ -19,6 +19,7 @@
 # include <wchar.h>
 # include <stdint.h>
 
+// #define NORMAL	"\x1B[0m"
 // #define RED		"\x1B[31m"
 // #define GREEN	"\x1B[32m"
 // #define YELLOW	"\x1B[33m"
@@ -26,16 +27,28 @@
 // #define MAGENTA	"\x1B[35m"
 // #define CYAN		"\x1B[36m"
 // #define WHITE	"\x1B[37m"
-// #define NORMAL	"\x1B[0m"	//standart
+
+//# define EOC		"\e[0m"
+//# define RED		"\e[91m"
+//# define GREEN	"\e[92m"
+//# define YELLOW	"\e[93m"
+//# define BLUE		"\e[94m"
+//# define PINK		"\e[95m"
+//# define WHITE	"\e[97m"
 
 # define S		aq->sp
-# define WIDTH	S.width
-# define PREC	S.prec
-# define FREE	S.free
 # define DEC	(S.ty == 'i' || S.ty == 'd')
 # define HEX	(S.ty == 'x' || S.ty == 'X')
 
 # define BUFS	1777
+
+/*
+** v		for vendetta or value sign // -1, 0, 1
+** free		for free space // 0-...
+** color[2]	for output color
+** //color[0] font
+** //color[1] background
+*/
 
 typedef struct	s_sp
 {
@@ -45,7 +58,7 @@ typedef struct	s_sp
 	short		plus;
 	short		spc;
 	short		apost;
-	short		width;
+	short		wi;
 	short		prec;
 	enum
 	{
@@ -56,6 +69,7 @@ typedef struct	s_sp
 	short		free;
 	size_t		ln;
 	char		ty;
+	char 		color[2];
 }				t_sp;
 
 typedef struct	s_print
@@ -78,6 +92,7 @@ void			start_handle(t_print *aq);
 ** specification_define.c
 */
 void			set_flag(char **line, t_sp *mark);
+void			set_color(char **line, t_sp *mark);
 void			set_num(char **line, t_sp *mark);
 void			set_length(char **line, t_sp *mark);
 void			set_type(char **line, t_sp *mark);
