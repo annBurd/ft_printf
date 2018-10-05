@@ -6,28 +6,27 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 21:39:53 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/09/28 05:09:03 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/05 15:46:56 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_printf.h"
 
-size_t			get_bytes(unsigned int arg)
+size_t	get_bytes(unsigned int arg)
 {
 	if (!arg)
 		return (0);
-	else if (arg < 128) //2^7
+	else if (arg < 128)
 		return (1);
-	else if (arg < 2048) //2^12
+	else if (arg < 2048)
 		return (2);
-	else if (arg < 65536) //2^16
+	else if (arg < 65536)
 		return (3);
-	else if (arg < 4294967296) //2^32
+	else
 		return (4);
-	return (0);
 }
 
-void			set_wchar(t_print *aq, wchar_t *arg, size_t n)
+void	set_wchar(t_print *aq, wchar_t *arg, size_t n)
 {
 	size_t	i;
 	size_t	size;
@@ -45,12 +44,36 @@ void			set_wchar(t_print *aq, wchar_t *arg, size_t n)
 		else if (size == 4)
 			pr_join_4b(aq, arg[i]);
 		else
-			break;
+			break ;
 		i++;
 	}
 }
 
-void			handle_wc(t_print *aq)
+size_t	set_wln(t_print *aq, wchar_t *arg)
+{
+	size_t	i;
+
+	i = 0;
+	if (S.ty == 'c')
+		S.ln = get_bytes(arg[i]);
+	else if (S.ty == 's')
+	{
+		if (!PREC)
+			S.ln = 0;
+		else if (PREC == -2)
+			while (arg[i])
+				S.ln += get_bytes(arg[i++]);
+		else if (PREC > 0)
+			while (arg[i] && S.ln < PREC)
+			{
+				S.ln += get_bytes(arg[i++]);
+				S.ln > PREC && (S.ln -= get_bytes(arg[--i]) - S.ln + PREC);
+			}
+	}
+	return (i);
+}
+
+void	handle_wc(t_print *aq)
 {
 	wint_t	wc;
 	wchar_t	*arg;
@@ -59,16 +82,7 @@ void			handle_wc(t_print *aq)
 	if (S.ty == 'c' && (wc = (wint_t)va_arg(aq->va, int)))
 		arg = &wc;
 	S.ty == 's' && (arg = va_arg(aq->va, wchar_t*));
-	i = 0;
-	if (S.ty == 'c')
-		S.ln = get_bytes(arg[i++]);
-	else if (S.ty == 's' && PREC >= 0)
-//		S.ln = (size_t)PREC; //****
-		while (arg[i] && S.ln <= PREC)
-			S.ln += get_bytes(arg[i++]);
-	else
-		while (arg[i])
-			S.ln += get_bytes(arg[i++]);
+	i = set_wln(aq, arg);
 	S.free = (short)((WIDTH - (short)S.ln) < 0 ? 0 : WIDTH - (short)S.ln);
 	if (!S.minus && S.free)
 		pr_join(aq, ' ', (size_t)S.free);
