@@ -1,0 +1,11 @@
+zzz
+.DS_Store
+.idea/
+CMakeLists.txt
+cmake-build-debug/
+libftprintf.a
+inc/.DS_Store
+libft/.DS_Store
+libft/libft.a
+main.c
+obj/
