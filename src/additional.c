@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 16:26:59 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/02 18:39:06 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/05 15:46:52 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ void	pr_refresh(t_print *aq)
 
 void	pr_itoa(t_print *aq, uintmax_t value)
 {
-	size_t	len;
-	size_t	len_p;
-	short	left;
+	size_t		len;
+	size_t		len_p;
+	short		left;
 	const char	c = (char)(S.ty == 'X' ? 'A' : 'a');
 
 	len = S.ln - 1;
 	len_p = len;
-	if (!value && ((!DEC && S.hash)	|| PREC || (S.plus && PREC < 0)))
+	if (!value && ((!DEC && S.hash) || PREC || (S.plus && PREC < 0)))
 		aq->out[aq->i++] = '0';
 	while (value)
 	{

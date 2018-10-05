@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:32:45 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/09/30 21:24:46 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/05 15:30:22 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ typedef struct	s_sp
 	short		v;
 	short		base;
 	short		free;
-	size_t 		ln;
+	size_t		ln;
 	char		ty;
 }				t_sp;
 
 typedef struct	s_print
 {
-	va_list 	va;
+	va_list		va;
 	t_sp		sp;
 	unsigned char		out[BUFS];
 	size_t		i;
@@ -77,10 +77,10 @@ void			start_handle(t_print *aq);
 /*
 ** specification_define.c
 */
-void			set_flag(unsigned char **line, t_sp *mark);
-void			set_num(unsigned char **line, t_sp *mark);
-void			set_length(unsigned char **line, t_sp *mark);
-void			set_type(unsigned char **line, t_sp *mark);
+void			set_flag(char **line, t_sp *mark);
+void			set_num(char **line, t_sp *mark);
+void			set_length(char **line, t_sp *mark);
+void			set_type(char **line, t_sp *mark);
 
 /*
 ** additional.c
@@ -108,6 +108,7 @@ void			handle_c(t_print *aq);
 ** handle_wc.c
 */
 void			handle_wc(t_print *aq);
+size_t			set_wln(t_print *aq, wchar_t *arg);
 size_t			get_bytes(unsigned int arg);
 void			set_wchar(t_print *aq, wchar_t *arg, size_t n);
 

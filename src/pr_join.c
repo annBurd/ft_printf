@@ -1,6 +1,14 @@
-//
-// Created by norb on 05.10.2018.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pr_join.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/10/05 14:28:23 by aburdeni          #+#    #+#             */
+/*   Updated: 2018/10/05 15:46:47 by aburdeni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../inc/ft_printf.h"
 
@@ -15,7 +23,7 @@
 void	pr_join_str(t_print *aq, unsigned char *s, size_t n)
 {
 	if (!n || !s)
-		return;
+		return ;
 	if (aq->i + n >= BUFS)
 		s += pr_overflow_str(aq, s, &n);
 	while (*s && n-- > 0)
@@ -25,7 +33,7 @@ void	pr_join_str(t_print *aq, unsigned char *s, size_t n)
 void	pr_join(t_print *aq, unsigned char c, size_t n)
 {
 	if (!n || !c)
-		return;
+		return ;
 	if (aq->i + n >= BUFS)
 		pr_overflow(aq, c, &n);
 	while (n--)

@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:26:16 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/09/30 20:11:45 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/05 15:46:49 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void		start_handle(t_print *aq)
 	else if ((S.ty == 'x' || S.ty == 'X' || S.ty == 'p') && (S.base = 16))
 		handle_i(aq);
 	else if (S.ty == '%' || (!S.length && (S.ty == 'c' || S.ty == 's')))
-	 	handle_c(aq);
+		handle_c(aq);
 	else if (S.ty == 'C' || S.ty == 'S' ||
 		(S.length == l && (S.ty == 'c' || S.ty == 's')))
 	{
@@ -38,17 +38,17 @@ void		start_handle(t_print *aq)
 
 void		explore(t_print *aq, const char *format)
 {
-	unsigned char *line;
-	unsigned char *point;
+	char *line;
+	char *point;
 
-	line = (unsigned char*)format;
-	point = (unsigned char*)format;
+	line = (char*)format;
+	point = (char*)format;
 	while (*line)
 	{
 		if (*line == '%')
 		{
 			if (line - point > 0)
-				pr_join_str(aq, point, line - point);
+				pr_join_str(aq, (unsigned char*)point, line - point);
 			line++;
 			ft_bzero(&aq->sp, sizeof(t_sp));
 			set_flag(&line, &aq->sp);
@@ -56,7 +56,7 @@ void		explore(t_print *aq, const char *format)
 			point = line;
 		}
 		if (!*(line + 1) && line - point > 0)
-			pr_join_str(aq, point, line - point);
+			pr_join_str(aq, (unsigned char*)point, line - point);
 		line++;
 	}
 }
