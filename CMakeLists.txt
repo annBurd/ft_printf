@@ -10,11 +10,12 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Ipthreads")
 set(SOURCE_FILES
         inc/ft_printf.h
         src/additional.c
-        src/specification_define.c
+        src/define_specification.c
         src/ft_printf.c
-        src/handle_i.c
-        src/handle_c.c
+        src/handle_integer.c
+        src/handle_char.c
         src/handle_wc.c
+        src/pr_join.c
         libft/ft_atoi.c
         libft/ft_atoi_base.c
         libft/ft_bzero.c
