@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   specification_define.c                             :+:      :+:    :+:   */
+/*   define_specification.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -48,7 +48,7 @@ void	set_num(char **line, t_sp *mark)
 {
 	if ((**line >= '1' && **line <= '9') || **line == '*')
 	{
-		mark->width = (short)(**line == '*' ? -1 : ft_atoi(*line));
+		mark->wi = (short)(**line == '*' ? -1 : ft_atoi(*line));
 		while ((**line >= '0' && **line <= '9') || **line == '*')
 			(*line)++;
 	}
@@ -69,6 +69,12 @@ void	set_num(char **line, t_sp *mark)
 	set_length(line, mark);
 }
 
+void	set_color(char **line, t_sp *mark)
+{
+	(*line)++;
+
+}
+
 void	set_flag(char **line, t_sp *mark)
 {
 	while (**line == '#' || **line == '0' || **line == '-'
@@ -80,7 +86,8 @@ void	set_flag(char **line, t_sp *mark)
 		(**line == '+') && (mark->plus = 1);
 		(**line == ' ') && (mark->spc = 1);
 		(**line == '`') && (mark->apost = 1);
-		// (**line == '$') && (set_color(line, mark));
+		if (**line == '$')
+			set_color(line, mark);
 		(*line)++;
 	}
 	set_num(line, mark);
