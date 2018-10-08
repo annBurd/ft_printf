@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 22:07:41 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/05 15:46:55 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/08 19:47:34 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ void	set_num(char **line, t_sp *mark)
 	set_length(line, mark);
 }
 
-void	set_color(char **line, t_sp *mark)
-{
-	(*line)++;
-
-}
+//void	set_color(char **line, t_sp *mark)
+//{
+//	(*line)++;
+//
+//}
 
 void	set_flag(char **line, t_sp *mark)
 {
@@ -86,8 +86,8 @@ void	set_flag(char **line, t_sp *mark)
 		(**line == '+') && (mark->plus = 1);
 		(**line == ' ') && (mark->spc = 1);
 		(**line == '`') && (mark->apost = 1);
-		if (**line == '$')
-			set_color(line, mark);
+//		if (**line == '$')
+//			set_color(line, mark);
 		(*line)++;
 	}
 	set_num(line, mark);

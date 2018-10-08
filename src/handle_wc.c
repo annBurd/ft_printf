@@ -64,10 +64,10 @@ size_t	set_wln(t_print *aq, wchar_t *arg)
 			while (arg[i])
 				S.ln += get_bytes(arg[i++]);
 		else if (S.prec > 0)
-			while (arg[i] && S.ln < S.prec)
+			while (arg[i] && S.ln < (size_t)S.prec)
 			{
 				S.ln += get_bytes(arg[i++]);
-				S.ln > S.prec && (S.ln -= get_bytes(arg[--i]) - S.ln + S.prec);
+				S.ln > (size_t)S.prec && (S.ln -= get_bytes(arg[--i]) - S.ln + S.prec);
 			}
 	}
 	return (i);

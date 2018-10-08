@@ -1,5 +1,4 @@
 #include "./inc/ft_printf.h"
-#include "../testing/color.h"
 #include <sys/types.h>
 #include <limits.h>
 #include <locale.h>
@@ -61,7 +60,6 @@ int main(int argc, char **argv)
 	(void)argc;
 	(void)argv;
 	setlocale(LC_CTYPE, "");
-//	setlocale(LC_ALL, "en_US.UTF-8");
 
 
 //	HERE WE HAVE SOME TESTS
@@ -122,12 +120,12 @@ int main(int argc, char **argv)
 
 //	POINTER: %p
 //	****************************************************
+//	ft_printf("\n> POINTER\n");
 //	short p = 6667;
 //	printf("\t\t[%p] 0R!G\n", &p);
 //	ft_printf("\t\t[%p]\n", &p);
 //	printf(".\t\t[%.p] 0R!G\n", &p);
 //	ft_printf(".\t\t[%.p]\n", &p);
-//	ft_printf(".20\t\t[%.20p]\n", &p);
 //	printf("20\t\t[%20p] 0R!G\n", &p);
 //	ft_printf("20\t\t[%20p]\n", &p);
 //	printf("-20\t\t[%-20p] 0R!G\n", &p);
@@ -210,12 +208,12 @@ int main(int argc, char **argv)
 //	ft_printf("\t\t[%S]\n", ww);
 //	printf("20\t\t[%20S]\n", ww);
 //	ft_printf("20\t\t[%20S]\n", ww);
-////	printf(".\t\t[%.S]\n", ww);
-////	ft_printf(".\t\t[%.S]\n", ww);
+//	printf(".\t\t[%.S]\n", ww);
+//	ft_printf(".\t\t[%.S]\n", ww);
 //	printf("-20\t\t[%-20S]\n", ww);
 //	ft_printf("-20\t\t[%-20S]\n", ww);
-////	printf("-20.\t[%-20.S]\n", ww);
-////	ft_printf("-20.\t[%-20.S]\n", ww);
+//	printf("-20.\t[%-20.S]\n", ww);
+//	ft_printf("-20.\t[%-20.S]\n", ww);
 
 
 //	CHAR
@@ -272,16 +270,16 @@ int main(int argc, char **argv)
 	unsigned int ui = 0;
 
 		ft_printf("________[o, O] minus & width\n");
-//	printf("-4.7\t[%-4.7o]\n", ui);
-//	ft_printf("-4.7\t[%-4.7o]\n", ui);
-//	printf("-7.7\t[%-7.7o]\n", ui);
-//	ft_printf("-7.7\t[%-7.7o]\n", ui);
-//	printf("-#7.7\t[%-#7.7o]\n", ui);
-//	ft_printf("-#7.7\t[%-#7.7o]\n", ui);
-//	printf("-7.4\t[%-7.4o]\n", ui);
-//	ft_printf("-7.4\t[%-7.4o]\n", ui);
-//	printf("-#7.4\t[%-#7.4o]\n", ui);
-//	ft_printf("-#7.4\t[%-#7.4o]\n", ui);
+	printf("-4.7\t[%-4.7o]\n", ui);
+	ft_printf("-4.7\t[%-4.7o]\n", ui);
+	printf("-7.7\t[%-7.7o]\n", ui);
+	ft_printf("-7.7\t[%-7.7o]\n", ui);
+	printf("-#7.7\t[%-#7.7o]\n", ui);
+	ft_printf("-#7.7\t[%-#7.7o]\n", ui);
+	printf("-7.4\t[%-7.4o]\n", ui);
+	ft_printf("-7.4\t[%-7.4o]\n", ui);
+	printf("-#7.4\t[%-#7.4o]\n", ui);
+	ft_printf("-#7.4\t[%-#7.4o]\n", ui);
 	printf("-7.\t\t[%#-7.o]\n", ui);
 	ft_printf("-7.\t\t[%#-7.o]\n", ui);
 	printf("#-7.\t[%#-7.o]\n", ui);
@@ -339,12 +337,12 @@ int main(int argc, char **argv)
 //	unsigned int ui = 77;
 
 		ft_printf("________[x, X] minus & width\n");
-//	printf("-4.7\t[%-4.7x]\n", ui);
-//	ft_printf("-4.7\t[%-4.7x]\n", ui);
-//	printf("-7.7\t[%-7.7x]\n", ui);
-//	ft_printf("-7.7\t[%-7.7x]\n", ui);
-//	printf("-#7.7\t[%-#7.7x]\n", ui);
-//	ft_printf("-#7.7\t[%-#7.7x]\n", ui);
+	printf("-4.7\t[%-4.7x]\n", ui);
+	ft_printf("-4.7\t[%-4.7x]\n", ui);
+	printf("-7.7\t[%-7.7x]\n", ui);
+	ft_printf("-7.7\t[%-7.7x]\n", ui);
+	printf("-#7.7\t[%-#7.7x]\n", ui);
+	ft_printf("-#7.7\t[%-#7.7x]\n", ui);
 	printf("-7.4\t[%-7.4x]\n", ui);
 	ft_printf("-7.4\t[%-7.4x]\n", ui);
 	printf("-#7.4\t[%-#7.4x]\n", ui);
@@ -355,19 +353,19 @@ int main(int argc, char **argv)
 	ft_printf("#-7.\t[%#-7.x]\n", ui);
 	printf("-7\t\t[%-7x]\n", ui);
 	ft_printf("-7\t\t[%-7x]\n", ui);
-//		ft_printf("________[x, X] minus & !width\n");
-//	printf("-\t\t[%-x]\n", ui);
-//	ft_printf("-\t\t[%-x]\n", ui);
-//	printf("-#\t\t[%-#x]\n", ui);
-//	ft_printf("-#\t\t[%-#x]\n", ui);
-//	printf("-.\t\t[%-.x]\n", ui);
-//	ft_printf("-.\t\t[%-.x]\n", ui);
-//	printf("-#.\t\t[%-#.x]\n", ui);
-//	ft_printf("-#.\t\t[%-#.x]\n", ui);
-//	printf("-.7\t\t[%-.7x]\n", ui);
-//	ft_printf("-.7\t\t[%-.7x]\n", ui);
-//	printf("-#.7\t[%-#.7x]\n", ui);
-//	ft_printf("-#.7\t[%-#.7x]\n", ui);
+		ft_printf("________[x, X] minus & !width\n");
+	printf("-\t\t[%-x]\n", ui);
+	ft_printf("-\t\t[%-x]\n", ui);
+	printf("-#\t\t[%-#x]\n", ui);
+	ft_printf("-#\t\t[%-#x]\n", ui);
+	printf("-.\t\t[%-.x]\n", ui);
+	ft_printf("-.\t\t[%-.x]\n", ui);
+	printf("-#.\t\t[%-#.x]\n", ui);
+	ft_printf("-#.\t\t[%-#.x]\n", ui);
+	printf("-.7\t\t[%-.7x]\n", ui);
+	ft_printf("-.7\t\t[%-.7x]\n", ui);
+	printf("-#.7\t[%-#.7x]\n", ui);
+	ft_printf("-#.7\t[%-#.7x]\n", ui);
 		ft_printf("________[x, X] !minus & width\n");
 	printf("7\t\t[%7x]\n", ui);
 	ft_printf("7\t\t[%7x]\n", ui);
@@ -523,7 +521,7 @@ int main(int argc, char **argv)
 //
 //
 ////	int size;
-////	int i = 0;
+//	int i = 0;
 //	ft_printf("________[_______] !minus & !width\n");
 //	printf(" .7	[% .7d]\n", i);
 //	ft_printf(" .7	[% .7d]\n", i);

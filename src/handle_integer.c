@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_i.c                                         :+:      :+:    :+:   */
+/*   handle_integer.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/28 20:10:04 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/05 15:46:50 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/08 23:00:36 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_printf.h"
 
-void	extract_i(t_print *aq, intmax_t *t, uintmax_t *ut)
+static void	extract_i(t_print *aq, intmax_t *t, uintmax_t *ut)
 {
 	if (DEC && !S.length)
 		*t = (va_arg(aq->va, int));
@@ -44,14 +44,14 @@ void		get_i(t_print *aq, intmax_t *t, uintmax_t *ut)
 {
 	*t = 0;
 	if (S.length == z)
-		*ut = (uintmax_t)va_arg(aq->va, size_t);
-	else if (DEC && S.length != z)
+		*ut = (size_t)va_arg(aq->va, size_t);
+	else if (S.ty == 'p')
+		*ut = (uintmax_t)va_arg(aq->va, void*);
+	else if (DEC)
 	{
 		extract_i(aq, t, ut);
 		*ut = (uintmax_t)(*t < 0 ? *t * -1 : *t);
 	}
-	else if (S.ty == 'p')
-		*ut = (uintmax_t)va_arg(aq->va, void*);
 	else
 		extract_i(aq, t, ut);
 	*ut && (S.v = (short)(*t < 0 ? -1 : 1));
@@ -68,14 +68,14 @@ void		set_flag_i(t_print *aq)
 		S.plus = 0;
 		S.spc = 0;
 	}
-	if (S.hash && S.v && S.ty == 'o')
+	if (S.hash && !DEC && (!S.v || S.ty == 'o'))
 		S.hash = 1;
-	else if ((S.hash && S.v && HEX) || S.ty == 'p')
+	else if (S.ty == 'p' || (S.hash && HEX))
 		S.hash = 2;
 	else
 		S.hash = 0;
 	S.free = S.wi;
-	S.free -= S.prec > (short)(S.ln + S.hash) ? S.prec : S.ln + /*(!SIGN ? 0 :*/ S.hash;
+	S.free -= S.prec > (short)(S.ln + S.hash) ? S.prec : S.ln + S.hash;
 	(S.v < 0 || S.plus || S.spc) && (S.free--);
 	!S.v && !S.prec && (S.free++);
 	S.free < 0 && (S.free = 0);
@@ -92,20 +92,19 @@ void		set_format_i(t_print *aq)
 		pr_refresh(aq);
 	if (S.v < 0)
 		aq->out[aq->i++] = '-';
-	else if (S.plus)
-		aq->out[aq->i++] = '+';
-	else if (S.spc)
-		aq->out[aq->i++] = ' ';
+	else if (S.plus || S.spc)
+		aq->out[aq->i++] = (char)(S.plus ? '+' : ' ');
+	else if (S.ty == 'p')
+		pr_join_str(aq, (unsigned char*)"0x", 2);
 	else if (S.hash)
 	{
 		aq->out[aq->i++] = '0';
-		(S.ty == 'x' || S.ty == 'p') && (aq->out[aq->i++] = 'x');
-		(S.ty == 'X') && (aq->out[aq->i++] = 'X');
+		S.hash == 2 && (aq->out[aq->i++] = (char)(S.ty == 'X' ? 'X' : 'x'));
 	}
 	if (S.zero && S.prec == -2 && S.free)
 		pr_join(aq, '0', (size_t)S.free);
-	else if (S.prec > (short)(S.ln + /*(!SIGN ? 0 :*/ S.hash/*)*/))
-		pr_join(aq, '0', (size_t)(S.prec - S.ln /*- *//*(!SIGN ? 0 :*//* S.hash*/));
+	else if (S.prec > (short)(S.ln + S.hash))
+		pr_join(aq, '0', (size_t)(S.prec - S.ln - S.hash));
 }
 
 void		handle_i(t_print *aq)

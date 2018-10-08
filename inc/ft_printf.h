@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:32:45 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/05 15:30:22 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/08 22:35:55 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ size_t			pr_overflow(t_print *aq, unsigned char c, size_t *n);
 */
 void			handle_i(t_print *aq);
 void			get_i(t_print *aq, intmax_t *t, uintmax_t *ut);
-void			extract_i(t_print *aq, intmax_t *t, uintmax_t *ut);
 void			set_flag_i(t_print *aq);
 void			set_format_i(t_print *aq);
 
