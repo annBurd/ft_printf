@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 16:26:59 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/08 22:42:57 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/09 18:09:31 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,26 +45,6 @@ size_t		pr_overflow(t_print *aq, unsigned char c, size_t *n)
 	return (t);
 }
 
-static void	set_null_value(t_print *aq)
-{
-	if (DEC && (S.prec || (S.plus && S.prec < 0)))
-		aq->out[aq->i ++] = '0';
-	else if (!DEC && !S.hash)
-	{
-		if (S.prec)
-			aq->out[aq->i ++] = '0';
-		else if (S.minus && S.wi && !S.prec && S.wi)
-			aq->out[aq->i ++] = '0';
-	}
-	else if (!DEC && S.hash)
-	{
-		if (S.prec > 0)
-			aq->out[aq->i ++] = '0';
-//		else if (S.minus && S.wi && !S.prec && S.wi)
-//			aq->out[aq->i ++] = '0';
-	}
-}
-
 void		pr_itoa(t_print *aq, uintmax_t value)
 {
 	size_t		len;
@@ -72,10 +52,8 @@ void		pr_itoa(t_print *aq, uintmax_t value)
 	short		left;
 	const char	c = (char)(S.ty == 'X' ? 'A' : 'a');
 
-	len = S.ln - 1;
-	len_p = len;
-	if (!value)
-		set_null_value(aq);
+	len = S.ln;
+	len_p = --len;
 	while (value)
 	{
 		left = (short)(value % S.base);
@@ -89,5 +67,5 @@ void		pr_itoa(t_print *aq, uintmax_t value)
 			S.apost--;
 		}
 	}
-	S.v && (aq->i += S.ln);
+	aq->i += S.ln;
 }
