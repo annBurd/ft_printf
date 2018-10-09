@@ -79,6 +79,8 @@ void	handle_wc(t_print *aq)
 	wchar_t	*arg;
 	size_t	i;
 
+	if (S.ty == 'C' || S.ty == 'S')
+		S.ty = (char)ft_tolower(S.ty);
 	if (S.ty == 'c' && (wc = (wint_t)va_arg(aq->va, int)))
 		arg = &wc;
 	S.ty == 's' && (arg = va_arg(aq->va, wchar_t*));
