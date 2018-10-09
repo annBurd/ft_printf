@@ -16,24 +16,15 @@ void		start_handle(t_print *aq)
 {
 	(S.wi == -1) && (S.wi = (short)va_arg(aq->va, int));
 	(S.prec == -1) && (S.prec = (short)va_arg(aq->va, int));
-	if ((S.ty == 'b') && (S.base = 2))
-		handle_i(aq);
-	else if ((S.ty == 'o' || S.ty == 'O') && (S.base = 8))
-		handle_i(aq);
-	else if ((S.ty == 'i' || S.ty == 'd' || S.ty == 'D'
-		|| S.ty == 'u' || S.ty == 'U') && (S.base = 10))
-		handle_i(aq);
-	else if ((S.ty == 'x' || S.ty == 'X' || S.ty == 'p') && (S.base = 16))
+	if (S.ty == 'D' || DEC || HEX ||
+		S.ty == 'o' || S.ty == 'O' || S.ty == 'b' ||
+		S.ty == 'u' || S.ty == 'U' || S.ty == 'p')
 		handle_i(aq);
 	else if (S.ty == '%' || (!S.length && (S.ty == 'c' || S.ty == 's')))
 		handle_c(aq);
 	else if (S.ty == 'C' || S.ty == 'S' ||
 		(S.length == l && (S.ty == 'c' || S.ty == 's')))
-	{
-		if (S.ty == 'C' || S.ty == 'S')
-			S.ty = (char)ft_tolower(S.ty);
 		handle_wc(aq);
-	}
 }
 
 void		explore(t_print *aq, const char *format)
