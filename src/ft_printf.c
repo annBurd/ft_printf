@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:26:16 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/09 21:01:50 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/10 00:02:22 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void		start_handle(t_print *aq)
 {
 	(S.wi == -1) && (S.wi = (short)va_arg(aq->va, int));
 	(S.prec == -1) && (S.prec = (short)va_arg(aq->va, int));
+	S.base = 10;
 	if (S.ty == 'D' || DEC || HEX ||
 		S.ty == 'o' || S.ty == 'O' || S.ty == 'b' ||
 		S.ty == 'u' || S.ty == 'U' || S.ty == 'p')
@@ -48,6 +49,8 @@ void		explore(t_print *aq, const char *format)
 		}
 		if (!*(line + 1) && line - point > 0)
 			pr_join_str(aq, point, line - point);
+		if (!*line)
+			break ;
 		line++;
 	}
 }
