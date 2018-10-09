@@ -113,6 +113,8 @@ int main(int argc, char **argv)
 //	int i = 56;
 //	ft_printf("\n> BINARY: %%b\n");
 //	ft_printf("[%b]\n", i);
+//	ft_printf("[%!060b]\n", i);
+//	ft_printf("[%!118bb]\n", i);
 //
 ////	 BONUS APOST (`) with %i, %d, %D
 ////	 BONUS STAR (*)
@@ -140,16 +142,16 @@ int main(int argc, char **argv)
 //	ft_printf("`7.9\t[%`7.9x]ui - x\n", ui);
 
 ////	BONUS COLOR
-		printf("\n> COLOR\n");
-//	printf("Do some \e[1;mtrash \e[0mtest for my lovely ft_printf()\n");
+//		printf("\n> COLOR\n");
+//	printf("Do some \e[31;mtrash \e[0mtest for my lovely ft_printf()\n");
 //	printf("Do some \e[31mtrash \e[0mtest for my lovely ft_printf()\n");
 //	printf("Do some \e[91mtrash \e[0mtest for my lovely ft_printf()\n");
 //	printf("Do some \e[31;47mtrash\e[0m test for my lovely ft_printf()\n");
 //	printf("Do some \e[1;31;107mtrash\e[0m test for my lovely ft_printf()\n");
 
-	ft_printf("Do %!128bs", "trash");
-	ft_printf("Do %!06b1s", "trash");
-	ft_printf("Do %!04b0s", "trash");
+//	ft_printf("Do %!128bs", "trash");
+//	ft_printf("Do %!06b1s", "trash");
+//	ft_printf("Do %!04b0s", "trash");
 //	****************************************************
 
 
