@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:32:45 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/09 21:01:37 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/10 00:58:47 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,6 @@
 # include <wchar.h>
 # include <stdint.h>
 
-// #define NORMAL	"\x1B[0m"
-// #define RED		"\x1B[31m"
-// #define GREEN	"\x1B[32m"
-// #define YELLOW	"\x1B[33m"
-// #define BLUE		"\x1B[34m"
-// #define MAGENTA	"\x1B[35m"
-// #define CYAN		"\x1B[36m"
-// #define WHITE	"\x1B[37m"
-
-//# define EOC		"\e[0m"
-//# define RED		"\e[91m"
-//# define GREEN	"\e[92m"
-//# define YELLOW	"\e[93m"
-//# define BLUE		"\e[94m"
-//# define PINK		"\e[95m"
-//# define WHITE	"\e[97m"
-
 # define S		aq->sp
 # define DEC	(S.ty == 'i' || S.ty == 'd')
 # define HEX	(S.ty == 'x' || S.ty == 'X')
@@ -45,9 +28,20 @@
 /*
 ** v		for vendetta or value sign // -1, 0, 1
 ** free		for free space // 0-...
-** color[2]	for output color
-** //color[0] font
-** //color[1] background
+** color[4]	for output color
+** //color[0] set active
+** //color[1] bold // 0, 1
+** //color[2] font
+** //color[3] background
+** //1 - black
+** //2 - red
+** //3 - green
+** //4 - yellow
+** //5 - blue
+** //6 - purple
+** //7 - cyan
+** //8 - white
+** // add 'b' after num for bright version
 */
 
 typedef struct	s_sp
@@ -69,7 +63,7 @@ typedef struct	s_sp
 	short		free;
 	size_t		ln;
 	char		ty;
-	char 		color[2];
+	size_t		color[4];
 }				t_sp;
 
 typedef struct	s_print
@@ -91,11 +85,6 @@ void			set_num(char **line, t_sp *mark);
 void			set_length(char **line, t_sp *mark);
 void			set_type(char **line, t_sp *mark);
 
-void			pr_itoa(t_print *aq, uintmax_t value);
-void			pr_refresh(t_print *aq);
-size_t			pr_overflow_str(t_print *aq, char *s, size_t *n);
-size_t			pr_overflow(t_print *aq, char c, size_t *n);
-
 void			handle_i(t_print *aq);
 void			get_i(t_print *aq, intmax_t *t, uintmax_t *ut);
 void			set_flag_i(t_print *aq);
@@ -108,6 +97,11 @@ size_t			set_wln(t_print *aq, wchar_t *arg);
 size_t			get_bytes(unsigned int arg);
 void			set_wchar(t_print *aq, wchar_t *arg, size_t n);
 
+void			pr_itoa(t_print *aq, uintmax_t value);
+void			pr_refresh(t_print *aq);
+void			pr_colorme(t_print *aq, short start);
+size_t			pr_overflow_str(t_print *aq, char *s, size_t *n);
+size_t			pr_overflow(t_print *aq, char c, size_t *n);
 void			pr_join_str(t_print *aq, char *s, size_t n);
 void			pr_join(t_print *aq, char c, size_t n);
 void			pr_join_4b(t_print *aq, unsigned int c);
