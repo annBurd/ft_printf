@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/28 20:10:04 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/08 23:00:36 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/09 20:46:58 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,12 @@ void		get_i(t_print *aq, intmax_t *t, uintmax_t *ut)
 	else
 		extract_i(aq, t, ut);
 	*ut && (S.v = (short)(*t < 0 ? -1 : 1));
-	S.ln = ft_nbrulen(*ut, S.base);
+	if (!S.v && !S.prec && S.ty != 'o')
+		S.ln = 0;
+	else if (!S.v && (S.hash || (!S.prec && (!S.hash || !S.minus))))
+		S.ln = 0;
+	else
+		S.ln = ft_nbrulen(*ut, S.base);
 	if (S.apost)
 		S.apost = (short)(S.ln / 3 - (S.ln % 3 ? 0 : 1));
 	S.ln += S.apost;
@@ -63,21 +68,25 @@ void		get_i(t_print *aq, intmax_t *t, uintmax_t *ut)
 
 void		set_flag_i(t_print *aq)
 {
-	if (S.ty != 'i' && S.ty != 'd')
+	if (!DEC)
 	{
 		S.plus = 0;
 		S.spc = 0;
+		if (S.hash &&
+		((S.prec && !HEX) || S.ty == 'o' || (HEX && !S.v && S.prec)))
+			S.hash = 1;
+		else if (S.ty == 'p' || (S.hash && HEX && S.v))
+			S.hash = 2;
+		else
+			S.hash = 0;
 	}
-	if (S.hash && !DEC && (!S.v || S.ty == 'o'))
-		S.hash = 1;
-	else if (S.ty == 'p' || (S.hash && HEX))
-		S.hash = 2;
 	else
 		S.hash = 0;
 	S.free = S.wi;
-	S.free -= S.prec > (short)(S.ln + S.hash) ? S.prec : S.ln + S.hash;
+	!(S.ty == 'o' && S.v && S.prec > (short)(S.ln)) && (S.free -= S.hash);
 	(S.v < 0 || S.plus || S.spc) && (S.free--);
-	!S.v && !S.prec && (S.free++);
+	S.free -= S.prec > (short)(S.ln) ? S.prec : S.ln;
+	S.hash && !S.v && S.prec && (S.free++);
 	S.free < 0 && (S.free = 0);
 }
 
@@ -103,8 +112,9 @@ void		set_format_i(t_print *aq)
 	}
 	if (S.zero && S.prec == -2 && S.free)
 		pr_join(aq, '0', (size_t)S.free);
-	else if (S.prec > (short)(S.ln + S.hash))
-		pr_join(aq, '0', (size_t)(S.prec - S.ln - S.hash));
+	else if ((S.zero =
+		(short)(S.prec - S.ln - (!S.v || S.ty == 'o' ? S.hash : 0))) > 0)
+		pr_join(aq, '0', (size_t)(S.zero));
 }
 
 void		handle_i(t_print *aq)
@@ -117,12 +127,16 @@ void		handle_i(t_print *aq)
 		S.length = l;
 		S.ty = (char)ft_tolower(S.ty);
 	}
+	S.ty == 'b' && (S.base = 2);
+	S.ty == 'o' && (S.base = 8);
+	(DEC || S.ty == 'u') && (S.base = 10);
+	(HEX || S.ty == 'p') && (S.base = 16);
 	get_i(aq, &t, &ut);
 	set_flag_i(aq);
 	set_format_i(aq);
 	if (aq->i + S.ln >= BUFS)
 		pr_refresh(aq);
-	pr_itoa(aq, ut);
+	!S.v ? pr_join(aq, '0', S.ln) : pr_itoa(aq, ut);
 	if (S.minus && S.free > 0)
 		pr_join(aq, ' ', (size_t)S.free);
 }
