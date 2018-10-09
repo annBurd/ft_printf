@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 14:28:23 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/05 15:46:47 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/09 21:00:22 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 ** 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
 */
 
-void	pr_join_str(t_print *aq, unsigned char *s, size_t n)
+void	pr_join_str(t_print *aq, char *s, size_t n)
 {
 	if (!n || !s)
 		return ;
@@ -30,7 +30,7 @@ void	pr_join_str(t_print *aq, unsigned char *s, size_t n)
 		aq->out[aq->i++] = *(s++);
 }
 
-void	pr_join(t_print *aq, unsigned char c, size_t n)
+void	pr_join(t_print *aq, char c, size_t n)
 {
 	if (!n || !c)
 		return ;

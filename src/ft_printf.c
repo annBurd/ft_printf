@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:26:16 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/05 15:46:49 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/09 21:01:50 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void		explore(t_print *aq, const char *format)
 		if (*line == '%')
 		{
 			if (line - point > 0)
-				pr_join_str(aq, (unsigned char*)point, line - point);
+				pr_join_str(aq, point, line - point);
 			line++;
 			ft_bzero(&aq->sp, sizeof(t_sp));
 			set_flag(&line, &aq->sp);
@@ -47,7 +47,7 @@ void		explore(t_print *aq, const char *format)
 			point = line;
 		}
 		if (!*(line + 1) && line - point > 0)
-			pr_join_str(aq, (unsigned char*)point, line - point);
+			pr_join_str(aq, point, line - point);
 		line++;
 	}
 }

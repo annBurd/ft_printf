@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/28 20:10:04 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/09 20:46:58 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/09 21:02:03 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void		set_format_i(t_print *aq)
 	else if (S.plus || S.spc)
 		aq->out[aq->i++] = (char)(S.plus ? '+' : ' ');
 	else if (S.ty == 'p')
-		pr_join_str(aq, (unsigned char*)"0x", 2);
+		pr_join_str(aq, "0x", 2);
 	else if (S.hash)
 	{
 		aq->out[aq->i++] = '0';

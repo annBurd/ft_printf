@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:32:45 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/08 22:35:55 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/09 21:01:37 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct	s_print
 {
 	va_list		va;
 	t_sp		sp;
-	unsigned char	out[BUFS];
+	char		out[BUFS];
 	size_t		i;
 	int			size;
 }				t_print;
@@ -93,8 +93,8 @@ void			set_type(char **line, t_sp *mark);
 
 void			pr_itoa(t_print *aq, uintmax_t value);
 void			pr_refresh(t_print *aq);
-size_t			pr_overflow_str(t_print *aq, unsigned char *s, size_t *n);
-size_t			pr_overflow(t_print *aq, unsigned char c, size_t *n);
+size_t			pr_overflow_str(t_print *aq, char *s, size_t *n);
+size_t			pr_overflow(t_print *aq, char c, size_t *n);
 
 void			handle_i(t_print *aq);
 void			get_i(t_print *aq, intmax_t *t, uintmax_t *ut);
@@ -108,8 +108,8 @@ size_t			set_wln(t_print *aq, wchar_t *arg);
 size_t			get_bytes(unsigned int arg);
 void			set_wchar(t_print *aq, wchar_t *arg, size_t n);
 
-void			pr_join_str(t_print *aq, unsigned char *s, size_t n);
-void			pr_join(t_print *aq, unsigned char c, size_t n);
+void			pr_join_str(t_print *aq, char *s, size_t n);
+void			pr_join(t_print *aq, char c, size_t n);
 void			pr_join_4b(t_print *aq, unsigned int c);
 void			pr_join_3b(t_print *aq, unsigned int c);
 void			pr_join_2b(t_print *aq, unsigned int c);

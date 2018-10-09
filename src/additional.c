@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 16:26:59 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/09 18:09:31 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/09 21:03:23 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		pr_refresh(t_print *aq)
 	aq->i = 0;
 }
 
-size_t		pr_overflow_str(t_print *aq, unsigned char *s, size_t *n)
+size_t		pr_overflow_str(t_print *aq, char *s, size_t *n)
 {
 	const size_t	t = *n > BUFS ? *n - BUFS : *n;
 
@@ -32,7 +32,7 @@ size_t		pr_overflow_str(t_print *aq, unsigned char *s, size_t *n)
 	return (t);
 }
 
-size_t		pr_overflow(t_print *aq, unsigned char c, size_t *n)
+size_t		pr_overflow(t_print *aq, char c, size_t *n)
 {
 	const size_t	t = *n > BUFS ? *n - BUFS : *n;
 
@@ -58,8 +58,7 @@ void		pr_itoa(t_print *aq, uintmax_t value)
 	{
 		left = (short)(value % S.base);
 		value /= S.base;
-		aq->out[aq->i + len--] =
-			(unsigned char)(left + (left < 10 ? '0' : c - 10));
+		aq->out[aq->i + len--] = (char)(left + (left < 10 ? '0' : c - 10));
 		if (S.apost && (len_p - len == 3))
 		{
 			aq->out[aq->i + len--] = ',';
