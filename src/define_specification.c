@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 22:07:41 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/08 19:47:34 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/09 23:38:31 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,29 @@ void	set_num(char **line, t_sp *mark)
 	set_length(line, mark);
 }
 
-//void	set_color(char **line, t_sp *mark)
-//{
-//	(*line)++;
-//
-//}
+void	set_color(char **line, t_sp *mark)
+{
+	mark->color[0] = 1;
+	*(++(*line)) == '1' && (mark->color[1] = 1);
+	if (*(++(*line)) == '0')
+		(*line)++;
+	else if (**line >= '1' && **line <= '8')
+	{
+		mark->color[2] = (size_t)(*((*line)++) - 19);
+		if (**line == 'b' && (mark->color[1] += 60))
+			(*line)++;
+	}
+	if (**line >= '1' && **line <= '8')
+	{
+		mark->color[3] = (size_t)(**line - 9);
+		if (*(*line + 1) == 'b' && (mark->color[2] += 60))
+			(*line)++;
+	}
+}
 
 void	set_flag(char **line, t_sp *mark)
 {
-	while (**line == '#' || **line == '0' || **line == '-'
+	while (**line == '#' || **line == '0' || **line == '-' || **line == '!'
 		|| **line == '+' || **line == ' ' || **line == '`')
 	{
 		(**line == '#') && (mark->hash = 1);
@@ -86,8 +100,8 @@ void	set_flag(char **line, t_sp *mark)
 		(**line == '+') && (mark->plus = 1);
 		(**line == ' ') && (mark->spc = 1);
 		(**line == '`') && (mark->apost = 1);
-//		if (**line == '$')
-//			set_color(line, mark);
+		if (**line == '!')
+			set_color(line, mark);
 		(*line)++;
 	}
 	set_num(line, mark);
