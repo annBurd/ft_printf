@@ -3,6 +3,23 @@
 #include <limits.h>
 #include <locale.h>
 
+// #define NORMAL	"\x1B[0m"
+// #define RED		"\x1B[31m"
+// #define GREEN	"\x1B[32m"
+// #define YELLOW	"\x1B[33m"
+// #define BLUE		"\x1B[34m"
+// #define MAGENTA	"\x1B[35m"
+// #define CYAN		"\x1B[36m"
+// #define WHITE	"\x1B[37m"
+
+//# define EOC		"\e[0m"
+//# define RED		"\e[91m"
+//# define GREEN	"\e[92m"
+//# define YELLOW	"\e[93m"
+//# define BLUE		"\e[94m"
+//# define PINK		"\e[95m"
+//# define WHITE	"\e[97m"
+
 #define MAX_OF(type) \
     (((type)(~0LLU) > (type)((1LLU<<((sizeof(type)<<3)-1))-1LLU)) ?	\
     (long long unsigned int)(type)(~0LLU) :	\
@@ -53,6 +70,12 @@
 
 //	Запятой (,) разделяются классы (у нас — полупробелы),
 //		а десятичная часть — точкой.
+
+//30 – 37: set foreground color 0 – 7 (black, red, green, yellow, blue, purple, cyan, white)
+//90 – 97: set foreground color 8 – 15 (bright versions of 0 – 7; "bright black" is a dark gray)
+//40 – 47: set background color 0 – 7 (ditto)
+//100 – 107: set background color 8 – 15 (ditto)
+//In your case, red text on a white background would be \e[31;47m.
 // **************************************************************************
 
 int main(int argc, char **argv)
@@ -74,11 +97,11 @@ int main(int argc, char **argv)
 //	ft_printf("[%04.2%]\n");
 
 ////	CHAR: %c, %s
-//	char c = '$';
-//	char *s = "Do some trash test for my lovely ft_printf()";
-//	ft_printf("\n> CHAR %%c, %%s\n");
-//	printf("%%c = %c ____[%-*.*s] 0R!G\n", c, 30, 13, s);
-//	ft_printf("%%c = %c ____[%-*.*s]\n", c, 30, 13, s);
+	char c = '$';
+	char *s = "Do some trash test for my lovely ft_printf()";
+	ft_printf("\n> CHAR %%c, %%s\n");
+	printf("%%c = %c ____[%-*.*s] 0R!G\n", c, 30, 13, s);
+	ft_printf("%%c = %!03b0c ____[%-*.*s]\n", c, 30, 13, s);
 
 //	UNSIGNED: # with %oO, %xX
 //	unsigned int ui = 1234567;
@@ -106,7 +129,7 @@ int main(int argc, char **argv)
 //	ft_printf(".%d\t\t[%`.*d]\n", w, w, i);
 //	ft_printf("0%d\t\t[%`0*d]\n", w, w, i);
 //
-////	unsigned  ui = 12345;
+//	unsigned  ui = 12345;
 //	ft_printf("\n> APOST && STAR && uU\n");
 //	printf("-10\t\t[%-10u]ui 0R!G\n", ui);
 //	ft_printf("`-10\t[%`-10lu]ui\n", ui);
@@ -115,6 +138,18 @@ int main(int argc, char **argv)
 //	printf("7.9\t\t[%7.9u]ui 0R!G\n", ui);
 //	ft_printf("`7.9\t[%`7.9lu]ui\n", ui);
 //	ft_printf("`7.9\t[%`7.9x]ui - x\n", ui);
+
+////	BONUS COLOR
+		printf("\n> COLOR\n");
+//	printf("Do some \e[1;mtrash \e[0mtest for my lovely ft_printf()\n");
+//	printf("Do some \e[31mtrash \e[0mtest for my lovely ft_printf()\n");
+//	printf("Do some \e[91mtrash \e[0mtest for my lovely ft_printf()\n");
+//	printf("Do some \e[31;47mtrash\e[0m test for my lovely ft_printf()\n");
+//	printf("Do some \e[1;31;107mtrash\e[0m test for my lovely ft_printf()\n");
+
+	ft_printf("Do %!128bs", "trash");
+	ft_printf("Do %!06b1s", "trash");
+	ft_printf("Do %!04b0s", "trash");
 //	****************************************************
 
 
@@ -267,38 +302,38 @@ int main(int argc, char **argv)
 //	UNSIGNED: o, O
 //	****************************************************
 //	unsigned int ui = ft_atoi(argv[1]);
-	unsigned int ui = 1;
-
-		ft_printf("________[o, O] minus & width\n");
-	printf("-4.7\t[%-4.7o]\n", ui);
-	ft_printf("-4.7\t[%-4.7o]\n", ui);
-	printf("-7.7\t[%-7.7o]\n", ui);
-	ft_printf("-7.7\t[%-7.7o]\n", ui);
-	printf("-#7.7\t[%-#7.7o]\n", ui);
-	ft_printf("-#7.7\t[%-#7.7o]\n", ui);
-	printf("-7.4\t[%-7.4o]\n", ui);
-	ft_printf("-7.4\t[%-7.4o]\n", ui);
-	printf("-#7.4\t[%-#7.4o]\n", ui);
-	ft_printf("-#7.4\t[%-#7.4o]\n", ui);
-	printf("-7.\t\t[%-7.o]\n", ui);
-	ft_printf("-7.\t\t[%-7.o]\n", ui);
-	printf("#-7.\t[%#-7.o]\n", ui);
-	ft_printf("#-7.\t[%#-7.o]\n", ui);
-	printf("-7\t\t[%-7o]\n", ui);
-	ft_printf("-7\t\t[%-7o]\n", ui);
-		ft_printf("________[o, O] minus & !width\n");
-	printf("-\t\t[%-o]\n", ui);
-	ft_printf("-\t\t[%-o]\n", ui);
-	printf("-#\t\t[%-#o]\n", ui);
-	ft_printf("-#\t\t[%-#o]\n", ui);
-	printf("-.\t\t[%-.o]\n", ui);
-	ft_printf("-.\t\t[%-.o]\n", ui);//0
-	printf("-#.\t\t[%-#.o]\n", ui);
-	ft_printf("-#.\t\t[%-#.o]\n", ui);
-	printf("-.7\t\t[%-.7o]\n", ui);
-	ft_printf("-.7\t\t[%-.7o]\n", ui);
-	printf("-#.7\t[%-#.7o]\n", ui);
-	ft_printf("-#.7\t[%-#.7o]\n", ui);
+//	unsigned int ui = 1;
+//
+//		ft_printf("________[o, O] minus & width\n");
+//	printf("-4.7\t[%-4.7o]\n", ui);
+//	ft_printf("-4.7\t[%-4.7o]\n", ui);
+//	printf("-7.7\t[%-7.7o]\n", ui);
+//	ft_printf("-7.7\t[%-7.7o]\n", ui);
+//	printf("-#7.7\t[%-#7.7o]\n", ui);
+//	ft_printf("-#7.7\t[%-#7.7o]\n", ui);
+//	printf("-7.4\t[%-7.4o]\n", ui);
+//	ft_printf("-7.4\t[%-7.4o]\n", ui);
+//	printf("-#7.4\t[%-#7.4o]\n", ui);
+//	ft_printf("-#7.4\t[%-#7.4o]\n", ui);
+//	printf("-7.\t\t[%-7.o]\n", ui);
+//	ft_printf("-7.\t\t[%-7.o]\n", ui);
+//	printf("#-7.\t[%#-7.o]\n", ui);
+//	ft_printf("#-7.\t[%#-7.o]\n", ui);
+//	printf("-7\t\t[%-7o]\n", ui);
+//	ft_printf("-7\t\t[%-7o]\n", ui);
+//		ft_printf("________[o, O] minus & !width\n");
+//	printf("-\t\t[%-o]\n", ui);
+//	ft_printf("-\t\t[%-o]\n", ui);
+//	printf("-#\t\t[%-#o]\n", ui);
+//	ft_printf("-#\t\t[%-#o]\n", ui);
+//	printf("-.\t\t[%-.o]\n", ui);
+//	ft_printf("-.\t\t[%-.o]\n", ui);//0
+//	printf("-#.\t\t[%-#.o]\n", ui);
+//	ft_printf("-#.\t\t[%-#.o]\n", ui);
+//	printf("-.7\t\t[%-.7o]\n", ui);
+//	ft_printf("-.7\t\t[%-.7o]\n", ui);
+//	printf("-#.7\t[%-#.7o]\n", ui);
+//	ft_printf("-#.7\t[%-#.7o]\n", ui);
 //		ft_printf("________[o, O] !minus & width\n");
 //	printf("7\t\t[%7o]\n", ui);
 //	ft_printf("7\t\t[%7o]\n", ui);
@@ -336,55 +371,55 @@ int main(int argc, char **argv)
 //	unsigned int ui = ft_atoi(argv[1]);
 //	unsigned int ui = 1;
 //
-		ft_printf("________[x, X] minus & width\n");
-	printf("-4.7\t[%-4.7x]\n", ui);
-	ft_printf("-4.7\t[%-4.7x]\n", ui);
-	printf("-7.7\t[%-7.7x]\n", ui);
-	ft_printf("-7.7\t[%-7.7x]\n", ui);
-	printf("-#7.7\t[%-#7.7x]\n", ui);
-	ft_printf("-#7.7\t[%-#7.7x]\n", ui);
-	printf("-7.4\t[%-7.4x]\n", ui);
-	ft_printf("-7.4\t[%-7.4x]\n", ui);
-	printf("-#7.4\t[%-#7.4x]\n", ui);
-	ft_printf("-#7.4\t[%-#7.4x]\n", ui);
-	printf("-7.\t\t[%-7.x]\n", ui);
-	ft_printf("-7.\t\t[%-7.x]\n", ui);
-	printf("#-7.\t[%#-7.x]\n", ui);
-	ft_printf("#-7.\t[%#-7.x]\n", ui);
-	printf("-7\t\t[%-7x]\n", ui);
-	ft_printf("-7\t\t[%-7x]\n", ui);
-		ft_printf("________[x, X] minus & !width\n");
-	printf("-\t\t[%-x]\n", ui);
-	ft_printf("-\t\t[%-x]\n", ui);
-	printf("-#\t\t[%-#x]\n", ui);
-	ft_printf("-#\t\t[%-#x]\n", ui);
-	printf("-.\t\t[%-.x]\n", ui);
-	ft_printf("-.\t\t[%-.x]\n", ui);
-	printf("-#.\t\t[%-#.x]\n", ui);
-	ft_printf("-#.\t\t[%-#.x]\n", ui);
-	printf("-.7\t\t[%-.7x]\n", ui);
-	ft_printf("-.7\t\t[%-.7x]\n", ui);
-	printf("-#.7\t[%-#.7x]\n", ui);
-	ft_printf("-#.7\t[%-#.7x]\n", ui);
-		ft_printf("________[x, X] !minus & width\n");
-	printf("7\t\t[%7x]\n", ui);
-	ft_printf("7\t\t[%7x]\n", ui);
-	printf("07\t\t[%07x]\n", ui);
-	ft_printf("07\t\t[%07x]\n", ui);
-	printf("7.\t\t[%7.x]\n", ui);
-	ft_printf("7.\t\t[%7.x]\n", ui);
-	printf("7.4\t\t[%7.4x]\n", ui);
-	ft_printf("7.4\t\t[%7.4x]\n", ui);
-	printf("#7.4\t[%#7.4x]\n", ui);
-	ft_printf("#7.4\t[%#7.4x]\n", ui);
-	printf("07.4\t[%07.4x]\n", ui);
-	ft_printf("07.4\t[%07.4x]\n", ui);
-	printf("7.7\t\t[%7.7x]\n", ui);
-	ft_printf("7.7\t\t[%7.7x]\n", ui);
-	printf("7.9\t\t[%7.9x]\n", ui);
-	ft_printf("7.9\t\t[%7.9x]\n", ui);
-	printf("#7.9\t[%#7.9x]\n", ui);
-	ft_printf("#7.9\t[%#7.9x]\n", ui);
+//		ft_printf("________[x, X] minus & width\n");
+//	printf("-4.7\t[%-4.7x]\n", ui);
+//	ft_printf("-4.7\t[%-4.7x]\n", ui);
+//	printf("-7.7\t[%-7.7x]\n", ui);
+//	ft_printf("-7.7\t[%-7.7x]\n", ui);
+//	printf("-#7.7\t[%-#7.7x]\n", ui);
+//	ft_printf("-#7.7\t[%-#7.7x]\n", ui);
+//	printf("-7.4\t[%-7.4x]\n", ui);
+//	ft_printf("-7.4\t[%-7.4x]\n", ui);
+//	printf("-#7.4\t[%-#7.4x]\n", ui);
+//	ft_printf("-#7.4\t[%-#7.4x]\n", ui);
+//	printf("-7.\t\t[%-7.x]\n", ui);
+//	ft_printf("-7.\t\t[%-7.x]\n", ui);
+//	printf("#-7.\t[%#-7.x]\n", ui);
+//	ft_printf("#-7.\t[%#-7.x]\n", ui);
+//	printf("-7\t\t[%-7x]\n", ui);
+//	ft_printf("-7\t\t[%-7x]\n", ui);
+//		ft_printf("________[x, X] minus & !width\n");
+//	printf("-\t\t[%-x]\n", ui);
+//	ft_printf("-\t\t[%-x]\n", ui);
+//	printf("-#\t\t[%-#x]\n", ui);
+//	ft_printf("-#\t\t[%-#x]\n", ui);
+//	printf("-.\t\t[%-.x]\n", ui);
+//	ft_printf("-.\t\t[%-.x]\n", ui);
+//	printf("-#.\t\t[%-#.x]\n", ui);
+//	ft_printf("-#.\t\t[%-#.x]\n", ui);
+//	printf("-.7\t\t[%-.7x]\n", ui);
+//	ft_printf("-.7\t\t[%-.7x]\n", ui);
+//	printf("-#.7\t[%-#.7x]\n", ui);
+//	ft_printf("-#.7\t[%-#.7x]\n", ui);
+//		ft_printf("________[x, X] !minus & width\n");
+//	printf("7\t\t[%7x]\n", ui);
+//	ft_printf("7\t\t[%7x]\n", ui);
+//	printf("07\t\t[%07x]\n", ui);
+//	ft_printf("07\t\t[%07x]\n", ui);
+//	printf("7.\t\t[%7.x]\n", ui);
+//	ft_printf("7.\t\t[%7.x]\n", ui);
+//	printf("7.4\t\t[%7.4x]\n", ui);
+//	ft_printf("7.4\t\t[%7.4x]\n", ui);
+//	printf("#7.4\t[%#7.4x]\n", ui);
+//	ft_printf("#7.4\t[%#7.4x]\n", ui);
+//	printf("07.4\t[%07.4x]\n", ui);
+//	ft_printf("07.4\t[%07.4x]\n", ui);
+//	printf("7.7\t\t[%7.7x]\n", ui);
+//	ft_printf("7.7\t\t[%7.7x]\n", ui);
+//	printf("7.9\t\t[%7.9x]\n", ui);
+//	ft_printf("7.9\t\t[%7.9x]\n", ui);
+//	printf("#7.9\t[%#7.9x]\n", ui);
+//	ft_printf("#7.9\t[%#7.9x]\n", ui);
 //		ft_printf("________[x, X] !minus & !width\n");
 //	printf("\t\t[%x]\n", ui);
 //	ft_printf("\t\t[%x]\n", ui);
