@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/28 17:45:03 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/09 23:52:55 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/10 02:51:37 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	handle_c(t_print *aq)
 	char	c;
 	char	*arg;
 
-	if (S.color[0])
-		pr_colorme(aq, 1);
 	c = 0;
 	if (S.ty == '%' || S.ty == 'c')
 		c = (char)(S.ty == '%' ? '%' : va_arg(aq->va, int));
@@ -34,6 +32,6 @@ void	handle_c(t_print *aq)
 	pr_join_str(aq, arg, S.ln);
 	if (S.minus && S.free)
 		pr_join(aq, ' ', (size_t)S.free);
-	if (S.color[0])
-		pr_colorme(aq, 0);
+	if (S.color)
+		pr_join_str(aq, "\e[0m", 4);
 }

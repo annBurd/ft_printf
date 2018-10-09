@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 22:07:41 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/09 23:38:31 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/10 02:25:48 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,28 +69,36 @@ void	set_num(char **line, t_sp *mark)
 	set_length(line, mark);
 }
 
-void	set_color(char **line, t_sp *mark)
+void	set_color(char **line, t_sp *mark, t_print *aq, size_t n)
 {
-	mark->color[0] = 1;
-	*(++(*line)) == '1' && (mark->color[1] = 1);
+	mark->color = 1;
+	aq->out[aq->i++] = '\e';
+	aq->out[aq->i++] = '[';
+	if (*(++(*line)) == '1')
+		pr_join_str(aq, "1;", 2);
 	if (*(++(*line)) == '0')
 		(*line)++;
 	else if (**line >= '1' && **line <= '8')
 	{
-		mark->color[2] = (size_t)(*((*line)++) - 19);
-		if (**line == 'b' && (mark->color[1] += 60))
+		n = (size_t)(*((*line)++) - 19);
+		if (**line == 'b' && (n += 60))
 			(*line)++;
+		pr_itoa(aq, n);
+		aq->out[aq->i++] = ';';
 	}
 	if (**line >= '1' && **line <= '8')
 	{
-		mark->color[3] = (size_t)(**line - 9);
-		if (*(*line + 1) == 'b' && (mark->color[2] += 60))
+		n = (size_t)(**line - 9);
+		if (*(*line + 1) == 'b' && (n += 60))
 			(*line)++;
+		pr_itoa(aq, n);
 	}
+	aq->out[aq->i++] = 'm';
 }
 
-void	set_flag(char **line, t_sp *mark)
+void	set_flag(char **line, t_sp *mark, t_print *aq)
 {
+	mark->base = 10;
 	while (**line == '#' || **line == '0' || **line == '-' || **line == '!'
 		|| **line == '+' || **line == ' ' || **line == '`')
 	{
@@ -101,7 +109,11 @@ void	set_flag(char **line, t_sp *mark)
 		(**line == ' ') && (mark->spc = 1);
 		(**line == '`') && (mark->apost = 1);
 		if (**line == '!')
-			set_color(line, mark);
+		{
+			if (aq->i + 12 >= BUFS)
+				pr_refresh(aq);
+			set_color(line, mark, aq, 0);
+		}
 		(*line)++;
 	}
 	set_num(line, mark);

@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 16:26:59 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/10 00:07:32 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/10 02:28:34 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,29 +67,4 @@ void	pr_itoa(t_print *aq, uintmax_t value)
 		}
 	}
 	aq->i += S.ln ? S.ln : len_p + 1;
-}
-
-void	pr_colorme(t_print *aq, short start)
-{
-	if (aq->i + 12 >= BUFS)
-		pr_refresh(aq);
-	if (start)
-	{
-		pr_join_str(aq, "\e[", 2);
-		if (S.color[1])
-		{
-			aq->out[aq->i++] = '1';
-			aq->out[aq->i++] = ';';
-		}
-		if (S.color[2])
-			pr_itoa(aq, S.color[2]);
-		if (S.color[3])
-		{
-			S.color[2] && (aq->out[aq->i++] = ';');
-			pr_itoa(aq, S.color[3]);
-		}
-		aq->out[aq->i++] = 'm';
-	}
-	else
-		pr_join_str(aq, "\e[0m", 4);
 }

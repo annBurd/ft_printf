@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 21:39:53 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/10 00:59:38 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/10 01:49:21 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ void	handle_wc(t_print *aq)
 	wchar_t	*arg;
 	size_t	i;
 
-	if (S.color[0])
-		pr_colorme(aq, 1);
 	if (S.ty == 'C' || S.ty == 'S')
 		S.ty = (char)ft_tolower(S.ty);
 	if (S.ty == 'c' && (wc = (wint_t)va_arg(aq->va, int)))
@@ -95,6 +93,6 @@ void	handle_wc(t_print *aq)
 		set_wchar(aq, arg, i);
 	if (S.minus && S.free)
 		pr_join(aq, ' ', (size_t)S.free);
-	if (S.color[0])
-		pr_colorme(aq, 0);
+	if (S.color)
+		pr_join_str(aq, "\e[0m", 4);
 }

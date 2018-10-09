@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/28 20:10:04 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/10 00:02:22 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/10 01:49:21 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,6 @@ void		handle_i(t_print *aq)
 	uintmax_t	ut;
 	intmax_t	t;
 
-	if (S.color[0])
-		pr_colorme(aq, 1);
 	if (S.ty == 'D' || S.ty == 'O' || S.ty == 'U')
 	{
 		S.length = l;
@@ -140,6 +138,6 @@ void		handle_i(t_print *aq)
 	!S.v ? pr_join(aq, '0', S.ln) : pr_itoa(aq, ut);
 	if (S.minus && S.free > 0)
 		pr_join(aq, ' ', (size_t)S.free);
-	if (S.color[0])
-		pr_colorme(aq, 0);
+	if (S.color)
+		pr_join_str(aq, "\e[0m", 4);
 }

@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:32:45 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/10 00:58:47 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/10 02:25:48 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,27 @@
 # define BUFS	1777
 
 /*
-** v		for vendetta or value sign // -1, 0, 1
-** free		for free space // 0-...
-** color[4]	for output color
-** //color[0] set active
-** //color[1] bold // 0, 1
-** //color[2] font
-** //color[3] background
-** //1 - black
-** //2 - red
-** //3 - green
-** //4 - yellow
-** //5 - blue
-** //6 - purple
-** //7 - cyan
-** //8 - white
-** // add 'b' after num for bright version
+** v		for vendetta or value sign [-1, 0, 1]
+** free		for free space
+** color -> {[bold][font][background]}
+** bold[0, 1]
+** use nums & 'b' combinations to set color
+** 1 - black
+** 2 - red
+** 3 - green
+** 4 - yellow
+** 5 - blue
+** 6 - purple
+** 7 - cyan
+** 8 - white
+** 1b - dark gray
+** 2b - bright red
+** 3b - bright green
+** 4b - bright yellow
+** 5b - bright blue
+** 6b - bright purple
+** 7b - bright cyan
+** 8b - bright white
 */
 
 typedef struct	s_sp
@@ -63,7 +68,7 @@ typedef struct	s_sp
 	short		free;
 	size_t		ln;
 	char		ty;
-	size_t		color[4];
+	short		color;
 }				t_sp;
 
 typedef struct	s_print
@@ -79,8 +84,8 @@ int				ft_printf(const char *format, ...);
 void			explore(t_print *aq, const char *format);
 void			start_handle(t_print *aq);
 
-void			set_flag(char **line, t_sp *mark);
-void			set_color(char **line, t_sp *mark);
+void			set_flag(char **line, t_sp *mark, t_print *aq);
+void			set_color(char **line, t_sp *mark, t_print *aq, size_t n);
 void			set_num(char **line, t_sp *mark);
 void			set_length(char **line, t_sp *mark);
 void			set_type(char **line, t_sp *mark);
@@ -99,9 +104,9 @@ void			set_wchar(t_print *aq, wchar_t *arg, size_t n);
 
 void			pr_itoa(t_print *aq, uintmax_t value);
 void			pr_refresh(t_print *aq);
-void			pr_colorme(t_print *aq, short start);
 size_t			pr_overflow_str(t_print *aq, char *s, size_t *n);
 size_t			pr_overflow(t_print *aq, char c, size_t *n);
+
 void			pr_join_str(t_print *aq, char *s, size_t n);
 void			pr_join(t_print *aq, char c, size_t n);
 void			pr_join_4b(t_print *aq, unsigned int c);

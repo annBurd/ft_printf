@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:26:16 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/10 00:02:22 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/10 02:22:14 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void		start_handle(t_print *aq)
 {
 	(S.wi == -1) && (S.wi = (short)va_arg(aq->va, int));
 	(S.prec == -1) && (S.prec = (short)va_arg(aq->va, int));
-	S.base = 10;
 	if (S.ty == 'D' || DEC || HEX ||
 		S.ty == 'o' || S.ty == 'O' || S.ty == 'b' ||
 		S.ty == 'u' || S.ty == 'U' || S.ty == 'p')
@@ -43,7 +42,7 @@ void		explore(t_print *aq, const char *format)
 				pr_join_str(aq, point, line - point);
 			line++;
 			ft_bzero(&aq->sp, sizeof(t_sp));
-			set_flag(&line, &aq->sp);
+			set_flag(&line, &aq->sp, aq);
 			start_handle(aq);
 			point = line;
 		}

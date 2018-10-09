@@ -6,14 +6,13 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 14:28:23 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/09 21:00:22 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/09 21:03:23 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_printf.h"
 
 /*
-** Unicode mask
 ** 0xxxxxxx
 ** 110xxxxx 10xxxxxx
 ** 1110xxxx 10xxxxxx 10xxxxxx
