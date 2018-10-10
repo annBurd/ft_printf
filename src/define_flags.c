@@ -14,14 +14,14 @@
 
 void	set_type(const char **line, t_sp *mark)
 {
-	char c;
+	char	Z;
 
-	c = **line;
-	if (c == '%' || c == 'p' || c == 's' || c == 'S' || c == 'c' || c == 'C' ||
-		c == 'i' || c == 'd' || c == 'D' || c == 'o' || c == 'O' || c == 'b' ||
-		c == 'u' || c == 'U' || c == 'x' || c == 'X')
+	Z = **line;
+	if (Z == '%' || Z == 'p' || Z == 's' || Z == 'S' || Z == 'c' || Z == 'C' ||
+		Z == 'i' || Z == 'd' || Z == 'D' || Z == 'o' || Z == 'O' || Z == 'b' ||
+		Z == 'u' || Z == 'U' || Z == 'x' || Z == 'X')
 	{
-		mark->ty = c;
+		mark->ty = Z;
 		(*line)++;
 	}
 	else
@@ -30,7 +30,7 @@ void	set_type(const char **line, t_sp *mark)
 
 void	set_length(const char **line, t_sp *mark)
 {
-	const char *s;
+	const char	*s;
 
 	s = *line;
 	if ((*s == 'h' && (mark->length = h)) ||
@@ -71,7 +71,7 @@ void	set_num(const char **line, t_sp *mark)
 
 void	set_color(const char **line, t_print *aq)
 {
-	size_t n;
+	size_t	n;
 
 	aq->out[aq->i++] = '\e';
 	aq->out[aq->i++] = '[';
