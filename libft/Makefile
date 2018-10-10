@@ -88,8 +88,7 @@ SRC = ft_atoi.c \
 	ft_swap.c \
 	ft_tolower.c \
 	ft_toupper.c \
-	ft_strjoinfree.c \
-	ft_strnjoinfree.c
+	ft_strjoinfree.c
  
 OBJ = $(SRC:.c=.o)
 
