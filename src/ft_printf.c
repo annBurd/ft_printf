@@ -36,7 +36,8 @@ void		explore(t_print *aq, const char *line, const char *point)
 		{
 			if (line - point > 0)
 				pr_join_str(aq, (char*)point, line - point);
-			*(line++) == '<' ? set_color(&line, aq) : pr_join_str(aq, "\e[0m", 4);
+			*(line++) == '<' ? set_color(&line, aq)
+							: pr_join_str(aq, "\e[0m", 4);
 			point = ++line;
 		}
 		if (*line == '%')
