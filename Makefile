@@ -6,7 +6,7 @@
 #    By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 18:22:11 by aburdeni          #+#    #+#              #
-#    Updated: 2018/10/10 00:51:53 by aburdeni         ###   ########.fr        #
+#    Updated: 2018/10/10 03:18:06 by aburdeni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ HEADER = $(addprefix $(INC_DIR), ft_printf.h)
 
 SRC = ft_printf.c \
 	additional.c \
-	define_specification.c \
+	define_flags.c \
     handle_char.c \
     handle_integer.c \
     handle_wc.c \

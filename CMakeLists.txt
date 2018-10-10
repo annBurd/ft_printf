@@ -10,7 +10,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Werror -Ipthreads")
 set(SOURCE_FILES
         inc/ft_printf.h
         src/additional.c
-        src/define_specification.c
+        src/define_flags.c
         src/ft_printf.c
         src/handle_integer.c
         src/handle_char.c
