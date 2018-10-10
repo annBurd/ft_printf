@@ -1,10 +1,9 @@
-zzz
 .DS_Store
 .idea/
 CMakeLists.txt
 cmake-build-debug/
 libftprintf.a
 inc/.DS_Store
+inc/ft_printf.h.gch
 libft/.DS_Store
-main.c
 a.out
