@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/28 17:45:03 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/10 02:51:37 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/10 03:01:51 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	handle_c(t_print *aq)
 	S.ty == 's' && (arg = va_arg(aq->va, char*));
 	S.ty != 's' && (S.ln = 1);
 	S.ty == 's' && (S.ln = S.prec >= 0 ? S.prec : ft_strlen(arg));
-	if ((size_t)S.wi <= S.ln && !S.color[0])
-		return (pr_join_str(aq, arg, S.ln));
 	S.free = (short)(S.wi - (short)S.ln < 0 ? 0 : S.wi - S.ln);
 	if (!S.minus && S.free)
 		pr_join(aq, (char)(S.ty == '%' && S.zero ? '0' : ' '), (size_t)S.free);
