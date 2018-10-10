@@ -93,6 +93,4 @@ void	handle_wc(t_print *aq)
 		set_wchar(aq, arg, i);
 	if (S.minus && S.free)
 		pr_join(aq, ' ', (size_t)S.free);
-	if (S.color)
-		pr_join_str(aq, "\e[0m", 4);
 }

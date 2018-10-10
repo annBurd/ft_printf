@@ -12,52 +12,40 @@
 
 #include "../inc/ft_printf.h"
 
-static void	extract_i(t_print *aq, intmax_t *t, uintmax_t *ut)
+static void	extract_i(t_print *aq, intmax_t t, uintmax_t *ut)
 {
-	if (DEC && !S.length)
-		*t = (va_arg(aq->va, int));
-	else if (DEC && S.length == h)
-		*t = (short)va_arg(aq->va, int);
-	else if (DEC && S.length == hh)
-		*t = (signed char)va_arg(aq->va, int);
-	else if (DEC && S.length == l)
-		*t = (va_arg(aq->va, long int));
-	else if (DEC && S.length == ll)
-		*t = (va_arg(aq->va, long long int));
-	else if (DEC && S.length == j)
-		*t = (va_arg(aq->va, intmax_t));
-	else if (!S.length)
-		*ut = va_arg(aq->va, unsigned int);
-	else if (S.length == h)
-		*ut = (unsigned short)va_arg(aq->va, unsigned int);
-	else if (S.length == hh)
-		*ut = (unsigned char)va_arg(aq->va, unsigned int);
-	else if (S.length == l)
-		*ut = (va_arg(aq->va, unsigned long int));
-	else if (S.length == ll)
-		*ut = (va_arg(aq->va, unsigned long long int));
-	else if (S.length == j)
-		*ut = (va_arg(aq->va, uintmax_t));
-}
-
-void		get_i(t_print *aq, intmax_t *t, uintmax_t *ut)
-{
-	*t = 0;
-	if (S.length == z)
-		*ut = (size_t)va_arg(aq->va, size_t);
-	else if (S.ty == 'p')
-		*ut = (uintmax_t)va_arg(aq->va, void*);
-	else if (DEC)
+	if (DEC)
 	{
-		extract_i(aq, t, ut);
-		*ut = (uintmax_t)(*t < 0 ? *t * -1 : *t);
+		!S.length && (t = va_arg(aq->va, int));
+		S.length == h && (t = (short)va_arg(aq->va, void*));
+		S.length == hh && (t = (signed char)va_arg(aq->va, void*));
+		S.length == l && (t = va_arg(aq->va, long int));
+		S.length == ll && (t = va_arg(aq->va, long long int));
+		S.length == j && (t = va_arg(aq->va, intmax_t));
+		S.length == z && (t = (size_t)va_arg(aq->va, size_t));
+		*ut = (uintmax_t)(t < 0 ? t * -1 : t);
+		*ut && (S.v = (short)(t < 0 ? -1 : 1));
 	}
 	else
-		extract_i(aq, t, ut);
-	*ut && (S.v = (short)(*t < 0 ? -1 : 1));
-	if (!S.v && !S.prec && S.ty != 'o')
-		S.ln = 0;
-	else if (!S.v && (S.hash || (!S.prec && (!S.hash || !S.minus))))
+	{
+		!S.length && (*ut = va_arg(aq->va, unsigned int));
+		S.length == h && (*ut = (unsigned short)va_arg(aq->va, void*));
+		S.length == hh && (*ut = (unsigned char)va_arg(aq->va, void*));
+		S.length == l && (*ut = va_arg(aq->va, unsigned long int));
+		S.length == ll && (*ut = va_arg(aq->va, unsigned long long int));
+		S.length == j && (*ut = va_arg(aq->va, uintmax_t));
+		S.length == z && (*ut = (size_t)va_arg(aq->va, size_t));
+		*ut && (S.v = 1);
+	}
+}
+
+void		get_i(t_print *aq, uintmax_t *ut)
+{
+	if (S.ty == 'p')
+		S.length = 0;
+	extract_i(aq, 0, ut);
+	if (!S.v && ((!S.prec && S.ty != 'o') ||
+				(S.hash || (!S.prec && (!S.hash || !S.minus)))))
 		S.ln = 0;
 	else
 		S.ln = ft_nbrulen(*ut, S.base);
@@ -120,7 +108,6 @@ void		set_format_i(t_print *aq)
 void		handle_i(t_print *aq)
 {
 	uintmax_t	ut;
-	intmax_t	t;
 
 	if (S.ty == 'D' || S.ty == 'O' || S.ty == 'U')
 	{
@@ -131,14 +118,12 @@ void		handle_i(t_print *aq)
 	S.ty == 'o' && (S.base = 8);
 	(DEC || S.ty == 'u') && (S.base = 10);
 	(HEX || S.ty == 'p') && (S.base = 16);
-	get_i(aq, &t, &ut);
+	get_i(aq, &ut);
 	set_flag_i(aq);
 	set_format_i(aq);
 	if (aq->i + S.ln >= BUFS)
 		pr_refresh(aq);
-	!S.v ? pr_join(aq, '0', S.ln) : pr_itoa(aq, ut, S.base);
+	!S.v && S.ln ? pr_join(aq, '0', S.ln) : pr_itoa(aq, ut, S.base);
 	if (S.minus && S.free > 0)
 		pr_join(aq, ' ', (size_t)S.free);
-	if (S.color)
-		pr_join_str(aq, "\e[0m", 4);
 }

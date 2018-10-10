@@ -23,7 +23,7 @@
 # define DEC	(S.ty == 'i' || S.ty == 'd')
 # define HEX	(S.ty == 'x' || S.ty == 'X')
 
-# define BUFS	1777
+# define BUFS	777
 
 /*
 ** v		for vendetta or value sign [-1, 0, 1]
@@ -91,7 +91,7 @@ void			set_length(const char **line, t_sp *mark);
 void			set_type(const char **line, t_sp *mark);
 
 void			handle_i(t_print *aq);
-void			get_i(t_print *aq, intmax_t *t, uintmax_t *ut);
+void			get_i(t_print *aq, uintmax_t *ut);
 void			set_flag_i(t_print *aq);
 void			set_format_i(t_print *aq);
 

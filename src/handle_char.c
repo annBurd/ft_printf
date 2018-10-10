@@ -30,6 +30,4 @@ void	handle_c(t_print *aq)
 	pr_join_str(aq, arg, S.ln);
 	if (S.minus && S.free)
 		pr_join(aq, ' ', (size_t)S.free);
-	if (S.color)
-		pr_join_str(aq, "\e[0m", 4);
 }

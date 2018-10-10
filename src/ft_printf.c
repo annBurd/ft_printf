@@ -24,6 +24,8 @@ void		start_handle(t_print *aq)
 	else if (S.ty == 'C' || S.ty == 'S' ||
 		(S.length == l && (S.ty == 'c' || S.ty == 's')))
 		handle_wc(aq);
+	if (S.color)
+		pr_join_str(aq, "\e[0m", 4);
 }
 
 void		explore(t_print *aq, const char *line, const char *point)
@@ -63,6 +65,5 @@ int			ft_printf(const char *format, ...)
 		explore(&aq, format, format);
 		va_end(aq.va);
 	}
-	aq.size += write(1, aq.out, aq.i);
-	return (aq.size);
+	return (aq.size + write(1, aq.out, aq.i));
 }
