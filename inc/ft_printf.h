@@ -28,9 +28,12 @@
 /*
 ** v		for vendetta or value sign [-1, 0, 1]
 ** free		for free space
-** color -> {[bold][font][background]}
-** bold[0, 1]
-** use nums & 'b' combinations to set color
+** color format -> <![modify][font color][background color]>!
+** Modifies:
+** 0 - default (stay w/o changes)
+** 1 - Bold
+** 4 - Underline
+** Colors:
 ** 1 - black
 ** 2 - red
 ** 3 - green
