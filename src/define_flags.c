@@ -81,7 +81,7 @@ void	set_color(char **line, t_sp *mark, t_print *aq, size_t n)
 	else if (**line >= '1' && **line <= '8')
 	{
 		n = (size_t)(*((*line)++) - 19);
-		if (**line == 'b' && (n += 60))
+		if (**line == 'j' && (n += 60))
 			(*line)++;
 		pr_itoa(aq, n);
 		aq->out[aq->i++] = ';';
@@ -89,7 +89,7 @@ void	set_color(char **line, t_sp *mark, t_print *aq, size_t n)
 	if (**line >= '1' && **line <= '8')
 	{
 		n = (size_t)(**line - 9);
-		if (*(*line + 1) == 'b' && (n += 60))
+		if (*(*line + 1) == 'j' && (n += 60))
 			(*line)++;
 		pr_itoa(aq, n);
 	}
