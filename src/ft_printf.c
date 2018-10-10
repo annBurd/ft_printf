@@ -19,10 +19,8 @@ void		start_handle(t_print *aq)
 	if (S.ty == 'D' || S.ty == 'o' || S.ty == 'O' || DEC || HEX ||
 		S.ty == 'b' || S.ty == 'u' || S.ty == 'U' || S.ty == 'p')
 		handle_i(aq);
-	else if (S.ty == '%' || (!S.length && S.ty == 'c'))
+	else if (S.ty == '%' || (!S.length && (S.ty == 'c' || S.ty == 's')))
 		handle_c(aq);
-	else if (!S.length && S.ty == 's')
-		handle_str(aq);
 	else if (S.ty == 'C' || S.ty == 'S' ||
 		(S.length == l && (S.ty == 'c' || S.ty == 's')))
 		handle_wc(aq);

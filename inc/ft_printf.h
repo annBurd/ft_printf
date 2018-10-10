@@ -23,17 +23,14 @@
 # define DEC	(S.ty == 'i' || S.ty == 'd')
 # define HEX	(S.ty == 'x' || S.ty == 'X')
 
-# define BUFS	777
+# define BUFS	1777
 
 /*
 ** v		for vendetta or value sign [-1, 0, 1]
 ** free		for free space
-** FORMAT -> <![modify][font color][background color]>!
-** Modifies:
-** 0 - default (stay w/o changes)
-** 1 - bold
-** Colors:
-** 0 - default (stay w/o changes)
+** color -> {[bold][font][background]}
+** bold[0, 1]
+** use nums & 'b' combinations to set color
 ** 1 - black
 ** 2 - red
 ** 3 - green
@@ -99,7 +96,6 @@ void			set_flag_i(t_print *aq);
 void			set_format_i(t_print *aq);
 
 void			handle_c(t_print *aq);
-void			handle_str(t_print *aq);
 
 void			handle_wc(t_print *aq);
 size_t			set_wln(t_print *aq, wchar_t *arg);
