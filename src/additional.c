@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 16:26:59 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/10 02:28:34 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/10 02:40:06 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,19 @@ size_t	pr_overflow(t_print *aq, char c, size_t *n)
 	return (t);
 }
 
-void	pr_itoa(t_print *aq, uintmax_t value)
+void	pr_itoa(t_print *aq, uintmax_t value, short base)
 {
 	size_t		len;
 	size_t		len_p;
 	short		left;
 	const char	c = (char)(S.ty == 'X' ? 'A' : 'a');
 
-	len = S.ln ? S.ln : ft_nbrulen(value, S.base);
+	len = S.ln ? S.ln : ft_nbrulen(value, base);
 	len_p = --len;
 	while (value)
 	{
-		left = (short)(value % S.base);
-		value /= S.base;
+		left = (short)(value % base);
+		value /= base;
 		aq->out[aq->i + len--] = (char)(left + (left < 10 ? '0' : c - 10));
 		if (S.apost && (len_p - len == 3))
 		{

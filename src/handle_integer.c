@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/28 20:10:04 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/10 01:49:21 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/10 02:21:59 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,13 +129,14 @@ void		handle_i(t_print *aq)
 	}
 	S.ty == 'b' && (S.base = 2);
 	S.ty == 'o' && (S.base = 8);
+	(DEC || S.ty == 'u') && (S.base = 10);
 	(HEX || S.ty == 'p') && (S.base = 16);
 	get_i(aq, &t, &ut);
 	set_flag_i(aq);
 	set_format_i(aq);
 	if (aq->i + S.ln >= BUFS)
 		pr_refresh(aq);
-	!S.v ? pr_join(aq, '0', S.ln) : pr_itoa(aq, ut);
+	!S.v ? pr_join(aq, '0', S.ln) : pr_itoa(aq, ut, S.base);
 	if (S.minus && S.free > 0)
 		pr_join(aq, ' ', (size_t)S.free);
 	if (S.color)

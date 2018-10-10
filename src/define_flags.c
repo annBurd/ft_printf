@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   define_specification.c                             :+:      :+:    :+:   */
+/*   define_flags.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 22:07:41 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/10 02:25:48 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/10 05:21:49 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_printf.h"
 
-void	set_type(char **line, t_sp *mark)
+void	set_type(const char **line, t_sp *mark)
 {
 	char c;
 
@@ -28,9 +28,9 @@ void	set_type(char **line, t_sp *mark)
 		mark->ty = 's';
 }
 
-void	set_length(char **line, t_sp *mark)
+void	set_length(const char **line, t_sp *mark)
 {
-	char *s;
+	const char *s;
 
 	s = *line;
 	if ((*s == 'h' && (mark->length = h))
@@ -44,7 +44,7 @@ void	set_length(char **line, t_sp *mark)
 	set_type(line, mark);
 }
 
-void	set_num(char **line, t_sp *mark)
+void	set_num(const char **line, t_sp *mark)
 {
 	if ((**line >= '1' && **line <= '9') || **line == '*')
 	{
@@ -69,9 +69,10 @@ void	set_num(char **line, t_sp *mark)
 	set_length(line, mark);
 }
 
-void	set_color(char **line, t_sp *mark, t_print *aq, size_t n)
+void	set_color(const char **line, t_print *aq)
 {
-	mark->color = 1;
+	size_t n;
+
 	aq->out[aq->i++] = '\e';
 	aq->out[aq->i++] = '[';
 	if (*(++(*line)) == '1')
@@ -83,7 +84,7 @@ void	set_color(char **line, t_sp *mark, t_print *aq, size_t n)
 		n = (size_t)(*((*line)++) - 19);
 		if (**line == 'j' && (n += 60))
 			(*line)++;
-		pr_itoa(aq, n);
+		pr_itoa(aq, n, 10);
 		aq->out[aq->i++] = ';';
 	}
 	if (**line >= '1' && **line <= '8')
@@ -91,14 +92,14 @@ void	set_color(char **line, t_sp *mark, t_print *aq, size_t n)
 		n = (size_t)(**line - 9);
 		if (*(*line + 1) == 'j' && (n += 60))
 			(*line)++;
-		pr_itoa(aq, n);
+		pr_itoa(aq, n, 10);
 	}
 	aq->out[aq->i++] = 'm';
 }
 
-void	set_flag(char **line, t_sp *mark, t_print *aq)
+void	set_flag(const char **line, t_sp *mark, t_print *aq)
 {
-	mark->base = 10;
+	ft_bzero(&aq->sp, sizeof(t_sp));
 	while (**line == '#' || **line == '0' || **line == '-' || **line == '!'
 		|| **line == '+' || **line == ' ' || **line == '`')
 	{
@@ -112,7 +113,8 @@ void	set_flag(char **line, t_sp *mark, t_print *aq)
 		{
 			if (aq->i + 12 >= BUFS)
 				pr_refresh(aq);
-			set_color(line, mark, aq, 0);
+			mark->color = 1;
+			set_color(line, aq);
 		}
 		(*line)++;
 	}

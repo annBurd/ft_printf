@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:26:16 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/10 02:22:14 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/10 05:31:33 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,28 @@ void		start_handle(t_print *aq)
 		handle_wc(aq);
 }
 
-void		explore(t_print *aq, const char *format)
+void		explore(t_print *aq, const char *line, const char *point)
 {
-	char *line;
-	char *point;
-
-	line = (char*)format;
-	point = (char*)format;
 	while (*line)
 	{
+		if (*line == '<' || *line == '>')
+		{
+			if (line - point > 0)
+				pr_join_str(aq, (char*)point, line - point);
+			*line == '<' ? set_color(&line, aq) : pr_join_str(aq, "\e[0m", 4);
+			point = ++line;
+		}
 		if (*line == '%')
 		{
 			if (line - point > 0)
-				pr_join_str(aq, point, line - point);
+				pr_join_str(aq, (char*)point, line - point);
 			line++;
-			ft_bzero(&aq->sp, sizeof(t_sp));
 			set_flag(&line, &aq->sp, aq);
 			start_handle(aq);
 			point = line;
 		}
 		if (!*(line + 1) && line - point > 0)
-			pr_join_str(aq, point, line - point);
+			pr_join_str(aq, (char*)point, line - point);
 		if (!*line)
 			break ;
 		line++;
@@ -62,7 +63,7 @@ int			ft_printf(const char *format, ...)
 	if (format)
 	{
 		va_start(aq.va, format);
-		explore(&aq, format);
+		explore(&aq, format, format);
 		va_end(aq.va);
 	}
 	aq.size += write(1, aq.out, aq.i) + write(1, "\n", 1);
