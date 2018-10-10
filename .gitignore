@@ -7,5 +7,4 @@ libftprintf.a
 inc/.DS_Store
 libft/.DS_Store
 main.c
-obj/
 a.out
