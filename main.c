@@ -97,11 +97,11 @@ int main(int argc, char **argv)
 //	ft_printf("[%04.2%]\n");
 
 ////	CHAR: %c, %s
-	char c = '$';
-	char *s = "Do some trash test for my lovely ft_printf()";
-	ft_printf("\n> CHAR %%c, %%s\n");
-	printf("%%c = %c ____[%-*.*s] 0R!G\n", c, 30, 13, s);
-	ft_printf("%%c = %!03b0c ____[%-*.*s]\n", c, 30, 13, s);
+//	char c = '$';
+//	char *s = "Do some trash test for my lovely ft_printf()";
+//	ft_printf("\n> CHAR %%c, %%s\n");
+//	printf("%%c = %c ____[%-*.*s] 0R!G\n", c, 30, 13, s);
+//	ft_printf("%%c = %!03j0c ____[%-*.*s]\n", c, 30, 13, s);
 
 //	UNSIGNED: # with %oO, %xX
 //	unsigned int ui = 1234567;
@@ -110,11 +110,12 @@ int main(int argc, char **argv)
 //	ft_printf("[%#o]\t[%#x]\t[%#X]\n", ui, ui, ui);
 //
 ////	BONUS BINARY: %b
-//	int i = 56;
+	int i = 56;
 //	ft_printf("\n> BINARY: %%b\n");
 //	ft_printf("[%b]\n", i);
 //	ft_printf("[%!060b]\n", i);
-//	ft_printf("[%!118bb]\n", i);
+//	ft_printf("[%!118jb]\n", i);
+	ft_printf("[%!18j2b]\n", i);
 //
 ////	 BONUS APOST (`) with %i, %d, %D
 ////	 BONUS STAR (*)
@@ -149,9 +150,9 @@ int main(int argc, char **argv)
 //	printf("Do some \e[31;47mtrash\e[0m test for my lovely ft_printf()\n");
 //	printf("Do some \e[1;31;107mtrash\e[0m test for my lovely ft_printf()\n");
 
-//	ft_printf("Do %!128bs", "trash");
-//	ft_printf("Do %!06b1s", "trash");
-//	ft_printf("Do %!04b0s", "trash");
+//	ft_printf("Do %!128js", "trash");
+//	ft_printf("Do %!06j1s", "trash");
+//	ft_printf("Do %!04j0s", "trash");
 //	****************************************************
 
 
