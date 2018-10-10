@@ -61,7 +61,7 @@ void		set_flag_i(t_print *aq)
 		S.plus = 0;
 		S.spc = 0;
 		if (S.hash &&
-		((S.prec && !HEX) || S.ty == 'o' || (HEX && !S.v && S.prec)))
+		(S.ty == 'o' || (!HEX && S.prec) || (HEX && !S.v && S.prec)))
 			S.hash = 1;
 		else if (S.ty == 'p' || (S.hash && HEX && S.v))
 			S.hash = 2;
