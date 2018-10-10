@@ -2,6 +2,7 @@
 #include <sys/types.h>
 #include <limits.h>
 #include <locale.h>
+#include <stdio.h>
 
 // #define NORMAL	"\x1B[0m"
 // #define RED		"\x1B[31m"
@@ -76,6 +77,20 @@
 //40 – 47: set background color 0 – 7 (ditto)
 //100 – 107: set background color 8 – 15 (ditto)
 //In your case, red text on a white background would be \e[31;47m.
+
+//	0: Reset/remove all modifier, foreground and background attributes: echo -e "\e[0mNormal Text"
+//	1: Bold/Bright: echo -e "Normal \e[1mBold"
+//	2: Dim: echo -e "Normal \e[2mDim"
+//	4: Underlined: echo -e "Normal \e[4mUnderlined"
+//	5: Blink (doesn't work in most terminals except XTerm): echo -e "Normal \e[5mBlink"
+//	7: Reverse/Invert: echo -e "Normal \e[7minverted"
+//	8: Hidden (useful for sensitive info): echo -e "Normal \e[8mHidden Input"
+//	21: Reset/Remove bold/bright: echo -e "Normal \e[1mBold \e[21mNormal"
+//	22: Reset/Remove dim: echo -e "Normal \e[2mDim \e[22mNormal"
+//	24: Reset/Remove underline: echo -e "Normal \e[4mUnderlined \e[24mNormal"
+//	25: Reset/Remove blink: echo -e "Normal \e[5mBlink \e[25mNormal"
+//	27: Reset/Remove reverse/invert: echo -e "Normal \e[7minverted \e[27mNormal"
+//	28: Reset/Remove hidden: echo -e "Normal \e[8mHidden \e[28mNormal"
 // **************************************************************************
 
 int main(int argc, char **argv)
@@ -89,20 +104,32 @@ int main(int argc, char **argv)
 //	****************************************************
 //	PERCENT: %
 //	ft_printf("\n> PERCENT: %%\n");
+//	printf("[%%]\n");
 //	ft_printf("[%%]\n");
+//	printf("[%.%]\n");
 //	ft_printf("[%.%]\n");
+//	printf("[%.4%]\n");
 //	ft_printf("[%.4%]\n");
+//	printf("[%4%]\n");
 //	ft_printf("[%4%]\n");
+//	printf("[%4.2%]\n");
 //	ft_printf("[%4.2%]\n");
+//	printf("[%04.2%]\n");
 //	ft_printf("[%04.2%]\n");
 
 ////	CHAR: %c, %s
-//	char c = '$';
-//	char *s = "Do some trash test for my lovely ft_printf()";
-//	ft_printf("\n> CHAR %%c, %%s\n");
-//	printf("%%c = %c ____[%-*.*s] 0R!G\n", c, 30, 13, s);
+	char c = '$';
+	char *s = "Do some trash test for my lovely ft_printf()";
+	ft_printf("\n> CHAR %%c, %%s\n");
+	printf("%%c = %c ____[%-*.*s] 0R!G\n", c, 30, 13, s);
+	ft_printf("%%c = %c ____[%-*.*s]\n", c, 30, 13, s);
 //	ft_printf("%%c = %!03j0c ____[%-*.*s]\n", c, 30, 13, s);
-	ft_printf("Do some <100trash test> for my <020lovely> ft_printf()\n");
+//	ft_printf("Do some <100trash test> for my <020lovely> ft_printf()\n");
+//	ft_printf("Do %% ");
+//	ft_printf("some trash");
+//	ft_printf(" test for ");
+//	ft_printf("my lovely");
+//	ft_printf(" ft_printf()");
 
 //	UNSIGNED: # with %oO, %xX
 //	unsigned int ui = 1234567;
