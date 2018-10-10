@@ -40,11 +40,13 @@ $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ) $(LIBFT_DIR)*.o
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@mkdir -p obj
 	@$(CC) $(CFLAGS) -I $(HEADER) -c $< -o $@
 	@echo -n _/\\_
 
 clean:
 	@rm -rf $(OBJ)
+	@rm -rf $(OBJ_DIR)
 	@make -C $(LIBFT_DIR) clean
 	
 fclean:	clean
