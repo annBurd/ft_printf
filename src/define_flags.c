@@ -17,9 +17,9 @@ void	set_type(const char **line, t_sp *mark)
 	char c;
 
 	c = **line;
-	if (c == '%' || c == 'p' || c == 's' || c == 'S' || c == 'c' || c == 'C'
-		|| c == 'i' || c == 'd' || c == 'D' || c == 'o' || c == 'O' || c == 'b'
-		|| c == 'u' || c == 'U' || c == 'x' || c == 'X')
+	if (c == '%' || c == 'p' || c == 's' || c == 'S' || c == 'c' || c == 'C' ||
+		c == 'i' || c == 'd' || c == 'D' || c == 'o' || c == 'O' || c == 'b' ||
+		c == 'u' || c == 'U' || c == 'x' || c == 'X')
 	{
 		mark->ty = c;
 		(*line)++;
@@ -33,8 +33,8 @@ void	set_length(const char **line, t_sp *mark)
 	const char *s;
 
 	s = *line;
-	if ((*s == 'h' && (mark->length = h))
-		|| (*s == 'l' && (mark->length = l)))
+	if ((*s == 'h' && (mark->length = h)) ||
+		(*s == 'l' && (mark->length = l)))
 		if ((*(s + 1) == *s) && (mark->length++))
 			(*line)++;
 	(*s == 'j') && (mark->length = j);
@@ -97,26 +97,26 @@ void	set_color(const char **line, t_print *aq)
 	aq->out[aq->i++] = 'm';
 }
 
-void	set_flag(const char **line, t_sp *mark, t_print *aq)
+void	set_flag(const char **line, t_print *aq)
 {
 	ft_bzero(&aq->sp, sizeof(t_sp));
 	while (**line == '#' || **line == '0' || **line == '-' || **line == '!'
 		|| **line == '+' || **line == ' ' || **line == '`')
 	{
-		(**line == '#') && (mark->hash = 1);
-		(**line == '0') && (mark->zero = 1);
-		(**line == '-') && (mark->minus = 1);
-		(**line == '+') && (mark->plus = 1);
-		(**line == ' ') && (mark->spc = 1);
-		(**line == '`') && (mark->apost = 1);
+		(**line == '#') && (S.hash = 1);
+		(**line == '0') && (S.zero = 1);
+		(**line == '-') && (S.minus = 1);
+		(**line == '+') && (S.plus = 1);
+		(**line == ' ') && (S.spc = 1);
+		(**line == '`') && (S.apost = 1);
 		if (**line == '!')
 		{
 			if (aq->i + 12 >= BUFS)
 				pr_refresh(aq);
-			mark->color = 1;
+			S.color = 1;
 			set_color(line, aq);
 		}
 		(*line)++;
 	}
-	set_num(line, mark);
+	set_num(line, &aq->sp);
 }

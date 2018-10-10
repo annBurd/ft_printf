@@ -84,7 +84,7 @@ int				ft_printf(const char *format, ...);
 void			explore(t_print *aq, const char *line, const char *point);
 void			start_handle(t_print *aq);
 
-void			set_flag(const char **line, t_sp *mark, t_print *aq);
+void			set_flag(const char **line, t_print *aq);
 void			set_color(const char **line, t_print *aq);
 void			set_num(const char **line, t_sp *mark);
 void			set_length(const char **line, t_sp *mark);

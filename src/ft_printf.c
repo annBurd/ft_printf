@@ -16,9 +16,8 @@ void		start_handle(t_print *aq)
 {
 	(S.wi == -1) && (S.wi = (short)va_arg(aq->va, int));
 	(S.prec == -1) && (S.prec = (short)va_arg(aq->va, int));
-	if (S.ty == 'D' || DEC || HEX ||
-		S.ty == 'o' || S.ty == 'O' || S.ty == 'b' ||
-		S.ty == 'u' || S.ty == 'U' || S.ty == 'p')
+	if (S.ty == 'D' || S.ty == 'o' || S.ty == 'O' || DEC || HEX ||
+		S.ty == 'b' || S.ty == 'u' || S.ty == 'U' || S.ty == 'p')
 		handle_i(aq);
 	else if (S.ty == '%' || (!S.length && (S.ty == 'c' || S.ty == 's')))
 		handle_c(aq);
@@ -43,16 +42,14 @@ void		explore(t_print *aq, const char *line, const char *point)
 			if (line - point > 0)
 				pr_join_str(aq, (char*)point, line - point);
 			line++;
-			set_flag(&line, &aq->sp, aq);
+			set_flag(&line, aq);
 			start_handle(aq);
-			point = line;
+			point = line++;
 		}
-		if (!*(line + 1) && line - point > 0)
-			pr_join_str(aq, (char*)point, line - point);
-		if (!*line)
-			break ;
 		line++;
 	}
+	if (line - point > 0)
+		pr_join_str(aq, (char*)point, line - point);
 }
 
 int			ft_printf(const char *format, ...)
@@ -66,6 +63,6 @@ int			ft_printf(const char *format, ...)
 		explore(&aq, format, format);
 		va_end(aq.va);
 	}
-	aq.size += write(1, aq.out, aq.i) + write(1, "\n", 1);
+	aq.size += write(1, aq.out, aq.i);
 	return (aq.size);
 }
