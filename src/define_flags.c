@@ -82,7 +82,7 @@ void	set_color(const char **line, t_print *aq)
 	else if (**line >= '1' && **line <= '8')
 	{
 		n = (size_t)(*((*line)++) - 19);
-		if (**line == 'j' && (n += 60))
+		if (**line == 'q' && (n += 60))
 			(*line)++;
 		pr_itoa(aq, n, 10);
 		aq->out[aq->i++] = ';';
@@ -90,7 +90,7 @@ void	set_color(const char **line, t_print *aq)
 	if (**line >= '1' && **line <= '8')
 	{
 		n = (size_t)(**line - 9);
-		if (*(*line + 1) == 'j' && (n += 60))
+		if (*(*line + 1) == 'q' && (n += 60))
 			(*line)++;
 		pr_itoa(aq, n, 10);
 	}

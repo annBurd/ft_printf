@@ -123,7 +123,7 @@ int main(int argc, char **argv)
 	ft_printf("\n> CHAR %%c, %%s\n");
 	printf("%%c = %c ____[%-*.*s] 0R!G\n", c, 30, 13, s);
 	ft_printf("%%c = %c ____[%-*.*s]\n", c, 30, 13, s);
-//	ft_printf("%%c = %!03j0c ____[%-*.*s]\n", c, 30, 13, s);
+//	ft_printf("%%c = %!03q0c ____[%-*.*s]\n", c, 30, 13, s);
 //	ft_printf("Do some <100trash test> for my <020lovely> ft_printf()\n");
 //	ft_printf("Do %% ");
 //	ft_printf("some trash");

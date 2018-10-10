@@ -28,7 +28,15 @@
 /*
 ** v		for vendetta or value sign [-1, 0, 1]
 ** free		for free space
-** color format -> <![modify][font color][background color]>!
+** Color codes		[modify][font color][background color]
+** Color format NOW	!03q0
+** Format in str	<!0;2;8;koko & some other text will have the same color>!
+** Format w/ %		%!0;2;8;koko will be the only colored word
+** 		<!1;0;0;koko>!
+** 		<!fR;qwqkoko>!
+** 		<!1;green;0;koko>!
+** 		<!4;red;white;koko>!
+** 		<!fR;koko>!
 ** Modifies:
 ** 0 - default (stay w/o changes)
 ** 1 - Bold
@@ -42,14 +50,14 @@
 ** 6 - purple
 ** 7 - cyan
 ** 8 - white
-** 1b - dark gray
-** 2b - bright red
-** 3b - bright green
-** 4b - bright yellow
-** 5b - bright blue
-** 6b - bright purple
-** 7b - bright cyan
-** 8b - bright white
+** 1q - dark gray
+** 2q - bright red
+** 3q - bright green
+** 4q - bright yellow
+** 5q - bright blue
+** 6q - bright purple
+** 7q - bright cyan
+** 8q - bright white
 */
 
 typedef struct	s_sp
