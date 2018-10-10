@@ -6,7 +6,7 @@
 #    By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 18:22:11 by aburdeni          #+#    #+#              #
-#    Updated: 2018/10/10 03:18:06 by aburdeni         ###   ########.fr        #
+#    Updated: 2018/10/10 00:58:09 by aburdeni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,11 @@ NAME = libftprintf.a
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-RM = rm -rf
 
 SRC_DIR = ./src/
 OBJ_DIR = ./obj/
 INC_DIR = ./inc/
-
 LIBFT_DIR = ./libft/
-LIBFT = $(LIBFT_DIR)libft.a
 
 HEADER = $(addprefix $(INC_DIR), ft_printf.h)
 
@@ -35,34 +32,28 @@ SRC = ft_printf.c \
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
-all: $(LIBFT)
-	@mkdir $(OBJ_DIR)
-	@make $(NAME)
+all: $(NAME)
 	@echo "\nft_printf: got $(NAME)"
 
 $(NAME): $(OBJ)
-	@ar rc $(NAME) $(OBJ) $(LIBFT_DIR)libft.a
+	@make -C $(LIBFT_DIR)
+	@ar rc $(NAME) $(OBJ) $(LIBFT_DIR)*.o
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@$(CC) -c $< -o $@ -I $(INC_DIR)
+	@$(CC) $(CFLAGS) -I $(HEADER) -c $< -o $@
 	@echo -n _/\\_
 
-$(LIBFT):
-	@make -C $(LIBFT_DIR)
-
 clean:
-	@$(RM) $(OBJ_DIR)
+	@rm -rf $(OBJ)
+	@make -C $(LIBFT_DIR) clean
 	
 fclean:	clean
-	@$(RM) $(NAME)
+	@rm -rf $(NAME)
 	@make -C $(LIBFT_DIR) fclean
 	@echo "ft_printf: fcleaned"
 
 re: fclean all
 
-
 .PHONY: all clean fclean re libftprintf.a libft.a
-
-.NOTPARALLEL: all clean fclean re libftprintf.a libft.a
 
 # vpath %.c $(SRC_DIR)
