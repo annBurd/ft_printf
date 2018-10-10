@@ -102,6 +102,7 @@ int main(int argc, char **argv)
 //	ft_printf("\n> CHAR %%c, %%s\n");
 //	printf("%%c = %c ____[%-*.*s] 0R!G\n", c, 30, 13, s);
 //	ft_printf("%%c = %!03j0c ____[%-*.*s]\n", c, 30, 13, s);
+	ft_printf("Do some <100trash test> for my <020lovely> ft_printf()\n");
 
 //	UNSIGNED: # with %oO, %xX
 //	unsigned int ui = 1234567;
@@ -110,12 +111,12 @@ int main(int argc, char **argv)
 //	ft_printf("[%#o]\t[%#x]\t[%#X]\n", ui, ui, ui);
 //
 ////	BONUS BINARY: %b
-	int i = 56;
+//	int i = 56;
 //	ft_printf("\n> BINARY: %%b\n");
 //	ft_printf("[%b]\n", i);
 //	ft_printf("[%!060b]\n", i);
 //	ft_printf("[%!118jb]\n", i);
-	ft_printf("[%!18j2b]\n", i);
+//	ft_printf("[%!18j2b]\n", i);
 //
 ////	 BONUS APOST (`) with %i, %d, %D
 ////	 BONUS STAR (*)
