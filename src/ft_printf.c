@@ -30,11 +30,11 @@ void		explore(t_print *aq, const char *line, const char *point)
 {
 	while (*line)
 	{
-		if (*line == '<' || *line == '>')
+		if ((*line == '<' || *line == '>') && *(line + 1) == '!')
 		{
 			if (line - point > 0)
 				pr_join_str(aq, (char*)point, line - point);
-			*line == '<' ? set_color(&line, aq) : pr_join_str(aq, "\e[0m", 4);
+			*(line++) == '<' ? set_color(&line, aq) : pr_join_str(aq, "\e[0m", 4);
 			point = ++line;
 		}
 		if (*line == '%')
@@ -44,7 +44,7 @@ void		explore(t_print *aq, const char *line, const char *point)
 			line++;
 			set_flag(&line, aq);
 			start_handle(aq);
-			point = line++;
+			point = line;
 		}
 		line++;
 	}
