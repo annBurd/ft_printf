@@ -130,7 +130,7 @@ int main(int argc, char **argv)
 //	printf("3 - \e[3;mItalic\e[0m\n");
 //	printf("4 - \e[4;mUnderline\e[0m\n");
 //	printf("7 - \e[7;mReverse\e[0m\n");
-	ft_printf("Test <!mb;Fr!colors>!\n");
+	ft_printf("Test <!mu;fr!colors>!\n");
 //	ft_printf("Do %% ");
 //	ft_printf("some trash");
 //	ft_printf(" test for ");
