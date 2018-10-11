@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:32:45 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/11 17:00:27 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/11 17:20:34 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,11 @@ void			explore(t_print *aq, const char *line, const char *point);
 void			start_handle(t_print *aq);
 
 void			set_flag(const char **line, t_print *aq);
-void			set_color(const char **line, t_print *aq);
 void			set_num(const char **line, t_sp *mark);
 void			set_length(const char **line, t_sp *mark);
 void			set_type(const char **line, t_sp *mark);
+
+void			set_color(const char **line, t_print *aq);
 
 void			handle_i(t_print *aq);
 void			get_i(t_print *aq, uintmax_t *ut);
@@ -84,7 +85,8 @@ size_t			set_wln(t_print *aq, wchar_t *arg);
 size_t			get_bytes(unsigned int arg);
 void			set_wchar(t_print *aq, wchar_t *arg, size_t n);
 
-void			pr_itoa(t_print *aq, uintmax_t value, short base);
+void			pr_utoa(t_print *aq, uintmax_t value, short base);
+
 void			pr_refresh(t_print *aq);
 size_t			pr_overflow_str(t_print *aq, char *s, size_t *n);
 size_t			pr_overflow(t_print *aq, char c, size_t *n);

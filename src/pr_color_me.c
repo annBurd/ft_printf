@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:37:22 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/11 17:04:21 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/11 17:20:34 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static void	set_color_code(t_print *aq, char br, char clr)
 		code += 6;
 	else if (clr == 'w')
 		code += 7;
-	pr_itoa(aq, code, 10);
+	pr_utoa(aq, code, 10);
 	aq->out[aq->i++] = ';';
 }
 

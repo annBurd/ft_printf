@@ -123,7 +123,7 @@ void		handle_i(t_print *aq)
 	set_format_i(aq);
 	if (aq->i + S.ln >= BUFS)
 		pr_refresh(aq);
-	!S.v && S.ln ? pr_join(aq, '0', S.ln) : pr_itoa(aq, ut, S.base);
+	!S.v && S.ln ? pr_join(aq, '0', S.ln) : pr_utoa(aq, ut, S.base);
 	if (S.minus && S.free > 0)
 		pr_join(aq, ' ', (size_t)S.free);
 }
