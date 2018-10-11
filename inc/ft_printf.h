@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:32:45 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/11 19:41:34 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/11 20:09:31 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void			set_color(const char **line, t_print *aq);
 
 void			handle_i(t_print *aq);
 void			handle_c(t_print *aq);
+void			handle_str(t_print *aq);
 void			handle_wc(t_print *aq);
 
 void			pr_utoa(t_print *aq, uintmax_t value, short base);

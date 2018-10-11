@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 22:07:41 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/11 17:43:53 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/11 21:00:24 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,14 @@ void	set_length(const char **line, t_sp *mark)
 	s = *line;
 	if ((*s == 'h' && (mark->length = h)) ||
 		(*s == 'l' && (mark->length = l)))
+	{
 		if ((*(s + 1) == *s) && (mark->length++))
 			(*line)++;
-	(*s == 'j') && (mark->length = j);
-	(*s == 'z') && (mark->length = z);
+	}
+	else if (*s == 'j')
+		mark->length = j;
+	else if (*s == 'z')
+		mark->length = z;
 	if (*s == 'h' || *s == 'l' || *s == 'j' || *s == 'z')
 		(*line)++;
 	set_type(line, mark);

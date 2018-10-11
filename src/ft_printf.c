@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:26:16 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/10 05:31:33 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/11 21:39:45 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ void		start_handle(t_print *aq)
 		handle_i(aq);
 	else if (S.ty == '%' || (!S.length && (S.ty == 'c' || S.ty == 's')))
 		handle_c(aq);
+//	else if (S.ty == '%' || (!S.length && S.ty == 'c'))
+//		handle_c(aq);
+//	else if (!S.length && S.ty == 's')
+//		handle_str(aq);
 	else if (S.ty == 'C' || S.ty == 'S' ||
 		(S.length == l && (S.ty == 'c' || S.ty == 's')))
 		handle_wc(aq);
@@ -43,14 +47,14 @@ void		explore(t_print *aq, const char *line, const char *point)
 		}
 		if (*line == '%')
 		{
-			if (line - point > 0)
+			if (*point != '%' && line - point > 0)
 				pr_join_str(aq, (char*)point, line - point);
 			line++;
 			set_flag(&line, aq);
 			start_handle(aq);
 			point = line;
 		}
-		line++;
+		*line != '%' && line++;
 	}
 	if (line - point > 0)
 		pr_join_str(aq, (char*)point, line - point);
