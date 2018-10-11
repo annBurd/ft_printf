@@ -95,7 +95,6 @@ OBJ = $(SRC:.c=.o)
 $(NAME):
 	@$(CC) $(CFLAGS) -c $(NAME:.a=.h) $(SRC)
 	@ar rc $(NAME) $(OBJ)
-	@make clean
 
 all: $(NAME)
 
