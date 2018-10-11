@@ -6,13 +6,13 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 21:39:53 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/10 01:49:21 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/11 17:47:32 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_printf.h"
 
-size_t	get_bytes(unsigned int arg)
+static size_t	get_bytes(unsigned int arg)
 {
 	if (!arg)
 		return (0);
@@ -26,7 +26,7 @@ size_t	get_bytes(unsigned int arg)
 		return (4);
 }
 
-void	set_wchar(t_print *aq, wchar_t *arg, size_t n)
+static void		set_wchar(t_print *aq, wchar_t *arg, size_t n)
 {
 	size_t	i;
 	size_t	size;
@@ -49,7 +49,7 @@ void	set_wchar(t_print *aq, wchar_t *arg, size_t n)
 	}
 }
 
-size_t	set_wln(t_print *aq, wchar_t *arg)
+static size_t	set_wln(t_print *aq, wchar_t *arg)
 {
 	size_t	i;
 
@@ -74,7 +74,7 @@ size_t	set_wln(t_print *aq, wchar_t *arg)
 	return (i);
 }
 
-void	handle_wc(t_print *aq)
+void			handle_wc(t_print *aq)
 {
 	wint_t	wc;
 	wchar_t	*arg;

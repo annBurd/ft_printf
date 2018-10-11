@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/28 20:10:04 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/10 02:21:59 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/11 17:52:15 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	extract_i(t_print *aq, intmax_t t, uintmax_t *ut)
 	}
 }
 
-void		get_i(t_print *aq, uintmax_t *ut)
+static void	get_i(t_print *aq, uintmax_t *ut)
 {
 	if (S.ty == 'p')
 		S.length = 0;
@@ -54,7 +54,7 @@ void		get_i(t_print *aq, uintmax_t *ut)
 	S.ln += S.apost;
 }
 
-void		set_flag_i(t_print *aq)
+static void	set_flag_i(t_print *aq)
 {
 	if (!DEC)
 	{
@@ -78,7 +78,7 @@ void		set_flag_i(t_print *aq)
 	S.free < 0 && (S.free = 0);
 }
 
-void		set_format_i(t_print *aq)
+static void	set_format_i(t_print *aq)
 {
 	if (!S.minus && S.free && !(S.zero && S.prec == -2))
 	{

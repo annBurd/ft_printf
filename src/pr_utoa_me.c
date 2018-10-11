@@ -35,5 +35,3 @@ void	pr_utoa(t_print *aq, uintmax_t value, short base)
 	}
 	aq->i += S.ln ? S.ln : len_p + 1;
 }
-
-

@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:32:45 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/11 17:20:34 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/11 17:38:14 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,8 @@ void			set_type(const char **line, t_sp *mark);
 void			set_color(const char **line, t_print *aq);
 
 void			handle_i(t_print *aq);
-void			get_i(t_print *aq, uintmax_t *ut);
-void			set_flag_i(t_print *aq);
-void			set_format_i(t_print *aq);
-
 void			handle_c(t_print *aq);
-
 void			handle_wc(t_print *aq);
-size_t			set_wln(t_print *aq, wchar_t *arg);
-size_t			get_bytes(unsigned int arg);
-void			set_wchar(t_print *aq, wchar_t *arg, size_t n);
 
 void			pr_utoa(t_print *aq, uintmax_t value, short base);
 

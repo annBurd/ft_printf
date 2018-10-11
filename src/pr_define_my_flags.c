@@ -14,14 +14,14 @@
 
 void	set_type(const char **line, t_sp *mark)
 {
-	char	Z;
+	char	q;
 
-	Z = **line;
-	if (Z == '%' || Z == 'p' || Z == 's' || Z == 'S' || Z == 'c' || Z == 'C' ||
-		Z == 'i' || Z == 'd' || Z == 'D' || Z == 'o' || Z == 'O' || Z == 'b' ||
-		Z == 'u' || Z == 'U' || Z == 'x' || Z == 'X')
+	q = **line;
+	if (q == '%' || q == 'p' || q == 's' || q == 'S' || q == 'c' || q == 'C' ||
+		q == 'i' || q == 'd' || q == 'D' || q == 'o' || q == 'O' || q == 'b' ||
+		q == 'u' || q == 'U' || q == 'x' || q == 'X')
 	{
-		mark->ty = Z;
+		mark->ty = q;
 		(*line)++;
 	}
 	else

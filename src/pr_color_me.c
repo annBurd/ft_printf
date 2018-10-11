@@ -6,13 +6,11 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:37:22 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/11 17:20:34 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/11 17:57:58 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_printf.h"
-
-# define END_COLOR_SET {aq->out[aq->i++] = 'm'; return ;}
 
 /*
 ** ___Format
@@ -105,30 +103,29 @@ static void	set_color_code(t_print *aq, char br, char clr)
 	aq->out[aq->i++] = ';';
 }
 
-void	set_color(const char **line, t_print *aq)
+void		set_color(const char **line, t_print *aq)
 {
-	aq->out[aq->i++] = '\e';
+	aq->out[aq->i++] = 033;
 	aq->out[aq->i++] = '[';
 	(*line)++;
 	if (**line == 'm')
 	{
 		set_mod_code(aq, *(++(*line)));
-		if (*(++(*line)) == '!')
-			END_COLOR_SET
+		if (*(++(*line)) == '!' && (aq->out[aq->i++] = 'm'))
+			return ;
 		(*line)++;
 	}
 	if (**line == 'f' || **line == 'F')
 	{
 		set_color_code(aq, **line, *(++(*line)));
-		if (*(++(*line)) == '!')
-			END_COLOR_SET
+		if (*(++(*line)) == '!' && (aq->out[aq->i++] = 'm'))
+			return ;
 		(*line)++;
 	}
 	if (**line == 'b' || **line == 'B')
 	{
 		set_color_code(aq, **line, *(++(*line)));
-		if (*(++(*line)) == '!')
-		if (**line == '!')
-			END_COLOR_SET
+		if (**line == '!' && (aq->out[aq->i++] = 'm'))
+			return ;
 	}
 }
