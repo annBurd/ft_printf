@@ -302,9 +302,20 @@ int main(int argc, char **argv)
 //	printf("-7\t\t[%-7c]\n", c);
 //	ft_printf("-7\t\t[%-7c]\n", c);
 
+//		ft_printf("> CHAR : failed tests\n");
+	printf("%.2c|\n", NULL);
+	ft_printf("%.2c|\n", NULL);
+	printf("@moulitest: %c|\n", 0);
+	ft_printf("@moulitest: %c|\n", 0);
+	printf("%2c|\n", 0);
+	ft_printf("%2c|\n", 0);
+	printf("null %c| and text\n", 0);
+	ft_printf("null %c| and text\n", 0);
+	printf("% c|\n", 0);
+	ft_printf("% c|\n", 0);
 
 
-//	CHAR *
+//	CHAR*
 //	****************************************************
 //	char *c = "text";
 //		ft_printf("> CHAR *\n");
@@ -332,6 +343,30 @@ int main(int argc, char **argv)
 //	ft_printf("-7.\t\t[%-7.s]\n", c);
 //	printf("-7.1\t[%-7.1s]\n", c);
 //	ft_printf("-7.1\t[%-7.1s]\n", c);
+
+//		ft_printf("> CHAR* : failed tests\n");
+//	printf("%5.2s is a string\n", "");
+//	ft_printf("%5.2s is a string\n", "");
+//	printf("%-5.2s is a string\n", "");
+//	ft_printf("%-5.2s is a string\n", "");
+//	printf("%s%s%s%s%s\n", "this", "is", "a", "multi", "string");
+//	ft_printf("%s%s%s%s%s\n", "this", "is", "a", "multi", "string");
+//	printf("%5.2s is a string\n", "this");
+//	ft_printf("%5.2s is a string\n", "this");
+//	printf("%10s is a string\n", "");
+//	ft_printf("%10s is a string\n", "");
+//	printf("%-5.2s is a string\n", "this");
+//	ft_printf("%-5.2s is a string\n", "this");
+//	printf("%-10s is a string\n", "");
+//	ft_printf("%-10s is a string\n", "");
+//	printf("%.2s is a string\n", "");
+//	ft_printf("%.2s is a string\n", "");
+//	printf("%-.2s is a string\n", "");
+//	ft_printf("%-.2s is a string\n", "");
+//	printf("@moulitest: %s\n", NULL);
+//	ft_printf("@moulitest: %s\n", NULL);
+//	printf("%s %s\n", NULL, "string");
+//	ft_printf("%s %s\n", NULL, "string");
 
 //	UNSIGNED: o, O
 //	****************************************************
