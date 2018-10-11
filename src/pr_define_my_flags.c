@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 22:07:41 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/11 17:35:26 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/11 17:43:53 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ void	set_num(const char **line, t_sp *mark)
 			mark->prec = -1;
 		else if (**line >= '1' && **line <= '9')
 			mark->prec = (short)ft_atoi(*line);
-		else if (**line >= '0' || !ft_isdigit(*(*line + 1)))
-			mark->prec = 0;
 		while ((**line >= '0' && **line <= '9') || **line == '*')
 			(*line)++;
 	}

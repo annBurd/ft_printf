@@ -6,55 +6,52 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/28 20:10:04 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/11 17:52:15 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/11 20:20:33 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_printf.h"
 
-static void	extract_i(t_print *aq, intmax_t t, uintmax_t *ut)
+static void	set_flag_1(t_print *aq)
 {
-	if (DEC)
+	if (S.ty == 'D' || S.ty == 'O' || S.ty == 'U')
 	{
-		!S.length && (t = va_arg(aq->va, int));
-		S.length == h && (t = (short)va_arg(aq->va, void*));
-		S.length == hh && (t = (signed char)va_arg(aq->va, void*));
-		S.length == l && (t = va_arg(aq->va, long int));
-		S.length == ll && (t = va_arg(aq->va, long long int));
-		S.length == j && (t = va_arg(aq->va, intmax_t));
-		S.length == z && (t = (size_t)va_arg(aq->va, size_t));
-		*ut = (uintmax_t)(t < 0 ? t * -1 : t);
-		*ut && (S.v = (short)(t < 0 ? -1 : 1));
+		S.length = l;
+		S.ty = (char)ft_tolower(S.ty);
 	}
+	else if (S.ty == 'p')
+		S.length = 0;
+	if (S.ty == 'b')
+		S.base = 2;
+	else if (S.ty == 'o')
+		S.base = 8;
+	else if (DEC || S.ty == 'u')
+		S.base = 10;
 	else
-	{
-		!S.length && (*ut = va_arg(aq->va, unsigned int));
-		S.length == h && (*ut = (unsigned short)va_arg(aq->va, void*));
-		S.length == hh && (*ut = (unsigned char)va_arg(aq->va, void*));
-		S.length == l && (*ut = va_arg(aq->va, unsigned long int));
-		S.length == ll && (*ut = va_arg(aq->va, unsigned long long int));
-		S.length == j && (*ut = va_arg(aq->va, uintmax_t));
-		S.length == z && (*ut = (size_t)va_arg(aq->va, size_t));
-		*ut && (S.v = 1);
-	}
+		S.base = 16;
 }
 
 static void	get_i(t_print *aq, uintmax_t *ut)
 {
-	if (S.ty == 'p')
-		S.length = 0;
-	extract_i(aq, 0, ut);
+	if (S.ty == 'i' || S.ty == 'd')
+		extract_i(aq, 0, ut);
+	else
+		extract_ui(aq, ut);
 	if (!S.v && ((!S.prec && S.ty != 'o') ||
-				(S.hash || (!S.prec && (!S.hash || !S.minus)))))
+			(S.hash || (!S.prec && (!S.hash || !S.minus)))))
 		S.ln = 0;
 	else
 		S.ln = ft_nbrulen(*ut, S.base);
-	if (S.apost)
+	if (S.apost && DEC)
+	{
 		S.apost = (short)(S.ln / 3 - (S.ln % 3 ? 0 : 1));
-	S.ln += S.apost;
+		S.ln += S.apost;
+	}
+	else
+		S.apost = 0;
 }
 
-static void	set_flag_i(t_print *aq)
+static void	set_flag_2(t_print *aq)
 {
 	if (!DEC)
 	{
@@ -98,10 +95,11 @@ static void	set_format_i(t_print *aq)
 		aq->out[aq->i++] = '0';
 		S.hash == 2 && (aq->out[aq->i++] = (char)(S.ty == 'X' ? 'X' : 'x'));
 	}
-	if (S.zero && S.prec == -2 && S.free)
+	if (S.zero && S.prec == -2 && S.free
+		&& !((HEX || S.ty == 'o' || DEC) && S.minus))
 		pr_join(aq, '0', (size_t)S.free);
-	else if ((S.zero =
-		(short)(S.prec - S.ln - (!S.v || S.ty == 'o' ? S.hash : 0))) > 0)
+	else if (!(HEX && S.minus) && (S.zero =
+			(short)(S.prec - S.ln - (!S.v || S.ty == 'o' ? S.hash : 0))) > 0)
 		pr_join(aq, '0', (size_t)(S.zero));
 }
 
@@ -109,21 +107,16 @@ void		handle_i(t_print *aq)
 {
 	uintmax_t	ut;
 
-	if (S.ty == 'D' || S.ty == 'O' || S.ty == 'U')
-	{
-		S.length = l;
-		S.ty = (char)ft_tolower(S.ty);
-	}
-	S.ty == 'b' && (S.base = 2);
-	S.ty == 'o' && (S.base = 8);
-	(DEC || S.ty == 'u') && (S.base = 10);
-	(HEX || S.ty == 'p') && (S.base = 16);
+	set_flag_1(aq);
 	get_i(aq, &ut);
-	set_flag_i(aq);
+	set_flag_2(aq);
 	set_format_i(aq);
 	if (aq->i + S.ln >= BUFS)
 		pr_refresh(aq);
-	!S.v && S.ln ? pr_join(aq, '0', S.ln) : pr_utoa(aq, ut, S.base);
+	if (!S.v && S.ln)
+		pr_join(aq, '0', S.ln);
+	else if (S.v)
+		pr_utoa(aq, ut, S.base);
 	if (S.minus && S.free > 0)
 		pr_join(aq, ' ', (size_t)S.free);
 }

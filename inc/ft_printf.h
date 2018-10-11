@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:32:45 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/11 17:38:14 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/11 19:41:34 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,9 @@ void			handle_c(t_print *aq);
 void			handle_wc(t_print *aq);
 
 void			pr_utoa(t_print *aq, uintmax_t value, short base);
+
+void			extract_i(t_print *aq, intmax_t t, uintmax_t *ut);
+void			extract_ui(t_print *aq, uintmax_t *ut);
 
 void			pr_refresh(t_print *aq);
 size_t			pr_overflow_str(t_print *aq, char *s, size_t *n);
