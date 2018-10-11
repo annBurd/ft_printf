@@ -15,7 +15,7 @@ set(SOURCE_FILES
         src/handle_integer.c
         src/handle_char.c
         src/handle_wc.c
-        src/pr_join.c
+        src/pr_join_me.c
 #        libft/ft_atoi.c
 #        libft/ft_atoi_base.c
 #        libft/ft_bzero.c
@@ -90,7 +90,7 @@ set(SOURCE_FILES
 #        libft/ft_toupper.c
 #        libft/ft_strjoinfree.c
 #        libft/ft_strnjoinfree.c
-        main.c)
+        main.c src/pr_color_me.c)
 link_directories(libft) # header directories
 add_executable(_ft_printf ${SOURCE_FILES})
 target_link_libraries(_ft_printf -lft) # linkage
