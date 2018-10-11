@@ -23,12 +23,14 @@ LIBFT_DIR = ./libft/
 HEADER = $(addprefix $(INC_DIR), ft_printf.h)
 
 SRC = ft_printf.c \
-	additional.c \
-	define_flags.c \
     handle_char.c \
     handle_integer.c \
     handle_wc.c \
-    pr_join.c
+    pr_color_me.c \
+    pr_define_my_flags.c \
+    pr_join_me.c \
+    pr_refresh_me.c \
+    pr_utoa_me.c
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
