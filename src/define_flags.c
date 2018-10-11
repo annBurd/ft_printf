@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 22:07:41 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/10 05:21:49 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/11 17:00:27 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,34 +67,6 @@ void	set_num(const char **line, t_sp *mark)
 	else
 		mark->prec = -2;
 	set_length(line, mark);
-}
-
-void	set_color(const char **line, t_print *aq)
-{
-	size_t	n;
-
-	aq->out[aq->i++] = '\e';
-	aq->out[aq->i++] = '[';
-	if (*(++(*line)) == '1')
-		pr_join_str(aq, "1;", 2);
-	if (*(++(*line)) == '0')
-		(*line)++;
-	else if (**line >= '1' && **line <= '8')
-	{
-		n = (size_t)(*((*line)++) - 19);
-		if (**line == 'q' && (n += 60))
-			(*line)++;
-		pr_itoa(aq, n, 10);
-		aq->out[aq->i++] = ';';
-	}
-	if (**line >= '1' && **line <= '8')
-	{
-		n = (size_t)(**line - 9);
-		if (*(*line + 1) == 'q' && (n += 60))
-			(*line)++;
-		pr_itoa(aq, n, 10);
-	}
-	aq->out[aq->i++] = 'm';
 }
 
 void	set_flag(const char **line, t_print *aq)
