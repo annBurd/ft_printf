@@ -100,10 +100,10 @@ $(NAME):
 all: $(NAME)
 
 clean:
+	@$(RM) $(OBJ)
 	@$(RM) $(NAME:.a=.h.gch)
 	
-fclean:	
-	@$(RM) $(OBJ)
+fclean:
 	@$(RM) $(NAME)
 
 re: fclean all
