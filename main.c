@@ -118,13 +118,19 @@ int main(int argc, char **argv)
 //	ft_printf("[%04.2%]\n");
 
 ////	CHAR: %c, %s
-	char c = '$';
-	char *s = "Do some trash test for my lovely ft_printf()";
-	ft_printf("\n> CHAR %%c, %%s\n");
-	printf("%%c = %c ____[%-*.*s] 0R!G\n", c, 30, 13, s);
-	ft_printf("%%c = %c ____[%-*.*s]\n", c, 30, 13, s);
+//	char c = '$';
+//	char *s = "Do some trash test for my lovely ft_printf()";
+//	ft_printf("\n> CHAR %%c, %%s\n");
+//	printf("%%c = %c ____[%-*.*s] 0R!G\n", c, 30, 13, s);
+//	ft_printf("%%c = %c ____[%-*.*s]\n", c, 30, 13, s);
 //	ft_printf("%%c = %!03q0c ____[%-*.*s]\n", c, 30, 13, s);
 //	ft_printf("Do some <100trash test> for my <020lovely> ft_printf()\n");
+//	printf("1 - \e[1;mBold\e[0m\n");
+//	printf("2 - \e[2;mDim\e[0m\n");
+//	printf("3 - \e[3;mItalic\e[0m\n");
+//	printf("4 - \e[4;mUnderline\e[0m\n");
+//	printf("7 - \e[7;mReverse\e[0m\n");
+	ft_printf("Test <!mb;Fr!colors>!\n");
 //	ft_printf("Do %% ");
 //	ft_printf("some trash");
 //	ft_printf(" test for ");
