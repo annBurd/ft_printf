@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/28 20:10:04 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/11 20:20:33 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/11 22:21:41 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ static void	set_flag_1(t_print *aq)
 		S.length = l;
 		S.ty = (char)ft_tolower(S.ty);
 	}
-	else if (S.ty == 'p')
-		S.length = 0;
 	if (S.ty == 'b')
 		S.base = 2;
 	else if (S.ty == 'o')
