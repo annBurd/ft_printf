@@ -9,8 +9,8 @@ project(_ft_printf)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Werror -Ipthreads")
 set(SOURCE_FILES
         inc/ft_printf.h
-        src/additional.c
-        src/define_flags.c
+        src/pr_refresh_me.c
+        src/pr_define_my_flags.c
         src/ft_printf.c
         src/handle_integer.c
         src/handle_char.c
@@ -90,7 +90,7 @@ set(SOURCE_FILES
 #        libft/ft_toupper.c
 #        libft/ft_strjoinfree.c
 #        libft/ft_strnjoinfree.c
-        main.c src/pr_color_me.c)
+        main.c src/pr_color_me.c src/pr_utoa_me.c)
 link_directories(libft) # header directories
 add_executable(_ft_printf ${SOURCE_FILES})
 target_link_libraries(_ft_printf -lft) # linkage
