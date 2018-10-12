@@ -1,7 +1,4 @@
 cmake_minimum_required(VERSION 3.9)
-project(_ft_printf)
-
-cmake_minimum_required(VERSION 3.9)
 set(CMAKE_C_STANDARD 99)
 project(_ft_printf)
 
@@ -92,7 +89,6 @@ set(SOURCE_FILES
 #        libft/ft_tolower.c
 #        libft/ft_toupper.c
 #        libft/ft_strjoinfree.c
-#        libft/ft_strnjoinfree.c
         main.c)
 link_directories(libft) # header directories
 add_executable(_ft_printf ${SOURCE_FILES})
