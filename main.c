@@ -187,35 +187,15 @@ int main(int argc, char **argv)
 //	****************************************************
 
 
-//	POINTER: %p
-//	****************************************************
-//	ft_printf("\n> POINTER\n");
-//	short p = 6667;
-//	printf("\t\t[%p] 0R!G\n", &p);
-//	ft_printf("\t\t[%p]\n", &p);
-//	printf(".\t\t[%.p] 0R!G\n", &p);
-//	ft_printf(".\t\t[%.p]\n", &p);
-//	printf("20\t\t[%20p] 0R!G\n", &p);
-//	ft_printf("20\t\t[%20p]\n", &p);
-//	printf("-20\t\t[%-20p] 0R!G\n", &p);
-//	ft_printf("-20\t\t[%-20p]\n", &p);
-
-
-//	char z1 = (char)208, z2 = (char)135;
-//	write(1, &z1, 1);
-//	write(1, &z2, 1);
-//	write(1, "\n", 1);
-//	printf("%c%c\n", z1, z2);
-
-
 //	WCHAR_T
 //	****************************************************
 //	wchar_t wc = L'Ї';
 //	wchar_t wc = L'ꚩ';
 //	wchar_t wc = L'ᚫ';
+//	wchar_t wc = 65537;
 //		ft_printf("> WCHAR_T\n");
 //	printf("\t\t[%C]%u\n", wc, wc);
-//	ft_printf("\t\t[%C]\n", wc, wc);
+//	ft_printf("\t\t[%C]%u\n", wc, wc);
 //	printf("1\t\t[%1C]\n", wc);
 //	ft_printf("1\t\t[%1C]\n", wc);
 //	printf("2\t\t[%2C]\n", wc);
@@ -232,7 +212,6 @@ int main(int argc, char **argv)
 //	ft_printf("-7\t\t[%-7C]\n", wc);
 
 
-//int size = 0;
 //	size = printf("\t\t[%C]%u\n", 199, 199);
 //	ft_putnbr(size);
 //	size = ft_printf("\t\t[%C]%u\n", 199, 199);
@@ -303,16 +282,16 @@ int main(int argc, char **argv)
 //	ft_printf("-7\t\t[%-7c]\n", c);
 
 //		ft_printf("> CHAR : failed tests\n");
-	printf("%.2c|\n", NULL);
-	ft_printf("%.2c|\n", NULL);
-	printf("@moulitest: %c|\n", 0);
-	ft_printf("@moulitest: %c|\n", 0);
-	printf("%2c|\n", 0);
-	ft_printf("%2c|\n", 0);
-	printf("null %c| and text\n", 0);
-	ft_printf("null %c| and text\n", 0);
-	printf("% c|\n", 0);
-	ft_printf("% c|\n", 0);
+//	printf("%.2c|\n", NULL);
+//	ft_printf("%.2c|\n", NULL);
+//	printf("@moulitest: %c|\n", 0);
+//	ft_printf("@moulitest: %c|\n", 0);
+//	printf("%2c|\n", 0);
+//	ft_printf("%2c|\n", 0);
+//	printf("null %c| and text\n", 0);
+//	ft_printf("null %c| and text\n", 0);
+//	printf("% c|\n", 0);
+//	ft_printf("% c|\n", 0);
 
 
 //	CHAR*
@@ -371,7 +350,7 @@ int main(int argc, char **argv)
 //	UNSIGNED: o, O
 //	****************************************************
 //	unsigned int ui = ft_atoi(argv[1]);
-//	unsigned int ui = 1;
+//	unsigned int ui = 0;
 //
 //		ft_printf("________[o, O] minus & width\n");
 //	printf("-4.7\t[%-4.7o]\n", ui);
@@ -435,11 +414,33 @@ int main(int argc, char **argv)
 //	ft_printf("#.7\t\t[%#.7o]\n", ui);
 
 
-//	UNSIGNED: x, X
+//	POINTER: %p
 //	****************************************************
-//	unsigned int ui = ft_atoi(argv[1]);
-	unsigned int ui = 0;
+//	ft_printf("\n> POINTER\n");
+//	short p = 6667;
+//	printf("\t\t[%p] 0R!G\n", &p);
+//	ft_printf("\t\t[%p]\n", &p);
+//	printf(".\t\t[%.p] 0R!G\n", &p);
+//	ft_printf(".\t\t[%.p]\n", &p);
+//	printf("20\t\t[%20p] 0R!G\n", &p);
+//	ft_printf("20\t\t[%20p]\n", &p);
+//	printf("-20\t\t[%-20p] 0R!G\n", &p);
+//	ft_printf("-20\t\t[%-20p]\n", &p);
+
+//	ft_printf("\n> POINTER: failed tests\n");
+//	printf("|% 0+5p|\n", 0);
+//	ft_printf("|% 0+5p|\n", 0);
+//	printf("|% 0+p|\n", 0);
+//	ft_printf("|% 0+p|\n", 0);
+//	printf("|%+-5p|\n", 0);
+//	ft_printf("|%+-5p|\n", 0);
 //
+//
+////	UNSIGNED: x, X
+////	****************************************************
+////	unsigned int ui = ft_atoi(argv[1]);
+//	unsigned int ui = 0;
+
 //		ft_printf("________[x, X] minus & width\n");
 //	printf("-4.7\t[%-4.7x]\n", ui);
 //	ft_printf("-4.7\t[%-4.7x]\n", ui);
@@ -517,13 +518,17 @@ int main(int argc, char **argv)
 //	ft_printf("%010x\n", 542);
 //	printf("%#08x\n", 42);
 //	ft_printf("%#08x\n", 42);
+//	printf("|%-.4X|\n", 0);
+//	ft_printf("|%-.4X|\n", 0);
+//	printf("|%#5lx|\n", 0);
+//	ft_printf("|%#5lx|\n", 0);
 
 
 //	UNSIGNED: u, U
 //	****************************************************
 //	unsigned int ui = ft_atoi(argv[1]);
-//	unsigned int ui = 1;
-//
+//	unsigned int ui = 0;
+
 //		ft_printf("________[u, U] minus & width\n");
 //	printf("-4.7\t[%-4.7u]\n", ui);
 //	ft_printf("-4.7\t[%-4.7u]\n", ui);
@@ -562,7 +567,7 @@ int main(int argc, char **argv)
 //	ft_printf(".\t\t[%.u]\n", ui);
 //	printf(".7\t\t[%.7u]\n", ui);
 //	ft_printf(".7\t\t[%.7u]\n", ui);
-
+//
 //		ft_printf("\n> OCTAL: failed tests\n");
 //	printf("%-05o\n", 2500);
 //	ft_printf("%-05o\n", 2500);
@@ -570,6 +575,13 @@ int main(int argc, char **argv)
 //	ft_printf("%-5.10o\n", 2500);
 //	printf("%-10.5o\n", 2500);
 //	ft_printf("%-10.5o\n", 2500);
+//	printf("|% #5.4zU|\n", -25);
+//	ft_printf("|% #5.4zU|\n", -25);
+//	printf("|% 0-5u|\n", 0);
+//	ft_printf("|% 0-5u|\n", 0);
+//	printf("|%-5u|\n", 0);
+//	ft_printf("|%-5u|\n", 0);
+
 
 
 //	 SIGNED: flags, %i, %d, %D
@@ -681,6 +693,8 @@ int main(int argc, char **argv)
 //	ft_printf("%-10.5d|\n", 4242);
 //	printf("%-+10.5d|\n", 4242);
 //	ft_printf("%-+10.5d|\n", 4242);
+//	printf("|%#5zd|\n", 0);
+//	ft_printf("|%#5zd|\n", 0);
 
 
 	// MIN & MAX values of types
