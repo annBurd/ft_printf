@@ -144,7 +144,7 @@ int main(int argc, char **argv)
 //	int i = 56;
 //	ft_printf("\n> BINARY: %%b\n");
 //	ft_printf("[%b]\n", i);
-//	ft_printf("[%!060b]\n", i);
+//	ft_printf("[%!mu;Fb!b]\n", i);
 //	ft_printf("[%!118jb]\n", i);
 //	ft_printf("[%!18j2b]\n", i);
 //
