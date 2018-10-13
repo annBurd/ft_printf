@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 22:07:41 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/13 23:56:42 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/14 02:10:02 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void		define_flags(const char **line, t_print *aq)
 		(**line == '\'') && (S.apost = 1);
 		if (**line == '!')
 		{
-			if (aq->i + 12 >= BUFS)
+			if (aq->i + 12 >= BUFSIZE)
 				pr_refresh(aq);
 			S.color = 1;
 			pr_color(line, aq);

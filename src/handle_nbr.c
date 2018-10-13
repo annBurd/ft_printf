@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/28 20:10:04 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/14 00:38:15 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/14 01:06:11 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,18 @@ static void	getting(t_print *aq, uintmax_t *ut)
 	}
 	else
 		S.hash = 0;
-	if (!(!S.v && (((S.prec && !S.prv) && S.ty != 'o') ||
-		((S.hash && S.ty != 'p') ||
-		((S.prec && !S.prv) && (!S.hash || !S.minus))))))
+	if (!(!S.v && (((S.prec && !S.prv) && S.ty != 'o')
+		|| ((S.hash && S.ty != 'p')
+		|| ((S.prec && !S.prv) && (!S.hash || !S.minus))))))
 		S.ln = ft_nbrulen(*ut, S.base);
 }
+
+/*
+**			^
+**
+** 		Do not touch it !
+** I don't remember how but it works
+*/
 
 static void	setting_2(t_print *aq)
 {

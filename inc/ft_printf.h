@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:32:45 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/14 00:51:30 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/14 01:43:20 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,22 @@
 # include <wchar.h>
 # include <stdint.h>
 
-# define S		aq->sp
-# define DEC	(S.ty == 'i' || S.ty == 'd')
-# define HEX	(S.ty == 'x' || S.ty == 'X')
-
-# define BUFS	777
+# define S aq->sp
+# define DEC (S.ty == 'i' || S.ty == 'd')
+# define HEX (S.ty == 'x' || S.ty == 'X')
+# define BUFSIZE 666
 
 /*
-** v >>> for vendetta or value sign [-1, 0, 1]
-** free >>> for free space ̶ ̶̶f̶o̶r̶ ̶m̶y̶s̶e̶l̶f̶
-** color >>> for usage details see pr_color_me.c file
-** star[0] >>> star for width		| otherwise star[2] isn't used
-** star[1] >>> star for precision	| just wasting of memory :(
-** refreshing funcs >>> for strange & mystic cases when buff is over
+** v >>> for ̶ ̶v̶e̶n̶d̶e̶t̶t̶a̶  value sign [-1, 0, 1]
+** free >>> for counting free space when length > width
+** color >>> usage details see pr_color_me.c
 **
+** star[0] >>> star for width		| otherwise star[2] isn't used
+** star[1] >>> star for precision	| just wasting of memory
+** 									| but I hope it's necessary
+** pr_refresh			|
+** pr_overflow		>>>	| for strange & mystic cases
+** pr_overflow_str		| when buff is full ̶ ̶̶o̶f̶ ̶d̶a̶r̶k̶n̶e̶s̶s̶
 */
 
 typedef struct	s_sp
@@ -63,7 +65,7 @@ typedef struct	s_print
 {
 	va_list		va;
 	t_sp		sp;
-	char		out[BUFS];
+	char		out[BUFSIZE];
 	size_t		i;
 	int			size;
 }				t_print;
@@ -83,13 +85,17 @@ void			extract_i(t_print *aq, intmax_t t, uintmax_t *ut);
 void			extract_ui(t_print *aq, uintmax_t *ut);
 
 void			pr_color(const char **line, t_print *aq);
+
 void			pr_utoa(t_print *aq, uintmax_t value, short base);
+
 void			pr_refresh(t_print *aq);
 size_t			pr_overflow_str(t_print *aq, char *s, size_t *n);
 void			pr_overflow(t_print *aq, char c, size_t *n);
+
 void			pr_join_str(t_print *aq, char *s, size_t n);
 void			pr_join(t_print *aq, char c, size_t n);
-void			pr_join_4b(t_print *aq, unsigned int c);
-void			pr_join_3b(t_print *aq, unsigned int c);
+
 void			pr_join_2b(t_print *aq, unsigned int c);
+void			pr_join_3b(t_print *aq, unsigned int c);
+void			pr_join_4b(t_print *aq, unsigned int c);
 #endif

@@ -6,11 +6,16 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 17:34:16 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/11 19:24:49 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/14 01:23:47 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_printf.h"
+
+/*
+** Hello itoa, my old friend
+** I've come to write some nbrs again
+*/
 
 void	pr_utoa(t_print *aq, uintmax_t value, short base)
 {
@@ -21,7 +26,7 @@ void	pr_utoa(t_print *aq, uintmax_t value, short base)
 
 	len = S.ln ? S.ln : ft_nbrulen(value, base);
 	len_p = --len;
-	if (aq->i + len + 1 >= BUFS)
+	if (aq->i + len + 1 >= BUFSIZE)
 		pr_refresh(aq);
 	while (value)
 	{

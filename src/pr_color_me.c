@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:37:22 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/13 22:06:11 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/14 01:49:43 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** ft_printf("%![modify];[foreground color];[background color]!s\n", "koko");
 ** ___ Modes
 ** > You can use few modifies which don't contradict each other
-** > But only one fg or bg
+** > But only one foreground or background
 ** m - set modify
 ** M - reset modify
 ** f - usual foreground
@@ -28,8 +28,8 @@
 ** ___ Modifies
 ** [m/M]0 - Turn off all modifies
 ** [m/M]b - set/reset Bold
-** [m/M]d - set/reset Dim
-** [m/M]i - set/reset Italic
+** [m/M]d - set/reset Dim //doesn't work in CLion
+** [m/M]i - set/reset Italic //doesn't work in CLion
 ** [m/M]u - set/reset Underline
 ** [m/M]r - set/reset Reverse/Invert
 ** ___ Colors
