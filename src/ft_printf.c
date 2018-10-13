@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:26:16 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/13 20:00:05 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/14 00:35:14 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,21 @@
 
 void		start_handle(t_print *aq)
 {
-	(S.wi == -1) && (S.wi = (short)va_arg(aq->va, int));
-	(S.prec == -1) && (S.prec = (short)va_arg(aq->va, int));
+	if (S.star[0])
+	{
+		S.wi = va_arg(aq->va, int);
+		S.wi < 0 && (S.minus = 1);
+		S.wi < 0 && (S.wi *= -1);
+	}
+	if (S.star[1])
+	{
+		S.prv = va_arg(aq->va, int);
+		S.prv < 0 && S.zero && !S.minus && (S.prv *= -1);
+	}
 	if (S.ty == 'i' || S.ty == 'd' || S.ty == 'D' || S.ty == 'b' ||
 		S.ty == 'o' || S.ty == 'O' || S.ty == 'u' || S.ty == 'U' ||
 		S.ty == 'x' || S.ty == 'X' || S.ty == 'p')
-		handle_i(aq);
+		handle_nbr(aq);
 	else if (S.ty == 'c' || S.ty == 'C' || S.ty == '%')
 		!S.length && S.ty != 'C' ? handle_c(aq) : handle_wc(aq);
 	else if (S.ty == 's' || S.ty == 'S')
@@ -36,7 +45,7 @@ void		explore(t_print *aq, const char *line, const char *point)
 		{
 			if (line - point > 0)
 				pr_join_str(aq, (char*)point, line - point);
-			*(line++) == '<' ? set_color(&line, aq)
+			*(line++) == '<' ? pr_color(&line, aq)
 							: pr_join_str(aq, "\e[0m", 4);
 			point = ++line;
 		}
@@ -45,7 +54,7 @@ void		explore(t_print *aq, const char *line, const char *point)
 			if (*point != '%' && line - point > 0)
 				pr_join_str(aq, (char*)point, line - point);
 			line++;
-			set_flag(&line, aq);
+			define_flags(&line, aq);
 			start_handle(aq);
 			point = line;
 		}
