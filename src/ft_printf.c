@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:26:16 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/13 19:10:02 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/13 20:00:05 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void		start_handle(t_print *aq)
 		S.ty == 'x' || S.ty == 'X' || S.ty == 'p')
 		handle_i(aq);
 	else if (S.ty == 'c' || S.ty == 'C' || S.ty == '%')
-		!S.length ? handle_c(aq) : handle_wc(aq);
+		!S.length && S.ty != 'C' ? handle_c(aq) : handle_wc(aq);
 	else if (S.ty == 's' || S.ty == 'S')
-		!S.length ? handle_str(aq) : handle_wstr(aq);
+		!S.length && S.ty != 'S' ? handle_str(aq) : handle_wstr(aq);
 	if (S.color)
 		pr_join_str(aq, "\e[0m", 4);
 }

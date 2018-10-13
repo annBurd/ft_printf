@@ -81,19 +81,15 @@ static void	set_format_i(t_print *aq)
 		pr_join(aq, ' ', (size_t)S.free);
 		S.free = 0;
 	}
-	if (aq->i + 2 >= BUFS)
-		pr_refresh(aq);
 	if (S.v < 0)
-		aq->out[aq->i++] = '-';
+		pr_join(aq, '-', 1);
 	else if (S.plus || S.spc)
-		aq->out[aq->i++] = (char)(S.plus ? '+' : ' ');
-	else if (S.hash)
-	{
-		aq->out[aq->i++] = '0';
-		S.hash == 2 && (aq->out[aq->i++] = (char)(S.ty == 'X' ? 'X' : 'x'));
-	}
-	if (S.zero && S.prec == -2 && S.free &&
-			!(/*(HEX || S.ty == 'o' || DEC) &&*/ S.minus))
+		pr_join(aq, (char)(S.plus ? '+' : ' '), 1);
+	else if (S.hash == 1)
+		pr_join(aq, '0', 1);
+	else if (S.hash == 2)
+		pr_join_str(aq, (char*)(S.ty == 'X' ? "0X" : "0x"), 2);
+	if (S.zero && S.prec == -2 && S.free && !S.minus)
 		pr_join(aq, '0', (size_t)S.free);
 	else if ((S.zero = (short)(S.prec - S.ln -
 			(!S.v || S.ty == 'o' ? S.hash : 0))) > 0)
@@ -108,8 +104,6 @@ void		handle_i(t_print *aq)
 	get_i(aq, &ut);
 	set_flag_2(aq);
 	set_format_i(aq);
-	if (aq->i + S.ln >= BUFS)
-		pr_refresh(aq);
 	if (!S.v && S.ln)
 		pr_join(aq, '0', S.ln);
 	else if (S.v)

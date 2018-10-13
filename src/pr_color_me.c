@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:37:22 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/11 17:57:58 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/13 18:07:35 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void		set_color(const char **line, t_print *aq)
 	aq->out[aq->i++] = 033;
 	aq->out[aq->i++] = '[';
 	(*line)++;
-	if (**line == 'm')
+	while (**line == 'm')
 	{
 		set_mod_code(aq, **line, *(++(*line)));
 		if (*(++(*line)) == '!' && (aq->out[aq->i++] = 'm'))

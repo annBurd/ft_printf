@@ -21,6 +21,8 @@ void	pr_utoa(t_print *aq, uintmax_t value, short base)
 
 	len = S.ln ? S.ln : ft_nbrulen(value, base);
 	len_p = --len;
+	if (aq->i + len + 1 >= BUFS)
+		pr_refresh(aq);
 	while (value)
 	{
 		left = (short)(value % base);
