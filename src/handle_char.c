@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/28 17:45:03 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/13 19:51:44 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/13 20:00:05 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	handle_c(t_print *aq)
 	if (S.ty == '%')
 		arg = '%';
 	else if (S.ty == 'c')
-		arg =(char)va_arg(aq->va, int);
+		arg = (char)va_arg(aq->va, int);
 	S.ln = 1;
 	S.free = (short)(S.wi - (short)S.ln < 0 ? 0 : S.wi - S.ln);
 	if (!S.minus && S.free)
