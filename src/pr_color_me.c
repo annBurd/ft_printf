@@ -6,19 +6,19 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:37:22 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/13 18:07:35 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/13 21:38:51 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_printf.h"
 
 /*
-** ___ Format in str
-** >>> in string
+** ___ Format
 ** ft_printf("<![modify];[foreground color];[background color]!koko>!\n");
-** >>> w/ %
 ** ft_printf("%![modify];[foreground color];[background color]!s\n", "koko");
 ** ___ Modes
+** > You can use few modifies which don't contradict each other
+** > But only one fg or bg
 ** m - set modify
 ** M - reset modify
 ** f - usual foreground
