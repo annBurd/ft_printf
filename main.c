@@ -195,16 +195,18 @@ int main(int argc, char **argv)
 
 ////	BONUS COLOR
 //		printf("\n> COLOR\n");
-//	printf("Do some \e[31;mtrash \e[0mtest for my lovely ft_printf()\n");
-//	printf("Do some \e[31mtrash \e[0mtest for my lovely ft_printf()\n");
-//	printf("Do some \e[91mtrash \e[0mtest for my lovely ft_printf()\n");
-//	printf("Do some \e[31;47mtrash\e[0m test for my lovely ft_printf()\n");
-//	printf("Do some \e[1;31;107mtrash\e[0m test for my lovely ft_printf()\n");
 
-//	ft_printf("Do %!mb;fr;Bw!s\n", "trash");
-//	ft_printf("Do %!Fb!s\n", "trash");
-//	ft_printf("Do %!mr;fy!s\n", "trash");
-//	ft_printf("Do <!mu;mb;fy!trash<!Mu;fg! test>!!\n");
+//	ft_printf("Do %!mb;fr;Bw!s test!\n", "trash");
+//	ft_printf("Do <!Fb!%s test!\n", "trash");
+//	ft_printf("Do %!mr;fy!s test!\n", "trash");
+//	ft_printf("Do <!mu;mb;fp!trash<!Mu;fg! test!\n");
+//	ft_printf("\t<<<<<<<<<<>!%!Fr!c>>>>>>>>>\n", '!');
+//	ft_printf("<!mb;fy!zzZzZz<!Mb! <!Fp;BB![Bold]>!\n");
+//	ft_printf("<!md;fy!zzZzZz<!Md! <!Fp;BB![Dim]>!\n");
+//	ft_printf("<!mi;fy!zzZzZz<!Mi! <!Fp;BB![Italic]>!\n");
+//	ft_printf("<!mr;fy!zzZzZz<!Mr! <!Fp;BB![Reverse]>!\n");
+//	ft_printf("<!mu;fy!zzZzZz<!Mu! <!Fp;BB![Underline]>!\n");
+
 //	****************************************************
 
 
