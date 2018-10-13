@@ -13,16 +13,18 @@
 #include "../inc/ft_printf.h"
 
 /*
-** ___ Format
-** in str	<![modify];[foreground color];[background color]! koko >?
-** w/ %		%![modify];[foreground color];[background color]!s
-** ___ Modify & Foreground & Background
+** ___ Format in str
+** >>> in string
+** ft_printf("<![modify];[foreground color];[background color]!koko>!\n");
+** >>> w/ %
+** ft_printf("%![modify];[foreground color];[background color]!s\n", "koko");
+** ___ Modes
 ** m - set modify
 ** M - reset modify
-** f - simple foreground
-** F - bright version
-** b - simple bg
-** B - bright version
+** f - usual foreground
+** F - bright version of foreground
+** b - usual background
+** B - bright version of background
 ** ___ Modifies
 ** [m/M]0 - Turn off all modifies
 ** [m/M]b - set/reset Bold
