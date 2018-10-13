@@ -32,7 +32,7 @@ size_t	pr_overflow_str(t_print *aq, char *s, size_t *n)
 	return (t);
 }
 
-size_t	pr_overflow(t_print *aq, char c, size_t *n)
+void	pr_overflow(t_print *aq, char c, size_t *n)
 {
 	const size_t	t = *n > BUFS ? *n - BUFS : *n;
 
@@ -42,5 +42,4 @@ size_t	pr_overflow(t_print *aq, char c, size_t *n)
 	if (*n <= BUFS)
 		pr_join(aq, c, t);
 	*n -= t;
-	return (t);
 }

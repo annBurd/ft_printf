@@ -7,9 +7,9 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Ipthreads")
 set(SOURCE_FILES
         inc/ft_printf.h
         src/ft_printf.c
-        src/handle_integer.c
+        src/handle_nbr.c
         src/handle_char.c
-        src/handle_wc.c
+        src/handle_wchar.c
         src/pr_refresh_me.c
         src/pr_define_my_flags.c
         src/pr_join_me.c

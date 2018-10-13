@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 21:39:53 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/13 21:47:47 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/14 00:12:24 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,26 @@ static size_t	get_bytes(unsigned int arg)
 		return (size_t)(4 > MB_CUR_MAX ? MB_CUR_MAX : 4);
 }
 
-static void		set_wln(t_print *aq, wchar_t *arg)
-{
-	size_t	i;
-
-	i = 0;
-	if (!S.prec)
-		S.ln = 0;
-	else if (S.prec == -2)
-		while (arg[i])
-			S.ln += get_bytes(arg[i++]);
-	else if (S.prec > 0)
-		while (arg[i] && S.ln < (size_t)S.prec)
-		{
-			S.ln += get_bytes(arg[i++]);
-			if (S.ln > (size_t)S.prec)
-				S.ln -= get_bytes(arg[--i]) - S.ln + S.prec;
-		}
-}
-
-static void		set_flag_wc(t_print *aq, wchar_t *arg)
+static void		setting_wc(t_print *aq, wchar_t *arg, size_t i)
 {
 	if (S.ty == 'c' || S.ty == 'C')
-		S.ln = get_bytes(*arg);
+		S.ln = get_bytes(arg[i]);
 	else
-		set_wln(aq, arg);
-	S.free = (short)((S.wi - (short)S.ln) < 0 ? 0 : S.wi - (short)S.ln);
+	{
+		if (S.prec && !S.prv)
+			S.ln = 0;
+		else if (!S.prec)
+			while (arg[i])
+				S.ln += get_bytes(arg[i++]);
+		else if (S.prec && S.prv > 0)
+			while (arg[i] && S.ln < (size_t)S.prv)
+			{
+				S.ln += get_bytes(arg[i++]);
+				if (S.ln > (size_t)S.prv)
+					S.ln -= get_bytes(arg[--i]) - S.ln + S.prv;
+			}
+	}
+	S.free = ((S.wi - (int)S.ln) < 0 ? 0 : S.wi - (int)S.ln);
 	if (!S.minus && S.free)
 		pr_join(aq, (char)(S.zero ? '0' : ' '), (size_t)S.free);
 }
@@ -59,7 +53,7 @@ void			handle_wc(t_print *aq)
 	wchar_t	arg;
 
 	arg = (wchar_t)va_arg(aq->va, int);
-	set_flag_wc(aq, &arg);
+	setting_wc(aq, &arg, 0);
 	if (S.ln)
 	{
 		if (S.ln == 1)
@@ -84,7 +78,7 @@ void			handle_wstr(t_print *aq)
 	arg = va_arg(aq->va, wchar_t*);
 	if (!arg)
 		arg = L"(null)\0";
-	set_flag_wc(aq, arg);
+	setting_wc(aq, arg, 0);
 	i = 0;
 	while (arg[i] && S.ln)
 	{

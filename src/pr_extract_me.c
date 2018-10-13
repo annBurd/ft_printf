@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 19:27:37 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/11 19:28:20 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/14 00:12:24 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,19 @@ void	extract_i(t_print *aq, intmax_t t, uintmax_t *ut)
 
 void	extract_ui(t_print *aq, uintmax_t *ut)
 {
-	if (S.ty == 'p')
+	if (S.ty == 'p' || S.length == j)
 		*ut = (uintmax_t)va_arg(aq->va, void*);
 	else if (!S.length)
-		*ut = va_arg(aq->va, unsigned int);
+		*ut = (unsigned int)va_arg(aq->va, void*);
 	else if (S.length == h)
 		*ut = (unsigned short)va_arg(aq->va, void*);
 	else if (S.length == hh)
 		*ut = (unsigned char)va_arg(aq->va, void*);
 	else if (S.length == l)
-		*ut = va_arg(aq->va, unsigned long int);
+		*ut = (unsigned long int)va_arg(aq->va, void*);
 	else if (S.length == ll)
-		*ut = va_arg(aq->va, unsigned long long int);
-	else if (S.length == j)
-		*ut = va_arg(aq->va, uintmax_t);
+		*ut = (unsigned long long int)va_arg(aq->va, void*);
 	else if (S.length == z)
-		*ut = (size_t)va_arg(aq->va, size_t);
+		*ut = (size_t)va_arg(aq->va, void*);
 	*ut && (S.v = 1);
 }
