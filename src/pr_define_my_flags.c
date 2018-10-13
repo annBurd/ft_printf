@@ -6,91 +6,94 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 22:07:41 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/11 21:00:24 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/13 23:56:42 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_printf.h"
 
-void	set_type(const char **line, t_sp *mark)
+static void	define_type(const char **line, t_print *aq)
 {
 	char	q;
 
 	q = **line;
-	if (q == '%' || q == 'p' || q == 's' || q == 'S' || q == 'c' || q == 'C' ||
-		q == 'i' || q == 'd' || q == 'D' || q == 'o' || q == 'O' || q == 'b' ||
-		q == 'u' || q == 'U' || q == 'x' || q == 'X')
+	if (q == '%' || q == 'p' || q == 'b' || q == 'i' ||
+		q == 'd' || q == 'D' || q == 'u' || q == 'U' ||
+		q == 's' || q == 'S' || q == 'c' || q == 'C' ||
+		q == 'o' || q == 'O' || q == 'x' || q == 'X')
 	{
-		mark->ty = q;
+		S.ty = q;
 		(*line)++;
 	}
 	else
-		mark->ty = 's';
+		S.ty = 's';
 }
 
-void	set_length(const char **line, t_sp *mark)
+static void	define_length(const char **line, t_print *aq)
 {
 	const char	*s;
 
 	s = *line;
-	if ((*s == 'h' && (mark->length = h)) ||
-		(*s == 'l' && (mark->length = l)))
+	if ((*s == 'h' && (S.length = h)) ||
+		(*s == 'l' && (S.length = l)))
 	{
-		if ((*(s + 1) == *s) && (mark->length++))
+		if ((*(s + 1) == *s) && (S.length++))
 			(*line)++;
 	}
 	else if (*s == 'j')
-		mark->length = j;
+		S.length = j;
 	else if (*s == 'z')
-		mark->length = z;
+		S.length = z;
 	if (*s == 'h' || *s == 'l' || *s == 'j' || *s == 'z')
 		(*line)++;
-	set_type(line, mark);
+	define_type(line, aq);
 }
 
-void	set_num(const char **line, t_sp *mark)
+static void	define_num(const char **line, t_print *aq)
 {
 	if ((**line >= '1' && **line <= '9') || **line == '*')
 	{
-		mark->wi = (short)(**line == '*' ? -1 : ft_atoi(*line));
+		if (**line == '*')
+			S.star[0] = 1;
+		else
+			S.wi = ft_atoi(*line);
 		while ((**line >= '0' && **line <= '9') || **line == '*')
 			(*line)++;
 	}
 	if (**line == '.')
 	{
+		S.prec = 1;
 		(*line)++;
 		if (**line == '*')
-			mark->prec = -1;
+			S.star[1] = 1;
 		else if (**line >= '1' && **line <= '9')
-			mark->prec = (short)ft_atoi(*line);
+			S.prv = ft_atoi(*line);
 		while ((**line >= '0' && **line <= '9') || **line == '*')
 			(*line)++;
 	}
-	else
-		mark->prec = -2;
-	set_length(line, mark);
+	define_length(line, aq);
 }
 
-void	set_flag(const char **line, t_print *aq)
+void		define_flags(const char **line, t_print *aq)
 {
 	ft_bzero(&aq->sp, sizeof(t_sp));
 	while (**line == '#' || **line == '0' || **line == '-' || **line == '!'
-		|| **line == '+' || **line == ' ' || **line == '`')
+		|| **line == '+' || **line == ' ' || **line == '\'')
 	{
 		(**line == '#') && (S.hash = 1);
 		(**line == '0') && (S.zero = 1);
 		(**line == '-') && (S.minus = 1);
 		(**line == '+') && (S.plus = 1);
 		(**line == ' ') && (S.spc = 1);
-		(**line == '`') && (S.apost = 1);
+		(**line == '\'') && (S.apost = 1);
 		if (**line == '!')
 		{
 			if (aq->i + 12 >= BUFS)
 				pr_refresh(aq);
 			S.color = 1;
-			set_color(line, aq);
+			pr_color(line, aq);
 		}
 		(*line)++;
 	}
-	set_num(line, &aq->sp);
+	define_num(line, aq);
 }

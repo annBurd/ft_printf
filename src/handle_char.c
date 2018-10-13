@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/28 17:45:03 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/13 20:00:05 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/14 00:39:02 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	handle_c(t_print *aq)
 	else if (S.ty == 'c')
 		arg = (char)va_arg(aq->va, int);
 	S.ln = 1;
-	S.free = (short)(S.wi - (short)S.ln < 0 ? 0 : S.wi - S.ln);
+	S.free = (int)(S.wi - (int)S.ln < 0 ? 0 : S.wi - S.ln);
 	if (!S.minus && S.free)
 		pr_join(aq, (char)(S.zero ? '0' : ' '), (size_t)S.free);
 	pr_join(aq, arg, S.ln);
@@ -41,9 +41,9 @@ void	handle_str(t_print *aq)
 		S.ln = 1;
 	else
 		S.ln = ft_strlen(arg);
-	if (S.prec >= 0 && (size_t)S.prec < S.ln)
-		S.ln = (size_t)S.prec;
-	S.free = (short)(S.wi - (short)S.ln < 0 ? 0 : S.wi - S.ln);
+	if (S.prec && S.prv >= 0 && (size_t)S.prv < S.ln)
+		S.ln = (size_t)S.prv;
+	S.free = (int)(S.wi - (int)S.ln < 0 ? 0 : S.wi - S.ln);
 	!*arg && S.wi && S.free++;
 	if (!S.minus && S.free)
 		pr_join(aq, (char)(S.zero ? '0' : ' '), (size_t)S.free);

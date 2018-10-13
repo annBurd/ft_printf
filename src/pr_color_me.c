@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:37:22 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/13 21:38:51 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/13 22:06:11 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@
 **	<!md;Fr;bB!koko>!
 */
 
-static void	set_mod_code(t_print *aq, char mod, char value)
+static void	set_modify(t_print *aq, char mod, char value)
 {
 	size_t code;
 
@@ -83,7 +83,7 @@ static void	set_mod_code(t_print *aq, char mod, char value)
 	aq->out[aq->i++] = ';';
 }
 
-static void	set_color_code(t_print *aq, char mod, char value)
+static void	set_color(t_print *aq, char mod, char value)
 {
 	size_t code;
 
@@ -110,29 +110,29 @@ static void	set_color_code(t_print *aq, char mod, char value)
 	aq->out[aq->i++] = ';';
 }
 
-void		set_color(const char **line, t_print *aq)
+void		pr_color(const char **line, t_print *aq)
 {
 	aq->out[aq->i++] = 033;
 	aq->out[aq->i++] = '[';
 	(*line)++;
-	while (**line == 'm')
+	while (**line == 'm' || **line == 'M')
 	{
-		set_mod_code(aq, **line, *(++(*line)));
+		set_modify(aq, **line, *(++(*line)));
 		if (*(++(*line)) == '!' && (aq->out[aq->i++] = 'm'))
 			return ;
 		(*line)++;
 	}
 	if (**line == 'f' || **line == 'F')
 	{
-		set_color_code(aq, **line, *(++(*line)));
+		set_color(aq, **line, *(++(*line)));
 		if (*(++(*line)) == '!' && (aq->out[aq->i++] = 'm'))
 			return ;
 		(*line)++;
 	}
 	if (**line == 'b' || **line == 'B')
 	{
-		set_color_code(aq, **line, *(++(*line)));
-		if (**line == '!' && (aq->out[aq->i++] = 'm'))
+		set_color(aq, **line, *(++(*line)));
+		if (*(++(*line)) == '!' && (aq->out[aq->i++] = 'm'))
 			return ;
 	}
 }
