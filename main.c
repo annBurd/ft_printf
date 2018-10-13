@@ -97,7 +97,7 @@ int main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-//	setlocale(LC_CTYPE, "");
+	setlocale(LC_CTYPE, "");
 //	setlocale(LC_ALL, "en_US.UTF-8");
 
 
@@ -220,6 +220,12 @@ int main(int argc, char **argv)
 //	ft_printf("|%2.lc|\n", 129);
 //	printf("|% +2.lc|\n", 129);
 //	ft_printf("|% +2.lc|\n", 129);
+//	printf("|%+0.C|\n", L'V');
+//	ft_printf("|%+0.C|\n", L'V');
+//	printf("|%2C|\n", 129);
+//	ft_printf("|%2C|\n", 129);
+//	printf("|% 0+-C|\n", 0);
+//	ft_printf("|% 0+-C|\n", 0);
 
 
 //	size = printf("\t\t[%C]%u\n", 199, 199);
@@ -273,28 +279,34 @@ int main(int argc, char **argv)
 //	printf("-20.\t[%-20.S]\n", ww);
 //	ft_printf("-20.\t[%-20.S]\n", ww);
 
+//		ft_printf("> WCHAR_T* : failed tests\n");
+//	printf("|%013.12ls|\n", L"casual string");
+//	ft_printf("|%013.12ls|\n", L"casual string");
+//	printf("|%.3ls|\n", NULL);
+//	ft_printf("|%.3ls|\n", NULL);
+
 
 //	CHAR
 //	****************************************************
 //	char c = '#';
-	char c = 0;
-		ft_printf("> CHAR\n");
-	printf("\t\t[%c]\n", c);
-	ft_printf("\t\t[%c]\n", c);
-	printf("1\t\t[%1c]\n", c);
-	ft_printf("1\t\t[%1c]\n", c);
-	printf("2\t\t[%2c]\n", c);
-	ft_printf("2\t\t[%2c]\n", c);
-	printf("7\t\t[%7c]\n", c);
-	ft_printf("7\t\t[%7c]\n", c);
-	printf(".\t\t[%.c]\n", c);
-	ft_printf(".\t\t[%.c]\n", c);
-	printf(".2\t\t[%.2c]\n", c);
-	ft_printf(".2\t\t[%.2c]\n", c);
-	printf("-7\t\t[%-7c]\n", c);
-	ft_printf("-7\t\t[%-7c]\n", c);
-	printf("_\t\t[% c]\n", c);
-	ft_printf("_\t\t[% c]\n", c);
+//	char c = 0;
+//		ft_printf("> CHAR\n");
+//	printf("\t\t[%c]\n", c);
+//	ft_printf("\t\t[%c]\n", c);
+//	printf("1\t\t[%1c]\n", c);
+//	ft_printf("1\t\t[%1c]\n", c);
+//	printf("2\t\t[%2c]\n", c);
+//	ft_printf("2\t\t[%2c]\n", c);
+//	printf("7\t\t[%7c]\n", c);
+//	ft_printf("7\t\t[%7c]\n", c);
+//	printf(".\t\t[%.c]\n", c);
+//	ft_printf(".\t\t[%.c]\n", c);
+//	printf(".2\t\t[%.2c]\n", c);
+//	ft_printf(".2\t\t[%.2c]\n", c);
+//	printf("-7\t\t[%-7c]\n", c);
+//	ft_printf("-7\t\t[%-7c]\n", c);
+//	printf("_\t\t[% c]\n", c);
+//	ft_printf("_\t\t[% c]\n", c);
 
 
 //	CHAR*
