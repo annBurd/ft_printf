@@ -155,14 +155,33 @@ int main(int argc, char **argv)
 //	int w = 20;
 //	int p = 11;
 //	ft_printf("\n> APOST && STAR\n");
-//	ft_printf("\t\t[%`d]\n", i);
-//	ft_printf(" 2\t\t[%` 2d]\n", i);
-//	ft_printf("-%d.%d\t[%`-*.*d]\n", w, p, w, p, i);
-//	ft_printf("%d\t\t[%`*d]\n", w, w, i);
-//	ft_printf("%d.%d\t[%`*.*d]\n", w, p, w, p, i);
-//	ft_printf("+%d.%d\t[%`+*.*d]\n", w, p, w, p, i);
-//	ft_printf(".%d\t\t[%`.*d]\n", w, w, i);
-//	ft_printf("0%d\t\t[%`0*d]\n", w, w, i);
+//	ft_printf("\t\t[%'d]\n", i);
+//	ft_printf(" 2\t\t[%\' 2d]\n", i);
+//	ft_printf("-%d.%d\t[%'-*.*d]\n", w, p, w, p, i);
+//	ft_printf("%d\t\t[%'*d]\n", w, w, i);
+//	ft_printf("%d.%d\t[%'*.*d]\n", w, p, w, p, i);
+//	ft_printf("+%d.%d\t[%'+*.*d]\n", w, p, w, p, i);
+//	ft_printf(".%d\t\t[%'.*d]\n", w, w, i);
+//	ft_printf("0%d\t\t[%'0*d]\n", w, w, i);
+
+//		ft_printf("> BONUS STAR : failed tests\n");
+//	printf("|% +.*d|\n", -8, -25);
+//	ft_printf("|% +.*d|\n", -8, -25);
+//	printf("|% +*d|\n", -8, -25);
+//	ft_printf("|% +*d|\n", -8, -25);
+//	printf("|% +*.*d|\n", -8, -1, -25);
+//	ft_printf("|% +*.*d|\n", -8, -1, -25);
+//	printf("|%0+#*.*i|\n", 5, -4, -25);
+//	ft_printf("|%0+#*.*i|\n", 5, -4, -25);
+//	printf("|%+#*.*i|\n", 5, -4, -25);
+//	ft_printf("|%+#*.*i|\n", 5, -4, -25);
+//	printf("|% 0+#*.*i|\n", 5, -4, -25);
+//	ft_printf("|% 0+#*.*i|\n", 5, -4, -25);
+//	printf("|%0-#*.*d|\n", 5, -4, -25);
+//	ft_printf("|%0-#*.*d|\n", 5, -4, -25);
+//	printf("|% +*.*d|\n", 15, 4, 1234567);
+//	ft_printf("|% +*.*d|\n", 15, 4, 1234567);
+
 //
 //	unsigned  ui = 12345;
 //	ft_printf("\n> APOST && STAR && uU\n");
@@ -182,9 +201,10 @@ int main(int argc, char **argv)
 //	printf("Do some \e[31;47mtrash\e[0m test for my lovely ft_printf()\n");
 //	printf("Do some \e[1;31;107mtrash\e[0m test for my lovely ft_printf()\n");
 
-//	ft_printf("Do %!128js", "trash");
-//	ft_printf("Do %!06j1s", "trash");
-//	ft_printf("Do %!04j0s", "trash");
+//	ft_printf("Do %!mb;fr;Bw!s\n", "trash");
+//	ft_printf("Do %!Fb!s\n", "trash");
+//	ft_printf("Do %!mr;fy!s\n", "trash");
+//	ft_printf("Do <!mu;mb;fy!trash<!Mu;fg! test>!!\n");
 //	****************************************************
 
 
@@ -457,7 +477,7 @@ int main(int argc, char **argv)
 ////	****************************************************
 ////	unsigned int ui = ft_atoi(argv[1]);
 //	unsigned int ui = 0;
-
+//
 //		ft_printf("________[x, X] minus & width\n");
 //	printf("-4.7\t[%-4.7x]\n", ui);
 //	ft_printf("-4.7\t[%-4.7x]\n", ui);
@@ -518,9 +538,9 @@ int main(int argc, char **argv)
 //	ft_printf(".7\t\t[%.7x]\n", ui);
 //	printf("#.7\t\t[%#.7x]\n", ui);
 //	ft_printf("#.7\t\t[%#.7x]\n", ui);
-
+//
 //	ft_printf("\n> HEXADECIMAL: failed tests\n");
-//	FAILED TESTS:
+////	FAILED TESTS:
 //	printf("%#x\n", 0);
 //	ft_printf("%#x\n", 0);
 //	printf("%#-08x|\n", 42);
@@ -604,8 +624,8 @@ int main(int argc, char **argv)
 //	 SIGNED: flags, %i, %d, %D
 //	****************************************************
 //	 int i = ft_atoi(argv[1]);
-//	 int i = 123;
-
+//	 int i = 0;
+//
 //	 ft_printf("________[_______] minus & width\n");
 //	 printf("-	\t[%-d]\n", i);
 //	 ft_printf("-	\t[%-d]\n", i);
@@ -639,7 +659,7 @@ int main(int argc, char **argv)
 //	 ft_printf("-.0	\t[%-.d]\n", i);
 //	 printf("-	\t[%-d]\n", i);
 //	 ft_printf("-	\t[%-d]\n", i);
-//
+////
 //	 ft_printf("________[_______] !minus & width\n");
 //	 printf("4.7	\t[%4.7d]\n", i);
 //	 ft_printf("4.7	\t[%4.7d]\n", i);
@@ -675,10 +695,10 @@ int main(int argc, char **argv)
 //	 ft_printf("7	\t[%7d]\n", i);
 //	 printf("+7	\t[%+7d]\n", i);
 //	 ft_printf("+7	\t[%+7d]\n", i);
-//
-//
-////	int size;
-//	int i = 0;
+////
+////
+//////	int size;
+////	int i = 0;
 //	ft_printf("________[_______] !minus & !width\n");
 //	printf(" .7	[% .7d]\n", i);
 //	ft_printf(" .7	[% .7d]\n", i);
@@ -700,7 +720,7 @@ int main(int argc, char **argv)
 //	ft_printf("+	[%+d]\n", i);
 //	printf("	[%d]\n", i);
 //	ft_printf("	[%d]\n", i);
-
+//
 //		ft_printf("\n> DECIMAL: failed tests\n");
 //	printf("%-05d\n", 42);
 //	ft_printf("%-05d\n", 42);
@@ -712,6 +732,8 @@ int main(int argc, char **argv)
 //	ft_printf("%-+10.5d|\n", 4242);
 //	printf("|%#5zd|\n", 0);
 //	ft_printf("|%#5zd|\n", 0);
+//	printf("|%'.0hhd|\n", 1024);
+//	ft_printf("|%'.0hhd|\n", 1024);
 
 
 	// MIN & MAX values of types
@@ -736,6 +758,8 @@ int main(int argc, char **argv)
 //	 printf("ssize_t MAX = %llu\n", MAX_OF(ssize_t));
 //	 printf("short MIN = %lld\n", MIN_OF(short));
 //	 printf("short MAX = %llu\n", MAX_OF(short));
+//	 printf("void* MIN = %lld\n", MIN_OF(void*));
+//	 printf("void* MAX = %llu\n", MAX_OF(void*));
 
 	// ENUM
 	//****************************************************
