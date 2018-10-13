@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 14:28:23 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/11 17:38:38 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/13 19:51:44 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 void	pr_join_str(t_print *aq, char *s, size_t n)
 {
-	if (!n || !s)
+	if (!n)
 		return ;
 	if (aq->i + n >= BUFS)
 		s += pr_overflow_str(aq, s, &n);
@@ -31,7 +31,7 @@ void	pr_join_str(t_print *aq, char *s, size_t n)
 
 void	pr_join(t_print *aq, char c, size_t n)
 {
-	if (!n || !c)
+	if (!n)
 		return ;
 	if (aq->i + n >= BUFS)
 		pr_overflow(aq, c, &n);

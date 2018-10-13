@@ -77,6 +77,7 @@ void			handle_i(t_print *aq);
 void			handle_c(t_print *aq);
 void			handle_str(t_print *aq);
 void			handle_wc(t_print *aq);
+void			handle_wstr(t_print *aq);
 
 void			pr_utoa(t_print *aq, uintmax_t value, short base);
 

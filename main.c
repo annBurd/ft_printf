@@ -97,7 +97,8 @@ int main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-	setlocale(LC_CTYPE, "");
+//	setlocale(LC_CTYPE, "");
+//	setlocale(LC_ALL, "en_US.UTF-8");
 
 
 //	HERE WE HAVE SOME TESTS
@@ -123,8 +124,8 @@ int main(int argc, char **argv)
 //	ft_printf("\n> CHAR %%c, %%s\n");
 //	printf("%%c = %c ____[%-*.*s] 0R!G\n", c, 30, 13, s);
 //	ft_printf("%%c = %c ____[%-*.*s]\n", c, 30, 13, s);
-//	ft_printf("%%c = %!03q0c ____[%-*.*s]\n", c, 30, 13, s);
-//	ft_printf("Do some <100trash test> for my <020lovely> ft_printf()\n");
+//	ft_printf("%%c = %!fr!c ____[%-*.*s]\n", c, 30, 13, s);
+//	ft_printf("Do some <!mb!trash test>! for my <!Fr!lovely>! ft_printf()\n");
 
 //	printf("1 - \e[1;mBold\e[0m\n");
 //	printf("2 - \e[2;mDim\e[0m\n");
@@ -212,6 +213,15 @@ int main(int argc, char **argv)
 //	ft_printf("-7\t\t[%-7C]\n", wc);
 
 
+//		ft_printf("> WCHAR_T : failed tests\n");
+//	printf("|% 0+2.C|\n", 129);
+//	ft_printf("|% 0+2.C|\n", 129);
+//	printf("|%2.lc|\n", 129);
+//	ft_printf("|%2.lc|\n", 129);
+//	printf("|% +2.lc|\n", 129);
+//	ft_printf("|% +2.lc|\n", 129);
+
+
 //	size = printf("\t\t[%C]%u\n", 199, 199);
 //	ft_putnbr(size);
 //	size = ft_printf("\t\t[%C]%u\n", 199, 199);
@@ -266,32 +276,25 @@ int main(int argc, char **argv)
 
 //	CHAR
 //	****************************************************
-//	char c = '$';
-//		ft_printf("> CHAR\n");
-//	printf("\t\t[%c]\n", c);
-//	ft_printf("\t\t[%c]\n", c);
-//	printf("1\t\t[%1c]\n", c);
-//	ft_printf("1\t\t[%1c]\n", c);
-//	printf("2\t\t[%2c]\n", c);
-//	ft_printf("2\t\t[%2c]\n", c);
-//	printf("7\t\t[%7c]\n", c);
-//	ft_printf("7\t\t[%7c]\n", c);
-//	printf(".\t\t[%.c]\n", c);
-//	ft_printf(".\t\t[%.c]\n", c);
-//	printf("-7\t\t[%-7c]\n", c);
-//	ft_printf("-7\t\t[%-7c]\n", c);
-
-//		ft_printf("> CHAR : failed tests\n");
-//	printf("%.2c|\n", NULL);
-//	ft_printf("%.2c|\n", NULL);
-//	printf("@moulitest: %c|\n", 0);
-//	ft_printf("@moulitest: %c|\n", 0);
-//	printf("%2c|\n", 0);
-//	ft_printf("%2c|\n", 0);
-//	printf("null %c| and text\n", 0);
-//	ft_printf("null %c| and text\n", 0);
-//	printf("% c|\n", 0);
-//	ft_printf("% c|\n", 0);
+//	char c = '#';
+	char c = 0;
+		ft_printf("> CHAR\n");
+	printf("\t\t[%c]\n", c);
+	ft_printf("\t\t[%c]\n", c);
+	printf("1\t\t[%1c]\n", c);
+	ft_printf("1\t\t[%1c]\n", c);
+	printf("2\t\t[%2c]\n", c);
+	ft_printf("2\t\t[%2c]\n", c);
+	printf("7\t\t[%7c]\n", c);
+	ft_printf("7\t\t[%7c]\n", c);
+	printf(".\t\t[%.c]\n", c);
+	ft_printf(".\t\t[%.c]\n", c);
+	printf(".2\t\t[%.2c]\n", c);
+	ft_printf(".2\t\t[%.2c]\n", c);
+	printf("-7\t\t[%-7c]\n", c);
+	ft_printf("-7\t\t[%-7c]\n", c);
+	printf("_\t\t[% c]\n", c);
+	ft_printf("_\t\t[% c]\n", c);
 
 
 //	CHAR*
@@ -346,6 +349,8 @@ int main(int argc, char **argv)
 //	ft_printf("@moulitest: %s\n", NULL);
 //	printf("%s %s\n", NULL, "string");
 //	ft_printf("%s %s\n", NULL, "string");
+//	printf("|%-30.20s|\n", L"casual string");
+//	ft_printf("|%-30.20s|\n", L"casual string");
 
 //	UNSIGNED: o, O
 //	****************************************************

@@ -50,7 +50,7 @@
 ** [F/B]c - bright cyan
 ** [F/B]w - bright white
 ** ___ Examples
-**	<!m1;Fr;bB!koko & other text will have the same color>!
+**	<!m1;Fr;bB!koko & other text will have the same color>! but not this text
 **	%!m1;Fr;bB!koko will be the only colored word
 **	<!mb!koko>!
 **	<!fR;Bw!koko>!
