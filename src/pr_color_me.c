@@ -13,23 +13,24 @@
 #include "../inc/ft_printf.h"
 
 /*
-** ___Format
-** in str	<![modify];[font color];[background color]! koko >?
-** w/ %		%![modify];[font color];[background color]!s
-** ___Modifies
-** m0 - Turn off current modify
-** mb - Bold
-** md - Dim
-** mi - Italic
-** mu - Underline
-** mr - Reverse/Invert
-** ___Font & Background
-** Use upper case for bright version
-** f - simple font
+** ___ Format
+** in str	<![modify];[foreground color];[background color]! koko >?
+** w/ %		%![modify];[foreground color];[background color]!s
+** ___ Modify & Foreground & Background
+** m - set modify
+** M - reset modify
+** f - simple foreground
 ** F - bright version
 ** b - simple bg
 ** B - bright version
-** ___Colors
+** ___ Modifies
+** [m/M]0 - Turn off all modifies
+** [m/M]b - set/reset Bold
+** [m/M]d - set/reset Dim
+** [m/M]i - set/reset Italic
+** [m/M]u - set/reset Underline
+** [m/M]r - set/reset Reverse/Invert
+** ___ Colors
 ** [f/b]B - black
 ** [f/b]r - red
 ** [f/b]g - green
@@ -46,58 +47,62 @@
 ** [F/B]p - bright purple
 ** [F/B]c - bright cyan
 ** [F/B]w - bright white
-** ___Examples
-** 	<!m1;Fr;bB!koko & other text will have the same color>!
+** ___ Examples
 **	<!m1;Fr;bB!koko & other text will have the same color>!
 **	%!m1;Fr;bB!koko will be the only colored word
 **	<!mb!koko>!
 **	<!fR;Bw!koko>!
-**	<!mifg!koko>!
+**	<!mi;fg!koko>!
 **	<!mu;Fr;bw;koko>!
 **	<!md;Fr;bB!koko>!
 */
 
-static void	set_mod_code(t_print *aq, char mod)
+static void	set_mod_code(t_print *aq, char mod, char value)
 {
-	if (mod == '0')
-		aq->out[aq->i++] = '0';
-	else if (mod == 'b')
-		aq->out[aq->i++] = '1';
-	else if (mod == 'd')
-		aq->out[aq->i++] = '2';
-	else if (mod == 'i')
-		aq->out[aq->i++] = '3';
-	else if (mod == 'u')
-		aq->out[aq->i++] = '4';
-	else if (mod == 'r')
-		aq->out[aq->i++] = '7';
+	size_t code;
+
+	if (!value)
+		code = 0;
+	else if (value == 'b')
+		code = 1;
+	else if (value == 'd')
+		code = 2;
+	else if (value == 'i')
+		code = 3;
+	else if (value == 'u')
+		code = 4;
+	else if (value == 'r')
+		code = 7;
 	else
-		aq->out[aq->i++] = '0';
+		code = 0;
+	if (mod == 'M' && value)
+		code += 20;
+	pr_utoa(aq, code, 10);
 	aq->out[aq->i++] = ';';
 }
 
-static void	set_color_code(t_print *aq, char br, char clr)
+static void	set_color_code(t_print *aq, char mod, char value)
 {
 	size_t code;
 
 	code = 30;
-	if (br == 'F')
+	if (mod == 'F')
 		code = 90;
-	else if (br == 'b' || br == 'B')
-		code = br == 'b' ? 40 : 100;
-	if (clr == 'r')
+	else if (mod == 'b' || mod == 'B')
+		code = mod == 'b' ? 40 : 100;
+	if (value == 'r')
 		code += 1;
-	else if (clr == 'g')
+	else if (value == 'g')
 		code += 2;
-	else if (clr == 'y')
+	else if (value == 'y')
 		code += 3;
-	else if (clr == 'b')
+	else if (value == 'b')
 		code += 4;
-	else if (clr == 'p')
+	else if (value == 'p')
 		code += 5;
-	else if (clr == 'c')
+	else if (value == 'c')
 		code += 6;
-	else if (clr == 'w')
+	else if (value == 'w')
 		code += 7;
 	pr_utoa(aq, code, 10);
 	aq->out[aq->i++] = ';';
@@ -110,7 +115,7 @@ void		set_color(const char **line, t_print *aq)
 	(*line)++;
 	if (**line == 'm')
 	{
-		set_mod_code(aq, *(++(*line)));
+		set_mod_code(aq, **line, *(++(*line)));
 		if (*(++(*line)) == '!' && (aq->out[aq->i++] = 'm'))
 			return ;
 		(*line)++;
