@@ -47,19 +47,17 @@ void	handle_c(t_print *aq)
 //		arg = '%';
 //	else if (S.ty == 'c')
 //		arg =(char)va_arg(aq->va, int);
-////	if (arg == NULL)
-////		arg = ft_strcpy(arg, "(null)\0");
-//	if (S.ty != 's' || !*arg)
 //	S.ln = 1;
 //	S.free = (short)(S.wi - (short)S.ln < 0 ? 0 : S.wi - S.ln);
 //	!arg && S.wi && S.free++;
 //	if (!S.minus && S.free)
 //		pr_join(aq, (S.zero ? '0' : ' '), (size_t)S.free);
-//	pr_join_str(aq, arg, S.ln);
+//	aq->out[aq->i++] = arg;
+////	pr_join(aq, arg, S.ln);
 //	if (S.minus && S.free)
 //		pr_join(aq, ' ', (size_t)S.free);
 //}
-
+//
 //void	handle_str(t_print *aq)
 //{
 //	char	*arg;
