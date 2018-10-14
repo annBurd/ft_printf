@@ -27,7 +27,7 @@ static void	define_type(const char **line, t_print *aq, char q)
 	}
 	else if ((q == 'p' || q == 'x' || q == 'X') && (S.ty = q))
 		S.base = 16;
-	else if ((q == 'b') && (S.ty = q))
+	else if (q == 'b' && (S.ty = q))
 		S.base = 2;
 	else if (q == '%' || q == 'c' || q == 'C' || q == 's' || q == 'S')
 		S.ty = q;

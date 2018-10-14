@@ -25,9 +25,8 @@ static void		start_handle(t_print *aq)
 		S.prv = va_arg(aq->va, int);
 		S.prv < 0 && S.zero && !S.minus && (S.prv *= -1);
 	}
-	if (S.ty == 'i' || S.ty == 'd' || S.ty == 'D' || S.ty == 'b' ||
-		S.ty == 'o' || S.ty == 'O' || S.ty == 'u' || S.ty == 'U' ||
-		S.ty == 'x' || S.ty == 'X' || S.ty == 'p')
+	if (S.ty == 'i' || S.ty == 'd' || S.ty == 'b' || S.ty == 'p'
+		S.ty == 'o' || S.ty == 'u' || S.ty == 'x' || S.ty == 'X')
 		handle_nbr(aq);
 	else if (S.ty == 'c' || S.ty == 'C' || S.ty == '%')
 		!S.length && S.ty != 'C' ? handle_c(aq) : handle_wc(aq);
