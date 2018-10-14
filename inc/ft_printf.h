@@ -99,9 +99,7 @@ typedef struct	s_print
 }				t_print;
 
 int				ft_printf(const char *format, ...);
-void			explore(t_print *aq, const char *line, const char *point);
 void			define_flags(const char **line, t_print *aq);
-void			start_handle(t_print *aq);
 
 void			handle_nbr(t_print *aq);
 void			handle_c(t_print *aq);

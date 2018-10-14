@@ -12,7 +12,7 @@
 
 #include "../inc/ft_printf.h"
 
-void		start_handle(t_print *aq)
+static void		start_handle(t_print *aq)
 {
 	if (S.star[0])
 	{
@@ -37,7 +37,7 @@ void		start_handle(t_print *aq)
 		pr_join_str(aq, "\e[0m", 4);
 }
 
-void		explore(t_print *aq, const char *line, const char *point)
+static void		explore(t_print *aq, const char *line, const char *point)
 {
 	while (*line)
 	{
@@ -64,7 +64,7 @@ void		explore(t_print *aq, const char *line, const char *point)
 		pr_join_str(aq, (char*)point, line - point);
 }
 
-int			ft_printf(const char *format, ...)
+int				ft_printf(const char *format, ...)
 {
 	static t_print	aq;
 
