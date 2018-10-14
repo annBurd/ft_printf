@@ -24,7 +24,7 @@ static void	setting_1(t_print *aq)
 		S.base = 2;
 	else if (S.ty == 'o')
 		S.base = 8;
-	else if (DEC || S.ty == 'u')
+	else if (S.ty == 'i' || S.ty == 'd' || S.ty == 'u')
 		S.base = 10;
 	else
 		S.base = 16;
@@ -40,8 +40,7 @@ static void	getting(t_print *aq, uintmax_t *ut)
 	{
 		S.plus = 0;
 		S.spc = 0;
-		if (S.hash &&
-				(S.ty == 'o' || (HEX && !S.v && S.prec && S.prv)))
+		if (S.hash && (S.ty == 'o' || (HEX && !S.v && S.prec && S.prv)))
 			S.hash = 1;
 		else if (S.ty == 'p' || (S.hash && HEX && S.v))
 			S.hash = 2;
@@ -72,14 +71,18 @@ static void	setting_2(t_print *aq)
 	}
 	else
 		S.apost = 0;
-	S.free = S.wi;
-	!(S.ty == 'o' && S.v && S.prv > (int)(S.ln)) && (S.free -= S.hash);
-	(S.v < 0 || S.plus || S.spc) && (S.free--);
+	if (!(S.ty == 'o' && S.v && S.prv > (int)(S.ln)))
+		S.free = S.wi - S.hash;
+	else
+		S.free = S.wi;
 	if (S.prec && S.prv > (int)S.ln)
 		S.free -= S.prv;
 	else
 		S.free -= S.ln;
-	S.hash && !S.v && S.prec > 0 && (S.free++);
+	if (S.v < 0 || S.plus || S.spc)
+		S.free--;
+	else if (S.hash && !S.v && S.prec > 0)
+		S.free++;
 	S.free < 0 && (S.free = 0);
 }
 
