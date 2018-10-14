@@ -12,30 +12,8 @@
 
 #include "../inc/ft_printf.h"
 
-static void	setting_1(t_print *aq)
+static void	setting_1(t_print *aq, uintmax_t *ut)
 {
-	if (S.ty == 'D' || S.ty == 'O' || S.ty == 'U')
-	{
-		if (l > S.length)
-			S.length = l;
-		S.ty = (char)ft_tolower(S.ty);
-	}
-	if (S.ty == 'b')
-		S.base = 2;
-	else if (S.ty == 'o')
-		S.base = 8;
-	else if (S.ty == 'i' || S.ty == 'd' || S.ty == 'u')
-		S.base = 10;
-	else
-		S.base = 16;
-}
-
-static void	getting(t_print *aq, uintmax_t *ut)
-{
-	if (S.ty == 'i' || S.ty == 'd')
-		extract_i(aq, 0, ut);
-	else
-		extract_ui(aq, ut);
 	if (!DEC)
 	{
 		S.plus = 0;
@@ -59,7 +37,7 @@ static void	getting(t_print *aq, uintmax_t *ut)
 **			^
 **
 ** 		Do not touch it !
-** I don't remember how but it works
+** Don't remember how but it works
 */
 
 static void	setting_2(t_print *aq)
@@ -112,8 +90,11 @@ void		handle_nbr(t_print *aq)
 {
 	uintmax_t	ut;
 
-	setting_1(aq);
-	getting(aq, &ut);
+	if (S.ty == 'i' || S.ty == 'd')
+		extract_i(aq, 0, &ut);
+	else
+		extract_ui(aq, &ut);
+	setting_1(aq, &ut);
 	setting_2(aq);
 	setting_3(aq);
 	if (!S.v && S.ln)
