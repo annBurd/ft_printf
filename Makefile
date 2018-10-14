@@ -63,7 +63,4 @@ fclean:
 
 re: fclean all
 
-test:
-	@$(CC) $(CFLAGS) main.c $(NAME) -o test_me
-
 .PHONY: all clean fclean re libftprintf.a libft.a
