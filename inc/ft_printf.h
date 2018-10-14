@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:32:45 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/14 01:43:20 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/10/14 19:30:46 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,38 @@
 **
 ** star[0] >>> star for width		| otherwise star[2] isn't used
 ** star[1] >>> star for precision	| just wasting of memory
-** 									| but I hope it's necessary
+** 									| hope it's necessary
 ** pr_refresh			|
 ** pr_overflow		>>>	| for strange & mystic cases
 ** pr_overflow_str		| when buff is full ̶ ̶̶o̶f̶ ̶d̶a̶r̶k̶n̶e̶s̶s̶
+**
+**
+**
+**
+** EVALUATED BY MOULINETTE 70%
+**
+** test_c: [ko] **
+**
+** test_i: [ko] **
+** test_d: [ko] **
+** test_D: [ko] **
+** test_o: [ko] **
+** test_u: [ko] **
+** test_x: [ko] **
+**
+** test_C: [ok]
+** test_s: [ok]
+** test_S: [ok]
+** test_p: [ok]
+** test_hhhllljz: [ok]
+** test_sharp: [ok]
+** test_precision: [ok]
+** test_zero: [ok]
+** test_minus: [ok]
+** test_plus: [ok]
+** test_space: [ok]
+**
+**
 */
 
 typedef struct	s_sp
