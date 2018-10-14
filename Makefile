@@ -35,13 +35,15 @@ SRC = ft_printf.c \
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
-all: $(NAME)
+all: 
+	@rm -rf $(OBJ_DIR)
+	@mkdir $(OBJ_DIR)
+	@make $(NAME)
 	@echo "\n\033[35mft_printf\033[0m got $(NAME)"
 
-$(NAME): 
-	@make $(OBJ)
+$(NAME): $(OBJ)
 	@make -C $(LIBFT_DIR)
-	@ar rc $(NAME) $(OBJ) $(LIBFT_DIR)*.o
+	@ar rc $(NAME) $(OBJ)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) -I $(HEADER) -c $< -o $@
@@ -49,19 +51,19 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 
 clean:
 	@rm -rf $(OBJ)
+	@rm -rf $(OBJ_DIR)
 	@make -C $(LIBFT_DIR) clean
 	
 fclean:	
 	@make clean
 	@rm -rf $(NAME)
+	@rm -rf test_me
 	@make -C $(LIBFT_DIR) fclean
 	@echo "\033[35mft_printf\033[0m was fcleaned"
 
 re: fclean all
 
-.PHONY: all clean fclean re libftprintf.a libft.a
+test:
+	@$(CC) $(CFLAGS) main.c $(NAME) $(LIBFT_DIR)libft.a -o test_me
 
-# vpath %.c $(SRC_DIR)
-	# @rm -rf $(OBJ_DIR)
-	# @mkdir $(OBJ_DIR)
-	# @rm -rf $(OBJ_DIR)
+.PHONY: all clean fclean re libftprintf.a libft.a
