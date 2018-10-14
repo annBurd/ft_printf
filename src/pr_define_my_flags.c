@@ -12,21 +12,30 @@
 
 #include "../inc/ft_printf.h"
 
-static void	define_type(const char **line, t_print *aq)
+static void	define_type(const char **line, t_print *aq, char q)
 {
-	char	q;
-
-	q = **line;
-	if (q == '%' || q == 'p' || q == 'b' || q == 'i' ||
-		q == 'd' || q == 'D' || q == 'u' || q == 'U' ||
-		q == 's' || q == 'S' || q == 'c' || q == 'C' ||
-		q == 'o' || q == 'O' || q == 'x' || q == 'X')
+	(*line)++;
+	if ((q == 'i' || q == 'd' || q == 'u') && (S.ty = q))
+		S.base = 10;
+	else if (q == 'o' && (S.ty = q))
+		S.base = 8;
+	if (q == 'D' || q == 'U' || q == 'O')
 	{
-		S.ty = q;
-		(*line)++;
+		S.base = q == 'O' ? 8 : 10;
+		(l > S.length) && (S.length = l);
+		S.ty = (char)ft_tolower(q);
 	}
+	else if ((q == 'p' || q == 'x' || q == 'X') && (S.ty = q))
+		S.base = 16;
+	else if ((q == 'b') && (S.ty = q))
+		S.base = 2;
+	else if (q == '%' || q == 'c' || q == 'C' || q == 's' || q == 'S')
+		S.ty = q;
 	else
+	{
 		S.ty = 's';
+		(*line)--;
+	}
 }
 
 static void	define_length(const char **line, t_print *aq)
@@ -46,7 +55,7 @@ static void	define_length(const char **line, t_print *aq)
 		S.length = z;
 	if (*s == 'h' || *s == 'l' || *s == 'j' || *s == 'z')
 		(*line)++;
-	define_type(line, aq);
+	define_type(line, aq, **line);
 }
 
 static void	define_num(const char **line, t_print *aq)
