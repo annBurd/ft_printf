@@ -43,7 +43,7 @@ all:
 
 $(NAME): $(OBJ)
 	@make -C $(LIBFT_DIR)
-	@ar rc $(NAME) $(OBJ)
+	@ar rc $(NAME) $(OBJ) $(LIBFT_DIR)*.o
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) -I $(HEADER) -c $< -o $@
