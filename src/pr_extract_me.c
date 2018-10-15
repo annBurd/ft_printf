@@ -35,7 +35,7 @@ void	extract_i(t_print *aq, intmax_t t, uintmax_t *ut)
 void	extract_ui(t_print *aq, uintmax_t *ut)
 {
 	if (S.ty == 'p' || S.length == j)
-		*ut = a_arg(aq->va, uintmax_t);
+		*ut = va_arg(aq->va, uintmax_t);
 	else if (!S.length)
 		*ut = (unsigned int)va_arg(aq->va, void*);
 	else if (S.length == h)
