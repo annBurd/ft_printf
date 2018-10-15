@@ -41,8 +41,10 @@ void	pr_join_2b(t_print *aq, unsigned int c)
 	const unsigned int		o1 = ((c >> 6) << 27) >> 27;
 	const unsigned int		m2 = 49280;
 
-	pr_join(aq, (unsigned char)((m2 >> 8) | o1), 1);
-	pr_join(aq, (unsigned char)(((m2 << 24) >> 24) | o2), 1);
+	if (aq->i + 2 >= BUFSIZE)
+		pr_overflow(aq, c, &n);
+	aq->out[aq->i++] = (unsigned char)((m2 >> 8) | o1);
+	aq->out[aq->i++] = (unsigned char)(((m2 << 24) >> 24) | o2);
 }
 
 void	pr_join_3b(t_print *aq, unsigned int c)
@@ -52,9 +54,11 @@ void	pr_join_3b(t_print *aq, unsigned int c)
 	const unsigned int		o1 = ((c >> 12) << 28) >> 28;
 	const unsigned int		m3 = 14712960;
 
-	pr_join(aq, (unsigned char)((m3 >> 16) | o1), 1);
-	pr_join(aq, (unsigned char)(((m3 << 16) >> 24) | o2), 1);
-	pr_join(aq, (unsigned char)(((m3 << 24) >> 24) | o3), 1);
+	if (aq->i + 3 >= BUFSIZE)
+		pr_overflow(aq, c, &n);
+	aq->out[aq->i++] = (unsigned char)((m3 >> 16) | o1);
+	aq->out[aq->i++] = (unsigned char)(((m3 << 16) >> 24) | o2);
+	aq->out[aq->i++] = (unsigned char)(((m3 << 24) >> 24) | o3);
 }
 
 void	pr_join_4b(t_print *aq, unsigned int c)
@@ -65,8 +69,10 @@ void	pr_join_4b(t_print *aq, unsigned int c)
 	const unsigned int		o1 = ((c >> 18) << 29) >> 29;
 	const unsigned int		m4 = 4034953344;
 
-	pr_join(aq, (unsigned char)((m4 >> 24) | o1), 1);
-	pr_join(aq, (unsigned char)(((m4 << 8) >> 24) | o2), 1);
-	pr_join(aq, (unsigned char)(((m4 << 16) >> 24) | o3), 1);
-	pr_join(aq, (unsigned char)(((m4 << 24) >> 24) | o4), 1);
+	if (aq->i + 4 >= BUFSIZE)
+		pr_overflow(aq, c, &n);
+	aq->out[aq->i++] = (unsigned char)((m4 >> 24) | o1);
+	aq->out[aq->i++] = (unsigned char)(((m4 << 8) >> 24) | o2);
+	aq->out[aq->i++] = (unsigned char)(((m4 << 16) >> 24) | o3);
+	aq->out[aq->i++] = (unsigned char)(((m4 << 24) >> 24) | o4);
 }
