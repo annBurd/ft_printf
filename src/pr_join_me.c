@@ -21,18 +21,14 @@
 
 void	pr_join_str(t_print *aq, char *s, size_t n)
 {
-	if (!n || !*s)
-		return ;
 	if (aq->i + n >= BUFSIZE)
 		s += pr_overflow_str(aq, s, &n);
-	while (*s && n-- > 0)
+	while (*s && n--)
 		aq->out[aq->i++] = *(s++);
 }
 
 void	pr_join(t_print *aq, char c, size_t n)
 {
-	if (!n)
-		return ;
 	if (aq->i + n >= BUFSIZE)
 		pr_overflow(aq, c, &n);
 	while (n--)
