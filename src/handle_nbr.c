@@ -76,7 +76,7 @@ void		handle_nbr(t_print *aq)
 		extract_i(aq, 0, &ut);
 	else
 		extract_ui(aq, &ut);
-	S.ln = ft_nbrulen(*ut, S.base);
+	S.ln = ft_nbrulen(ut, S.base);
 	setting_1(aq);
 	setting_2(aq);
 	if (!S.v && S.ln)
