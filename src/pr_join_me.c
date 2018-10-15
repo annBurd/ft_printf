@@ -42,7 +42,7 @@ void	pr_join_2b(t_print *aq, unsigned int c)
 	const unsigned int		m2 = 49280;
 
 	if (aq->i + 2 >= BUFSIZE)
-		pr_overflow(aq, c, &n);
+		pr_refresh(aq);
 	aq->out[aq->i++] = (unsigned char)((m2 >> 8) | o1);
 	aq->out[aq->i++] = (unsigned char)(((m2 << 24) >> 24) | o2);
 }
@@ -55,7 +55,7 @@ void	pr_join_3b(t_print *aq, unsigned int c)
 	const unsigned int		m3 = 14712960;
 
 	if (aq->i + 3 >= BUFSIZE)
-		pr_overflow(aq, c, &n);
+		pr_refresh(aq);
 	aq->out[aq->i++] = (unsigned char)((m3 >> 16) | o1);
 	aq->out[aq->i++] = (unsigned char)(((m3 << 16) >> 24) | o2);
 	aq->out[aq->i++] = (unsigned char)(((m3 << 24) >> 24) | o3);
@@ -70,7 +70,7 @@ void	pr_join_4b(t_print *aq, unsigned int c)
 	const unsigned int		m4 = 4034953344;
 
 	if (aq->i + 4 >= BUFSIZE)
-		pr_overflow(aq, c, &n);
+		pr_refresh(aq);
 	aq->out[aq->i++] = (unsigned char)((m4 >> 24) | o1);
 	aq->out[aq->i++] = (unsigned char)(((m4 << 8) >> 24) | o2);
 	aq->out[aq->i++] = (unsigned char)(((m4 << 16) >> 24) | o3);
