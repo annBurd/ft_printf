@@ -27,7 +27,7 @@ void	extract_i(t_print *aq, intmax_t t, uintmax_t *ut)
 	else if (S.length == j)
 		t = va_arg(aq->va, intmax_t);
 	else if (S.length == z)
-		t = (size_t)va_arg(aq->va, size_t);
+		t = (size_t)va_arg(aq->va, void*);
 	*ut = (uintmax_t)(t < 0 ? t * -1 : t);
 	*ut && (S.v = (short)(t < 0 ? -1 : 1));
 }
@@ -35,7 +35,7 @@ void	extract_i(t_print *aq, intmax_t t, uintmax_t *ut)
 void	extract_ui(t_print *aq, uintmax_t *ut)
 {
 	if (S.ty == 'p' || S.length == j)
-		*ut = (uintmax_t)va_arg(aq->va, void*);
+		*ut = a_arg(aq->va, uintmax_t);
 	else if (!S.length)
 		*ut = (unsigned int)va_arg(aq->va, void*);
 	else if (S.length == h)
