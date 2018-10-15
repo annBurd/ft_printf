@@ -38,11 +38,8 @@ static void	define_type(const char **line, t_print *aq, char q)
 	}
 }
 
-static void	define_length(const char **line, t_print *aq)
+static void	define_length(const char **line, t_print *aq, char *s)
 {
-	const char	*s;
-
-	s = *line;
 	if ((*s == 'h' && (S.length = h)) ||
 		(*s == 'l' && (S.length = l)))
 	{
@@ -63,9 +60,11 @@ static void	define_num(const char **line, t_print *aq)
 	if ((**line >= '1' && **line <= '9') || **line == '*')
 	{
 		if (**line == '*')
-			S.star[0] = 1;
+			S.wi = va_arg(aq->va, int);
 		else
 			S.wi = ft_atoi(*line);
+		S.wi < 0 && (S.minus = 1);
+		S.wi < 0 && (S.wi *= -1);
 		while ((**line >= '0' && **line <= '9') || **line == '*')
 			(*line)++;
 	}
@@ -74,13 +73,14 @@ static void	define_num(const char **line, t_print *aq)
 		S.prec = 1;
 		(*line)++;
 		if (**line == '*')
-			S.star[1] = 1;
+			S.prv = va_arg(aq->va, int);
 		else if (**line >= '1' && **line <= '9')
 			S.prv = ft_atoi(*line);
+		S.prv < 0 && S.zero && !S.minus && (S.prv *= -1);
 		while ((**line >= '0' && **line <= '9') || **line == '*')
 			(*line)++;
 	}
-	define_length(line, aq);
+	define_length(line, aq, (char*)*line);
 }
 
 void		define_flags(const char **line, t_print *aq)
