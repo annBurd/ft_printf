@@ -70,24 +70,24 @@ static void		setting_wstr(t_print *aq, wchar_t *arg, size_t i)
 void			handle_wstr(t_print *aq)
 {
 	wchar_t	*arg;
-	size_t	i;
+	size_t	size;
 
 	arg = va_arg(aq->va, wchar_t*);
 	if (!arg)
 		arg = L"(null)\0";
 	setting_wstr(aq, arg, 0);
-	i = 0;
-	while (arg[i] && S.ln)
+	while (*arg && S.ln)
 	{
-		if (arg[i] < 128)
-			pr_join(aq, arg[i], 1);
-		else if (arg[i] < 2048)
-			pr_join_2b(aq, arg[i]);
-		else if (arg[i] < 65536)
-			pr_join_3b(aq, arg[i]);
+		size = count_bytes(*arg);
+		if (size == 1)
+			pr_join(aq, *(arg++), 1);
+		else if (size == 2)
+			pr_join_2b(aq, *(arg++));
+		else if (size == 3)
+			pr_join_3b(aq, *(arg++));
 		else
-			pr_join_4b(aq, arg[i]);
-		S.ln -= count_bytes(arg[i++]);
+			pr_join_4b(aq, *(arg++));
+		S.ln -= size;
 	}
 	if (S.minus && S.free)
 		pr_join(aq, ' ', (size_t)S.free);
