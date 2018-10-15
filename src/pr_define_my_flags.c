@@ -15,7 +15,9 @@
 static void	define_type(const char **line, t_print *aq, char q)
 {
 	(*line)++;
-	if ((q == 'i' || q == 'd' || q == 'u') && (S.ty = q))
+	if (q == '%' || q == 'c' || q == 'C' || q == 's' || q == 'S')
+		S.ty = q;
+	else if ((q == 'i' || q == 'd' || q == 'u') && (S.ty = q))
 		S.base = 10;
 	else if (q == 'o' && (S.ty = q))
 		S.base = 8;
@@ -29,8 +31,6 @@ static void	define_type(const char **line, t_print *aq, char q)
 		S.base = 16;
 	else if (q == 'b' && (S.ty = q))
 		S.base = 2;
-	else if (q == '%' || q == 'c' || q == 'C' || q == 's' || q == 'S')
-		S.ty = q;
 	else
 	{
 		S.ty = 's';
