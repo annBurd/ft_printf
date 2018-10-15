@@ -21,7 +21,7 @@ static void	define_type(const char **line, t_print *aq, char q)
 		S.base = 10;
 	else if (q == 'o' && (S.ty = q))
 		S.base = 8;
-	if (q == 'D' || q == 'U' || q == 'O')
+	else if (q == 'D' || q == 'U' || q == 'O')
 	{
 		S.base = q == 'O' ? 8 : 10;
 		(l > S.length) && (S.length = l);
