@@ -33,7 +33,7 @@ static void	setting(t_print *aq, uintmax_t ut)
 	else
 		S.free = S.wi;
 	S.free -= S.prec && S.prv > (int)S.ln ? S.prv : S.ln;
-	S.hash && !ut && S.prec > 0 && S.free++;
+	S.hash && !ut && S.prec && S.prv > 0 && S.free++;
 	S.free < 0 && (S.free = 0);
 	if (!S.minus && S.free && !(S.zero && !S.prec))
 	{
