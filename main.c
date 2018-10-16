@@ -622,7 +622,7 @@ int main(int argc, char **argv)
 
 
 
-//	 SIGNED: flags, %i, %d, %D
+//	 SIGNED: flags, %i, %d
 //	****************************************************
 //	 int i = ft_atoi(argv[1]);
 //	 int i = 0;
@@ -736,6 +736,13 @@ int main(int argc, char **argv)
 //	printf("|%'.0hhd|\n", 1024);
 //	ft_printf("|%'.0hhd|\n", 1024);
 
+//		ft_printf("\n> DECIMAL: %%D\n");
+//	long int li = 12;
+//	printf("|%12ld|\n", li);
+//	ft_printf("|%12D|\n", li);
+//	printf("|%4.13ld|\n", li);
+//	ft_printf("|%4.13ld|\n", li);
+//	ft_printf("|%4.13D|\n", li);
 
 	// MIN & MAX values of types
 	//****************************************************
