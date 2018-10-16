@@ -24,9 +24,9 @@ static void		start_handle(t_print *aq)
 		handle_c(aq, (wchar_t)va_arg(aq->va, int));
 	else if (S.ty == '%')
 		handle_c(aq, '%');
-	else if (S.ty == 's')
+	else if (S.ty == 's' && !S.length)
 		handle_s(aq, va_arg(aq->va, char*));
-	else if (S.ty == 'S')
+	else if (S.ty == 's' || S.ty == 'S')
 		handle_ws(aq, va_arg(aq->va, wchar_t*));
 	if (S.color)
 		pr_join_str(aq, "\e[0m", 4);
