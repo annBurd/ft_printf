@@ -14,7 +14,7 @@
 
 static void		start_handle(t_print *aq)
 {
-	if (S.ty == 'i' || S.ty == 'd')
+	if (S.ty == 'i' || S.ty == 'd' || S.ty == 'D')
 		handle_id(aq, extract_i(aq));
 	else if (S.ty == 'o' || S.ty == 'u' || S.ty == 'b')
 		handle_oub(aq, extract_ui(aq));
