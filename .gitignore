@@ -6,4 +6,5 @@ libftprintf.a
 inc/.DS_Store
 inc/ft_printf.h.gch
 libft/.DS_Store
+libft/libft.a
 a.out
