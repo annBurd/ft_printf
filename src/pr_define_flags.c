@@ -12,23 +12,22 @@
 
 #include "../inc/ft_printf.h"
 
-static void	define_type(const char **line, t_print *aq, char q)
+static void	define_type(t_print *aq, const char **line, char q)
 {
 	(*line)++;
-	if (q == '%' || q == 'c' || q == 'C' || q == 's' || q == 'S')
+	if (q == '%' || q == 'c' || q == 'C' || q == 's' || q == 'S' ||
+		q == 'i' || q == 'd' || q == 'D' || q == 'p' || q == 'x' || q == 'X')
 		S.ty = q;
-	else if ((q == 'i' || q == 'd' || q == 'u') && (S.ty = q))
+	else if ((q == 'u') && (S.ty = q))
 		S.base = 10;
 	else if (q == 'o' && (S.ty = q))
 		S.base = 8;
-	else if (q == 'D' || q == 'U' || q == 'O')
+	else if (q == 'U' || q == 'O')
 	{
 		S.base = q == 'O' ? 8 : 10;
 		(l > S.length) && (S.length = l);
 		S.ty = (char)ft_tolower(q);
 	}
-	else if ((q == 'p' || q == 'x' || q == 'X') && (S.ty = q))
-		S.base = 16;
 	else if (q == 'b' && (S.ty = q))
 		S.base = 2;
 	else
@@ -38,7 +37,7 @@ static void	define_type(const char **line, t_print *aq, char q)
 	}
 }
 
-static void	define_length(const char **line, t_print *aq, char *s)
+static void	define_length(t_print *aq, const char **line, char *s)
 {
 	if ((*s == 'h' && (S.length = h)) ||
 		(*s == 'l' && (S.length = l)))
@@ -52,10 +51,10 @@ static void	define_length(const char **line, t_print *aq, char *s)
 		S.length = z;
 	if (*s == 'h' || *s == 'l' || *s == 'j' || *s == 'z')
 		(*line)++;
-	define_type(line, aq, **line);
+	define_type(aq, line, **line);
 }
 
-static void	define_num(const char **line, t_print *aq)
+static void	define_num(t_print *aq, const char **line)
 {
 	if ((**line >= '1' && **line <= '9') || **line == '*')
 	{
@@ -70,7 +69,7 @@ static void	define_num(const char **line, t_print *aq)
 	}
 	if (**line == '.')
 	{
-		S.prec = 1;
+		S.prec |= 1;
 		(*line)++;
 		if (**line == '*')
 			S.prv = va_arg(aq->va, int);
@@ -80,29 +79,33 @@ static void	define_num(const char **line, t_print *aq)
 		while ((**line >= '0' && **line <= '9') || **line == '*')
 			(*line)++;
 	}
-	define_length(line, aq, (char*)*line);
+	define_length(aq, line, (char*)*line);
 }
 
-void		define_flags(const char **line, t_print *aq)
+void		define_flags(t_print *aq, const char **line)
 {
 	ft_bzero(&aq->sp, sizeof(t_sp));
 	while (**line == '#' || **line == '0' || **line == '-' || **line == '!'
 		|| **line == '+' || **line == ' ' || **line == '\'')
 	{
-		(**line == '#') && (S.hash = 1);
-		(**line == '0') && (S.zero = 1);
-		(**line == '-') && (S.minus = 1);
-		(**line == '+') && (S.plus = 1);
-		(**line == ' ') && (S.spc = 1);
-		(**line == '\'') && (S.apost = 1);
-		if (**line == '!')
+		if (**line == '#')
+			S.hash |= 1;
+		else if (**line == '0')
+			S.zero |= 1;
+		else if (**line == '-')
+			S.minus |= 1;
+		else if (**line == '+')
+			S.plus |= 1;
+		else if (**line == ' ')
+			S.spc |= 1;
+		else if (**line == '\'')
+			S.apost |= 1;
+		else if (**line == '!')
 		{
-			if (aq->i + 12 >= BUFSIZE)
-				pr_refresh(aq);
-			S.color = 1;
-			pr_color(line, aq);
+			S.color |= 1;
+			pr_color(aq, line);
 		}
 		(*line)++;
 	}
-	define_num(line, aq);
+	define_num(aq, line);
 }

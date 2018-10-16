@@ -110,8 +110,10 @@ static void	set_color(t_print *aq, char mod, char value)
 	aq->out[aq->i++] = ';';
 }
 
-void		pr_color(const char **line, t_print *aq)
+void		pr_color(t_print *aq, const char **line)
 {
+	if (aq->i + 12 >= BUFSIZE)
+		pr_refresh(aq);
 	aq->out[aq->i++] = 033;
 	aq->out[aq->i++] = '[';
 	(*line)++;
