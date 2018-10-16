@@ -302,10 +302,10 @@ int main(int argc, char **argv)
 //	ft_printf("-20.\t[%-20.S]\n", ww);
 
 //		ft_printf("> WCHAR_T* : failed tests\n");
-//	printf("|%013.12ls|\n", L"casual string");
-//	ft_printf("|%013.12ls|\n", L"casual string");
-//	printf("|%.3ls|\n", NULL);
-//	ft_printf("|%.3ls|\n", NULL);
+//	printf("%013.12ls|\n", L"casual string");
+//	ft_printf("%013.12ls|\n", L"casual string");
+//	printf("%.3ls|\n", NULL);
+//	ft_printf("%.3ls|\n", NULL);
 
 
 //	CHAR
@@ -383,8 +383,8 @@ int main(int argc, char **argv)
 //	ft_printf("%s\n", NULL);
 //	printf("%s %s\n", NULL, "string");
 //	ft_printf("%s %s\n", NULL, "string");
-//	printf("|%-30.20s|\n", L"casual string");
-//	ft_printf("|%-30.20s|\n", L"casual string");
+//	printf("%-30.20s|\n", L"casual string");
+//	ft_printf("%-30.20s|\n", L"casual string");
 
 //	UNSIGNED: o, O
 //	****************************************************
@@ -459,12 +459,24 @@ int main(int argc, char **argv)
 //	ft_printf("%-5.10o\n", 2500);
 //	printf("%-10.5o\n", 2500);
 //	ft_printf("%-10.5o\n", 2500);
-//	printf("|% #5.4zU|\n", -25);
-//	ft_printf("|% #5.4zU|\n", -25);
-//	printf("|% 0-5u|\n", 0);
-//	ft_printf("|% 0-5u|\n", 0);
-//	printf("|%-5u|\n", 0);
-//	ft_printf("|%-5u|\n", 0);
+//	printf("% #5.4zU|\n", -25);
+//	ft_printf("% #5.4zU|\n", -25);
+//	printf("% 0-5u|\n", 0);
+//	ft_printf("% 0-5u|\n", 0);
+//	printf("%-5u|\n", 0);
+//	ft_printf("%-5u|\n", 0);
+
+//	unsigned long int ulo = 0;
+//	printf("%0 +-#12.15lo|\n", ulo);
+//	ft_printf("%0 +-#12.15lo|\n", ulo);
+//	printf("%0 +-12.5lo|\n", ulo);
+//	ft_printf("%0 +-12.5lo|\n", ulo);
+//	printf("%0 +-.lo|\n", ulo);
+//	ft_printf("%0 +-.lo|\n", ulo);
+//	printf("% +#*lo|\n", 7, ulo);
+//	ft_printf("% +#*lo|\n", 7, ulo);
+//	printf("%0 +-#12.*lo|\n", -7, ulo);
+//	ft_printf("%0 +-#12.*lo|\n", -7, ulo);
 
 
 //	POINTER: %p
@@ -481,12 +493,12 @@ int main(int argc, char **argv)
 //	ft_printf("-20\t\t[%-20p]\n", &p);
 
 //	ft_printf("\n> POINTER: failed tests\n");
-//	printf("|% 0+5p|\n", 0);
-//	ft_printf("|% 0+5p|\n", 0);
-//	printf("|% 0+p|\n", 0);
-//	ft_printf("|% 0+p|\n", 0);
-//	printf("|%+-5p|\n", 0);
-//	ft_printf("|%+-5p|\n", 0);
+//	printf("% 0+5p|\n", 0);
+//	ft_printf("% 0+5p|\n", 0);
+//	printf("% 0+p|\n", 0);
+//	ft_printf("% 0+p|\n", 0);
+//	printf("%+-5p|\n", 0);
+//	ft_printf("%+-5p|\n", 0);
 //
 //
 ////	UNSIGNED: x, X
@@ -560,20 +572,20 @@ int main(int argc, char **argv)
 //	ft_printf("%#x\n", 0);
 //	printf("%#-08x|\n", 42);
 //	ft_printf("%#-08x|\n", 42);
-//	printf("|%#.x| %#.0x|\n", 0, 0);
-//	ft_printf("|%#.x| %#.0x|\n", 0, 0);
-//	printf("|%.x| %.0x|\n", 0, 0);
-//	ft_printf("|%.x| %.0x|\n", 0, 0);
-//	printf("|%5.x| %5.0x|\n", 0, 0);
-//	ft_printf("|%5.x| %5.0x|\n", 0, 0);
+//	printf("%#.x| %#.0x|\n", 0, 0);
+//	ft_printf("%#.x| %#.0x|\n", 0, 0);
+//	printf("%.x| %.0x|\n", 0, 0);
+//	ft_printf("%.x| %.0x|\n", 0, 0);
+//	printf("%5.x| %5.0x|\n", 0, 0);
+//	ft_printf("%5.x| %5.0x|\n", 0, 0);
 //	printf("%010x\n", 542);
 //	ft_printf("%010x\n", 542);
 //	printf("%#08x\n", 42);
 //	ft_printf("%#08x\n", 42);
-//	printf("|%-.4X|\n", 0);
-//	ft_printf("|%-.4X|\n", 0);
-//	printf("|%#5lx|\n", 0);
-//	ft_printf("|%#5lx|\n", 0);
+//	printf("%-.4X|\n", 0);
+//	ft_printf("%-.4X|\n", 0);
+//	printf("%#5lx|\n", 0);
+//	ft_printf("%#5lx|\n", 0);
 
 
 //	UNSIGNED: u, U
@@ -731,18 +743,18 @@ int main(int argc, char **argv)
 //	ft_printf("%-10.5d|\n", 4242);
 //	printf("%-+10.5d|\n", 4242);
 //	ft_printf("%-+10.5d|\n", 4242);
-//	printf("|%#5zd|\n", 0);
-//	ft_printf("|%#5zd|\n", 0);
-//	printf("|%'.0hhd|\n", 1024);
-//	ft_printf("|%'.0hhd|\n", 1024);
+//	printf("%#5zd|\n", 0);
+//	ft_printf("%#5zd|\n", 0);
+//	printf("%'.0hhd|\n", 1024);
+//	ft_printf("%'.0hhd|\n", 1024);
 
 //		ft_printf("\n> DECIMAL: %%D\n");
 //	long int li = 12;
-//	printf("|%12ld|\n", li);
-//	ft_printf("|%12D|\n", li);
-//	printf("|%4.13ld|\n", li);
-//	ft_printf("|%4.13ld|\n", li);
-//	ft_printf("|%4.13D|\n", li);
+//	printf("%12ld|\n", li);
+//	ft_printf("%12D|\n", li);
+//	printf("%4.13ld|\n", li);
+//	ft_printf("%4.13ld|\n", li);
+//	ft_printf("%4.13D|\n", li);
 
 	// MIN & MAX values of types
 	//****************************************************
