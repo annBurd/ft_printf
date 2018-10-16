@@ -20,6 +20,8 @@ uintmax_t	extract_ui(t_print *aq)
 		return (unsigned long long int)(va_arg(aq->va, void*));
 	else if (S.length == z)
 		return (size_t)(va_arg(aq->va, void*));
+	else
+		return (0);
 }
 
 static void	setting(t_print *aq, uintmax_t ut)
