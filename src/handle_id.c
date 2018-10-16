@@ -20,6 +20,8 @@ intmax_t	extract_i(t_print *aq)
 		return (va_arg(aq->va, intmax_t));
 	else if (S.length == z)
 		return (size_t)(va_arg(aq->va, void*));
+	else
+		return (0);
 }
 
 static void	setting(t_print *aq, intmax_t t)
