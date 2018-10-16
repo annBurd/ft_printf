@@ -97,8 +97,8 @@ int main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-	setlocale(LC_CTYPE, "");
-//	setlocale(LC_ALL, "en_US.UTF-8");
+//	setlocale(LC_CTYPE, "");
+	setlocale(LC_ALL, "en_US.UTF-8");
 
 
 //	HERE WE HAVE SOME TESTS
@@ -379,8 +379,8 @@ int main(int argc, char **argv)
 //	ft_printf("%.2s is a string\n", "");
 //	printf("%-.2s is a string\n", "");
 //	ft_printf("%-.2s is a string\n", "");
-//	printf("@moulitest: %s\n", NULL);
-//	ft_printf("@moulitest: %s\n", NULL);
+//	printf("%s\n", NULL);
+//	ft_printf("%s\n", NULL);
 //	printf("%s %s\n", NULL, "string");
 //	ft_printf("%s %s\n", NULL, "string");
 //	printf("|%-30.20s|\n", L"casual string");
@@ -451,6 +451,20 @@ int main(int argc, char **argv)
 //	ft_printf(".7\t\t[%.7o]\n", ui);
 //	printf("#.7\t\t[%#.7o]\n", ui);
 //	ft_printf("#.7\t\t[%#.7o]\n", ui);
+
+//		ft_printf("\n> OCTAL: failed tests\n");
+//	printf("%-05o\n", 2500);
+//	ft_printf("%-05o\n", 2500);
+//	printf("%-5.10o\n", 2500);
+//	ft_printf("%-5.10o\n", 2500);
+//	printf("%-10.5o\n", 2500);
+//	ft_printf("%-10.5o\n", 2500);
+//	printf("|% #5.4zU|\n", -25);
+//	ft_printf("|% #5.4zU|\n", -25);
+//	printf("|% 0-5u|\n", 0);
+//	ft_printf("|% 0-5u|\n", 0);
+//	printf("|%-5u|\n", 0);
+//	ft_printf("|%-5u|\n", 0);
 
 
 //	POINTER: %p
@@ -542,17 +556,16 @@ int main(int argc, char **argv)
 //	ft_printf("#.7\t\t[%#.7x]\n", ui);
 //
 //	ft_printf("\n> HEXADECIMAL: failed tests\n");
-////	FAILED TESTS:
 //	printf("%#x\n", 0);
 //	ft_printf("%#x\n", 0);
 //	printf("%#-08x|\n", 42);
 //	ft_printf("%#-08x|\n", 42);
-//	printf("@moulitest: %#.x| %#.0x|\n", 0, 0);
-//	ft_printf("@moulitest: %#.x| %#.0x|\n", 0, 0);
-//	printf("@moulitest: %.x| %.0x|\n", 0, 0);
-//	ft_printf("@moulitest: %.x| %.0x|\n", 0, 0);
-//	printf("@moulitest: %5.x| %5.0x|\n", 0, 0);
-//	ft_printf("@moulitest: %5.x| %5.0x|\n", 0, 0);
+//	printf("|%#.x| %#.0x|\n", 0, 0);
+//	ft_printf("|%#.x| %#.0x|\n", 0, 0);
+//	printf("|%.x| %.0x|\n", 0, 0);
+//	ft_printf("|%.x| %.0x|\n", 0, 0);
+//	printf("|%5.x| %5.0x|\n", 0, 0);
+//	ft_printf("|%5.x| %5.0x|\n", 0, 0);
 //	printf("%010x\n", 542);
 //	ft_printf("%010x\n", 542);
 //	printf("%#08x\n", 42);
@@ -567,7 +580,7 @@ int main(int argc, char **argv)
 //	****************************************************
 //	unsigned int ui = ft_atoi(argv[1]);
 //	unsigned int ui = 0;
-
+//
 //		ft_printf("________[u, U] minus & width\n");
 //	printf("-4.7\t[%-4.7u]\n", ui);
 //	ft_printf("-4.7\t[%-4.7u]\n", ui);
@@ -606,132 +619,118 @@ int main(int argc, char **argv)
 //	ft_printf(".\t\t[%.u]\n", ui);
 //	printf(".7\t\t[%.7u]\n", ui);
 //	ft_printf(".7\t\t[%.7u]\n", ui);
-//
-//		ft_printf("\n> OCTAL: failed tests\n");
-//	printf("%-05o\n", 2500);
-//	ft_printf("%-05o\n", 2500);
-//	printf("%-5.10o\n", 2500);
-//	ft_printf("%-5.10o\n", 2500);
-//	printf("%-10.5o\n", 2500);
-//	ft_printf("%-10.5o\n", 2500);
-//	printf("|% #5.4zU|\n", -25);
-//	ft_printf("|% #5.4zU|\n", -25);
-//	printf("|% 0-5u|\n", 0);
-//	ft_printf("|% 0-5u|\n", 0);
-//	printf("|%-5u|\n", 0);
-//	ft_printf("|%-5u|\n", 0);
 
 
 
 //	 SIGNED: flags, %i, %d, %D
 //	****************************************************
 //	 int i = ft_atoi(argv[1]);
-//	 int i = 0;
+	 int i = 0;
+
+	 ft_printf("________[_______] minus & width\n");
+	 printf("-	\t[%-d]\n", i);
+	 ft_printf("-	\t[%-d]\n", i);
+	 printf("-4.7	[%-4.7d]\n", i);
+	 ft_printf("-4.7	[%-4.7d]\n", i);
+	 printf("-7.7	[%-7.7d]\n", i);
+	 ft_printf("-7.7	[%-7.7d]\n", i);
+	 printf("-+7.4	[%+-7.4d]\n", i);
+	 ft_printf("-+7.4	[%+-7.4d]\n", i);
+	 printf("- 7.4	[% -7.4d]\n", i);
+	 ft_printf("- 7.4	[% -7.4d]\n", i);
+	 printf("-7.4	[%-7.4d]\n", i);
+	 ft_printf("-7.4	[%-7.4d]\n", i);
+	 printf("-7	\t[%-7d]\n", i);
+	 ft_printf("-7	\t[%-7d]\n", i);
+
+	 ft_printf("________[_______] minus & !width\n");
+	 printf("- .7	[%- .7d]\n", i);
+	 ft_printf("- .7	[%- .7d]\n", i);
+	 printf("-+.7	[%-+.7d]\n", i);
+	 ft_printf("-+.7	[%-+.7d]\n", i);
+	 printf("-+.1	[%-+.1d]\n", i);
+	 ft_printf("-+.1	[%-+.1d]\n", i);
+	 printf("- .0	[%- .0d]\n", i);
+	 ft_printf("- .0	[%- .0d]\n", i);
+	 printf("-+.0	[%-+.0d]\n", i);
+	 ft_printf("-+.0	[%-+.0d]\n", i);
+	 printf("-.7	\t[%-.7d]\n", i);
+	 ft_printf("-.7	\t[%-.7d]\n", i);
+	 printf("-.0	\t[%-.d]\n", i);
+	 ft_printf("-.0	\t[%-.d]\n", i);
+	 printf("-	\t[%-d]\n", i);
+	 ft_printf("-	\t[%-d]\n", i);
 //
-//	 ft_printf("________[_______] minus & width\n");
-//	 printf("-	\t[%-d]\n", i);
-//	 ft_printf("-	\t[%-d]\n", i);
-//	 printf("-4.7	[%-4.7d]\n", i);
-//	 ft_printf("-4.7	[%-4.7d]\n", i);
-//	 printf("-7.7	[%-7.7d]\n", i);
-//	 ft_printf("-7.7	[%-7.7d]\n", i);
-//	 printf("-+7.4	[%+-7.4d]\n", i);
-//	 ft_printf("-+7.4	[%+-7.4d]\n", i);
-//	 printf("- 7.4	[% -7.4d]\n", i);
-//	 ft_printf("- 7.4	[% -7.4d]\n", i);
-//	 printf("-7.4	[%-7.4d]\n", i);
-//	 ft_printf("-7.4	[%-7.4d]\n", i);
-//	 printf("-7	\t[%-7d]\n", i);
-//	 ft_printf("-7	\t[%-7d]\n", i);
+	 ft_printf("________[_______] !minus & width\n");
+	 printf("4.7	\t[%4.7d]\n", i);
+	 ft_printf("4.7	\t[%4.7d]\n", i);
+	 printf("7.7	\t[%7.7d]\n", i);
+	 ft_printf("7.7	\t[%7.7d]\n", i);
+	 printf("7.6	\t[%7.6d]\n", i);
+	 ft_printf("7.6	\t[%7.6d]\n", i);
+	 printf(" 7.6	[% 7.6d]\n", i);
+	 ft_printf(" 7.6	[% 7.6d]\n", i);
+	 printf("+7.6	[%+7.6d]\n", i);
+	 ft_printf("+7.6	[%+7.6d]\n", i);
+	 printf("+07	\t[%+07d]\n", i);
+	 ft_printf("+07	\t[%+07d]\n", i);
+	 printf("07	\t[%07d]\n", i);
+	 ft_printf("07	\t[%07d]\n", i);
+	 printf("7.4	\t[%7.4d]\n", i);
+	 ft_printf("7.4	\t[%7.4d]\n", i);
+	 printf(" 7.4	[% 7.4d]\n", i);
+	 ft_printf(" 7.4	[% 7.4d]\n", i);
+	 printf("0 7.4	[%0 7.4d]\n", i);
+	 ft_printf("0 7.4	[%0 7.4d]\n", i);
+	 printf("+7.4	[%+7.4d]\n", i);
+	 ft_printf("+7.4	[%+7.4d]\n", i);
+	 printf("+07.4	[%+07.4d]\n", i);
+	 ft_printf("+07.4	[%+07.4d]\n", i);
+	 printf("+07.	[%+07.d]\n", i);
+	 ft_printf("+07.	[%+07.d]\n", i);
+	 printf("07.	\t[%07.d]\n", i);
+	 ft_printf("07.	\t[%07.d]\n", i);
+	 printf("07.3	[%07.3d]\n", i);
+	 ft_printf("07.3	[%07.3d]\n", i);
+	 printf("7	\t[%7d]\n", i);
+	 ft_printf("7	\t[%7d]\n", i);
+	 printf("+7	\t[%+7d]\n", i);
+	 ft_printf("+7	\t[%+7d]\n", i);
 //
-//	 ft_printf("________[_______] minus & !width\n");
-//	 printf("- .7	[%- .7d]\n", i);
-//	 ft_printf("- .7	[%- .7d]\n", i);
-//	 printf("-+.7	[%-+.7d]\n", i);
-//	 ft_printf("-+.7	[%-+.7d]\n", i);
-//	 printf("-+.1	[%-+.1d]\n", i);
-//	 ft_printf("-+.1	[%-+.1d]\n", i);
-//	 printf("- .0	[%- .0d]\n", i);
-//	 ft_printf("- .0	[%- .0d]\n", i);
-//	 printf("-+.0	[%-+.0d]\n", i);
-//	 ft_printf("-+.0	[%-+.0d]\n", i);
-//	 printf("-.7	\t[%-.7d]\n", i);
-//	 ft_printf("-.7	\t[%-.7d]\n", i);
-//	 printf("-.0	\t[%-.d]\n", i);
-//	 ft_printf("-.0	\t[%-.d]\n", i);
-//	 printf("-	\t[%-d]\n", i);
-//	 ft_printf("-	\t[%-d]\n", i);
-////
-//	 ft_printf("________[_______] !minus & width\n");
-//	 printf("4.7	\t[%4.7d]\n", i);
-//	 ft_printf("4.7	\t[%4.7d]\n", i);
-//	 printf("7.7	\t[%7.7d]\n", i);
-//	 ft_printf("7.7	\t[%7.7d]\n", i);
-//	 printf("7.6	\t[%7.6d]\n", i);
-//	 ft_printf("7.6	\t[%7.6d]\n", i);
-//	 printf(" 7.6	[% 7.6d]\n", i);
-//	 ft_printf(" 7.6	[% 7.6d]\n", i);
-//	 printf("+7.6	[%+7.6d]\n", i);
-//	 ft_printf("+7.6	[%+7.6d]\n", i);
-//	 printf("+07	\t[%+07d]\n", i);
-//	 ft_printf("+07	\t[%+07d]\n", i);
-//	 printf("07	\t[%07d]\n", i);
-//	 ft_printf("07	\t[%07d]\n", i);
-//	 printf("7.4	\t[%7.4d]\n", i);
-//	 ft_printf("7.4	\t[%7.4d]\n", i);
-//	 printf(" 7.4	[% 7.4d]\n", i);
-//	 ft_printf(" 7.4	[% 7.4d]\n", i);
-//	 printf("0 7.4	[%0 7.4d]\n", i);
-//	 ft_printf("0 7.4	[%0 7.4d]\n", i);
-//	 printf("+7.4	[%+7.4d]\n", i);
-//	 ft_printf("+7.4	[%+7.4d]\n", i);
-//	 printf("+07.4	[%+07.4d]\n", i);
-//	 ft_printf("+07.4	[%+07.4d]\n", i);
-//	 printf("+07.	[%+07.d]\n", i);
-//	 ft_printf("+07.	[%+07.d]\n", i);
-//	 printf("07.	\t[%07.d]\n", i);
-//	 ft_printf("07.	\t[%07.d]\n", i);
-//	 printf("07.3	[%07.3d]\n", i);
-//	 ft_printf("07.3	[%07.3d]\n", i);
-//	 printf("7	\t[%7d]\n", i);
-//	 ft_printf("7	\t[%7d]\n", i);
-//	 printf("+7	\t[%+7d]\n", i);
-//	 ft_printf("+7	\t[%+7d]\n", i);
-////
-////
-//////	int size;
-////	int i = 0;
-//	ft_printf("________[_______] !minus & !width\n");
-//	printf(" .7	[% .7d]\n", i);
-//	ft_printf(" .7	[% .7d]\n", i);
-//	printf("+.7	[%+.7d]\n", i);
-//	ft_printf("+.7	[%+.7d]\n", i);
-//	printf("+.4	[%+.4d]\n", i);
-//	ft_printf("+.4	[%+.4d]\n", i);
-//	printf("+.1	[%+.1d]\n", i);
-//	ft_printf("+.1	[%+.1d]\n", i);
-//	printf(".7	[%.7d]\n", i);
-//	ft_printf(".7	[%.7d]\n", i);
-//	printf("+.0	[%+.0d]\n", i);
-//	ft_printf("+.0	[%+.0d]\n", i);
-//	printf(" .0	[% .0d]\n", i);
-//	ft_printf(" .0	[% .0d]\n", i);
-//	printf(".0	[%.d]\n", i);
-//	ft_printf(".0	[%.d]\n", i);
-//	printf("+	[%+d]\n", i);
-//	ft_printf("+	[%+d]\n", i);
-//	printf("	[%d]\n", i);
-//	ft_printf("	[%d]\n", i);
 //
-//		ft_printf("\n> DECIMAL: failed tests\n");
-//	printf("%-05d\n", 42);
-//	ft_printf("%-05d\n", 42);
-//	printf("%-05d\n", -42);
-//	ft_printf("%-05d\n", -42);
-//	printf("%-10.5d|\n", 4242);
-//	ft_printf("%-10.5d|\n", 4242);
-//	printf("%-+10.5d|\n", 4242);
-//	ft_printf("%-+10.5d|\n", 4242);
+////	int size;
+//	int i = 0;
+	ft_printf("________[_______] !minus & !width\n");
+	printf(" .7	[% .7d]\n", i);
+	ft_printf(" .7	[% .7d]\n", i);
+	printf("+.7	[%+.7d]\n", i);
+	ft_printf("+.7	[%+.7d]\n", i);
+	printf("+.4	[%+.4d]\n", i);
+	ft_printf("+.4	[%+.4d]\n", i);
+	printf("+.1	[%+.1d]\n", i);
+	ft_printf("+.1	[%+.1d]\n", i);
+	printf(".7	[%.7d]\n", i);
+	ft_printf(".7	[%.7d]\n", i);
+	printf("+.0	[%+.0d]\n", i);
+	ft_printf("+.0	[%+.0d]\n", i);
+	printf(" .0	[% .0d]\n", i);
+	ft_printf(" .0	[% .0d]\n", i);
+	printf(".0	[%.d]\n", i);
+	ft_printf(".0	[%.d]\n", i);
+	printf("+	[%+d]\n", i);
+	ft_printf("+	[%+d]\n", i);
+	printf("	[%d]\n", i);
+	ft_printf("	[%d]\n", i);
+
+		ft_printf("\n> DECIMAL: failed tests\n");
+	printf("%-05d\n", 42);
+	ft_printf("%-05d\n", 42);
+	printf("%-05d\n", -42);
+	ft_printf("%-05d\n", -42);
+	printf("%-10.5d|\n", 4242);
+	ft_printf("%-10.5d|\n", 4242);
+	printf("%-+10.5d|\n", 4242);
+	ft_printf("%-+10.5d|\n", 4242);
 //	printf("|%#5zd|\n", 0);
 //	ft_printf("|%#5zd|\n", 0);
 //	printf("|%'.0hhd|\n", 1024);
