@@ -29,7 +29,7 @@ static void	setting(t_print *aq, intmax_t t)
 	else
 		S.free = S.wi - (int)S.ln;
 	(t < 0 || S.plus || S.spc) && (S.free--);
-	S.free < 0 && (S.free = 0);
+	S.free < 0 && (S.free &= 0);
 	if (S.apost && S.ln)
 	{
 		S.apost = (short)(S.ln / 3 - (S.ln % 3 ? 0 : 1));
