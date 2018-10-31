@@ -104,15 +104,12 @@ intmax_t		extract_i(t_print *aq);
 uintmax_t		extract_ui(t_print *aq);
 
 void			pr_color(t_print *aq, const char **line);
-
 void			pr_utoa(t_print *aq, uintmax_t value, short base);
-
 void			pr_refresh(t_print *aq);
-size_t			pr_overflow_str(t_print *aq, char *s, size_t *n);
-void			pr_overflow(t_print *aq, char c, size_t *n);
 
 void			pr_join_str(t_print *aq, char *s, size_t n);
 void			pr_join(t_print *aq, char c, size_t n);
+
 void			pr_join_2b(t_print *aq, unsigned int c);
 void			pr_join_3b(t_print *aq, unsigned int c);
 void			pr_join_4b(t_print *aq, unsigned int c);
