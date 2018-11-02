@@ -12,14 +12,14 @@
 
 #include "../inc/ft_printf.h"
 
-static void		start_handle(t_print *aq)
+static void		start_handle(t_print *aq/*, va_list va*/)
 {
 	if (S.ty == 'i' || S.ty == 'd' || S.ty == 'D')
-		handle_id(aq, extract_i(aq));
+		handle_id(aq, extract_i(aq/*va*/));
 	else if (S.ty == 'o' || S.ty == 'u' || S.ty == 'b')
-		handle_oub(aq, extract_ui(aq));
+		handle_oub(aq, extract_ui(aq/*va*/));
 	else if (S.ty == 'p' || S.ty == 'x' || S.ty == 'X')
-		handle_xp(aq, extract_ui(aq));
+		handle_xp(aq, extract_ui(aq/*va*/));
 	else if (S.ty == 'c' || S.ty == 'C')
 		handle_c(aq, (wchar_t)va_arg(aq->va, int));
 	else if (S.ty == '%')
@@ -32,7 +32,7 @@ static void		start_handle(t_print *aq)
 		pr_join_str(aq, "\e[0m", 4);
 }
 
-static void		explore(t_print *aq, const char *line, const char *point)
+static void		explore(t_print *aq/*, va_list va, */const char *line, const char *point)
 {
 	while (*line)
 	{
@@ -49,8 +49,8 @@ static void		explore(t_print *aq, const char *line, const char *point)
 			if (*point != '%' && line - point > 0)
 				pr_join_str(aq, (char*)point, line - point);
 			line++;
-			define_flags(aq, &line);
-			start_handle(aq);
+			define_flags(aq/*, va*/, &line);
+			start_handle(aq/*, va*/);
 			point = line;
 		}
 		*line != '%' && line++;
@@ -62,6 +62,7 @@ static void		explore(t_print *aq, const char *line, const char *point)
 int				ft_printf(const char *format, ...)
 {
 	static t_print	aq;
+	// va_list			va;
 
 	aq.i = 0;
 	aq.size = 0;
@@ -69,7 +70,7 @@ int				ft_printf(const char *format, ...)
 	if (format)
 	{
 		va_start(aq.va, format);
-		explore(&aq, format, format);
+		explore(&aq/*, va*/, format, format);
 		va_end(aq.va);
 	}
 	return (aq.size + write(1, aq.out, aq.i));

@@ -67,6 +67,7 @@ typedef struct	s_sp
 	short		plus;
 	short		spc;
 	short		apost;
+	short		base;
 	int			wi;
 	short		prec;
 	int			prv;
@@ -74,7 +75,6 @@ typedef struct	s_sp
 	{
 		none, h, hh, l, ll, j, z
 	}			length;
-	short		base;
 	int			free;
 	size_t		ln;
 	char		ty;
@@ -83,7 +83,7 @@ typedef struct	s_sp
 
 typedef struct	s_print
 {
-	va_list		va;
+	va_list		va; //separate
 	t_sp		sp;
 	char		out[BUFSIZE];
 	short		i;
