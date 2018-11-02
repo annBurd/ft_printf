@@ -756,6 +756,67 @@ int main(int argc, char **argv)
 //	ft_printf("%4.13ld|\n", li);
 //	ft_printf("%4.13D|\n", li);
 
+
+
+//		ft_printf("\n> ONE MORE TEST\n");
+	// int	size = 0;
+	// size = printf("|%-2.C|", 129);
+	// printf("%d\n", size);
+	// size = ft_printf("|%-2.C|", 129);
+	// printf("%d\n", size);
+	// printf("------------------\n");
+	// printf("#o - |%#o|\n", 0);
+	// ft_printf("#o - |%#o|\n", 0);
+	// printf("------------------\n");
+	// printf("#x - |%#x|\n", 0);
+	// ft_printf("#x - |%#x|\n", 0);
+	// printf("------------------\n");
+	// printf(".0d - |%.0d|\n", 0);
+	// ft_printf(".0d - |%.0d|\n", 0);
+	// printf("------------------\n");
+	// printf(".0o - |%.0o|\n", 0);
+	// ft_printf(".0o - |%.0o|\n", 0);
+	// printf("------------------\n");
+	// printf(".0x - |%.0x|\n", 0);
+	// ft_printf(".0x - |%.0x|\n", 0);
+	// printf("------------------\n");
+	// printf("#.0d - |%#.0d|\n", 0);
+	// ft_printf("#.0d - |%#.0d|\n", 0);
+	// printf("------------------\n");
+	// printf("#.0o - |%#.0o|\n", 0);
+	// ft_printf("#.0o - |%#.0o|\n", 0);
+	// printf("------------------\n");
+	// printf("#.0x - |%#.0x|\n", 0);
+	// ft_printf("#.0x - |%#.0x|\n", 0);
+	// printf("==================\n");
+	// printf("#o - |%#o|\n", 1);
+	// ft_printf("#o - |%#o|\n", 1);
+	// printf("------------------\n");
+	// printf("#x - |%#x|\n", 1);
+	// ft_printf("#x - |%#x|\n", 1);
+	// printf("------------------\n");
+	// printf(".0d - |%.0d|\n", 1);
+	// ft_printf(".0d - |%.0d|\n", 1);
+	// printf("------------------\n");
+	// printf(".0o - |%.0o|\n", 1);
+	// ft_printf(".0o - |%.0o|\n", 1);
+	// printf("------------------\n");
+	// printf(".0x - |%.0x|\n", 1);
+	// ft_printf(".0x - |%.0x|\n", 1);
+	// printf("------------------\n");
+	// printf("#.0d - |%#.0d|\n", 1);
+	// ft_printf("#.0d - |%#.0d|\n", 1);
+	// printf("------------------\n");
+	// printf("#.0o - |%#.0o|\n", 1);
+	// ft_printf("#.0o - |%#.0o|\n", 1);
+	// printf("------------------\n");
+	// printf("#.0x - |%#.0x|\n", 1);
+	// ft_printf("#.0x - |%#.0x|\n", 1);
+	// printf("==================\n");
+
+
+
+
 	// MIN & MAX values of types
 	//****************************************************
 	// printf("size_t MIN = %lld\n", MIN_OF(size_t));
