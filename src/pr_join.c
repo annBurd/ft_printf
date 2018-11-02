@@ -19,22 +19,6 @@
 ** 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
 */
 
-void	pr_join_str(t_print *aq, char *s, size_t n)
-{
-	if (aq->i + n >= BUFSIZE)
-		s += pr_overflow_str(aq, s, &n);
-	while (*s && n--)
-		aq->out[aq->i++] = *(s++);
-}
-
-void	pr_join(t_print *aq, char c, size_t n)
-{
-	if (aq->i + n >= BUFSIZE)
-		pr_overflow(aq, c, &n);
-	while (n--)
-		aq->out[aq->i++] = c;
-}
-
 void	pr_join_2b(t_print *aq, unsigned int c)
 {
 	const unsigned int		o2 = (c << 26) >> 26;
