@@ -87,21 +87,21 @@ void	pr_join_4b(t_print *aq, unsigned int c)
  		aq->out[aq->i++] = c;
  	else if (c < 2048)
  	{
-// 		aq->out[aq->i++] = 192 | ((c >> 6) & 31); /**/
- 		aq->out[aq->i++] = 192 | (c >> 6);
+// 		aq->out[aq->i++] = 192 | ((c >> 6) & 31); /* var 1 */
+ 		aq->out[aq->i++] = 192 | (c >> 6); /* var 2 */
  		aq->out[aq->i++] = 128 | (c & 63);
  	}
  	else if (c < 65536)
  	{
-// 		aq->out[aq->i++] = 224 | ((c >> 12) & 15); /**/
- 		aq->out[aq->i++] = 224 | (c >> 12);
+// 		aq->out[aq->i++] = 224 | ((c >> 12) & 15); /* var 1 */
+ 		aq->out[aq->i++] = 224 | (c >> 12); /* var 2 */
  		aq->out[aq->i++] = 128 | ((c >> 6) & 63);
  		aq->out[aq->i++] = 128 | (c & 63);
  	}
  	else
  	{
-// 		aq->out[aq->i++] = 240 | ((c >> 18) & 7); /**/
- 		aq->out[aq->i++] = 240 | ((c >> 18) | 240);
+// 		aq->out[aq->i++] = 240 | ((c >> 18) & 7); /* var 1 */
+ 		aq->out[aq->i++] = 240 | ((c >> 18) | 240); /* var 2 */
  		aq->out[aq->i++] = 128 | ((c >> 12) & 63);
  		aq->out[aq->i++] = 128 | ((c >> 6) & 63);
  		aq->out[aq->i++] = 128 | (c & 63);
