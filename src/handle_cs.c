@@ -38,7 +38,7 @@ void			handle_c(t_print *aq, wchar_t arg)
 		pr_join_3b(aq, arg);
 	else if (S.ln == 4)
 		pr_join_4b(aq, arg);
-//	pr_join_byte(aq, arg);
+//	pr_join_bytes(aq, arg);
 	if (S.minus && S.free)
 		pr_join(aq, ' ', (size_t)S.free);
 }
@@ -99,7 +99,7 @@ void			handle_ws(t_print *aq, wchar_t *arg)
 //			pr_join_4b(aq, *(arg++));
 //		S.ln -= size;
 
-		pr_join_byte(aq, *arg);
+		pr_join_bytes(aq, *arg);
 		S.ln -= count_bytes(*(arg++));
 	}
 	if (S.minus && S.free)

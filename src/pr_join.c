@@ -79,7 +79,7 @@ void	pr_join_4b(t_print *aq, unsigned int c)
 //	 aq->out[aq->i++] = 4034953344 | ((c << 26) >> 26);
 }
 
- void	pr_join_byte(t_print *aq, unsigned int c)
+ void	pr_join_bytes(t_print *aq, unsigned int c)
  {
  	if (aq->i + 4 >= PR_BUF_SIZE)
  		pr_refresh(aq);
