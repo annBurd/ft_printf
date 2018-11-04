@@ -23,8 +23,6 @@
 ** oooooooo oooooooo oooooooo 11oooooo - 192 / 0xC0
 ** oooooooo oooooooo oooooooo 111ooooo - 224 / 0xC0
 ** oooooooo oooooooo oooooooo 1111oooo - 240 / 0xF0
-** oooooooo oooooooo 1111oooo 1ooooooo - 61568 / 0xF080
-** oooooooo 1111oooo 1ooooooo 1ooooooo - 15761536 / 0xF08080
 */
 
 void	pr_join_2b(t_print *aq, unsigned int c)
@@ -40,12 +38,6 @@ void	pr_join_2b(t_print *aq, unsigned int c)
 
 //	 aq->out[aq->i++] = 192 | (((c >> 6) << 27) >> 27);
 //	 aq->out[aq->i++] = 49280 | ((c << 26) >> 26);
-
-// 		aq->out[aq->i++] = 192 | ((c >> 6) & 31);
-// 		aq->out[aq->i++] = 128 | (c & 63);
-
-// 		aq->out[aq->i++] = 192 | (c >> 6);
-// 		aq->out[aq->i++] = 128 | (c & 63);
 }
 
 void	pr_join_3b(t_print *aq, unsigned int c)
@@ -64,14 +56,6 @@ void	pr_join_3b(t_print *aq, unsigned int c)
 //	 aq->out[aq->i++] = 224 | (((c >> 12) << 28) >> 28);
 //	 aq->out[aq->i++] = 57472 | (((c >> 6) << 26) >> 26);
 //	 aq->out[aq->i++] = 14712960 | ((c << 26) >> 26);
-
-// 		aq->out[aq->i++] = 224 | ((c >> 12) & 15);
-// 		aq->out[aq->i++] = 128 | ((c >> 6) & 63);
-// 		aq->out[aq->i++] = 128 | (c & 63);
-
-// 		aq->out[aq->i++] = 224 | (c >> 12);
-// 		aq->out[aq->i++] = 128 | ((c >> 6) & 63);
-// 		aq->out[aq->i++] = 128 | (c & 63);
 }
 
 void	pr_join_4b(t_print *aq, unsigned int c)
@@ -93,16 +77,6 @@ void	pr_join_4b(t_print *aq, unsigned int c)
 //	 aq->out[aq->i++] = 61568 | (((c >> 12) << 26) >> 26);
 //	 aq->out[aq->i++] = 15761536 | (((c >> 6) << 26) >> 26);
 //	 aq->out[aq->i++] = 4034953344 | ((c << 26) >> 26);
-
-// 		aq->out[aq->i++] = 240 | ((c >> 18) & 7);
-// 		aq->out[aq->i++] = 128 | ((c >> 12) & 63);
-// 		aq->out[aq->i++] = 128 | ((c >> 6) & 63);
-// 		aq->out[aq->i++] = 128 | (c & 63);
-
-// 		aq->out[aq->i++] = 240 | ((c >> 18) | 240);
-// 		aq->out[aq->i++] = 128 | (((c >> 12) & 63);
-// 		aq->out[aq->i++] = 128 | ((c >> 6) & 63));
-// 		aq->out[aq->i++] = 128 | (c & 63);
 }
 
  void	pr_join_byte(t_print *aq, unsigned int c)
