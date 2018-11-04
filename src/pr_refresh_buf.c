@@ -21,12 +21,12 @@ void			pr_refresh(t_print *aq)
 
 static size_t	pr_overflow_str(t_print *aq, char *s, size_t *n)
 {
-	const size_t	t = *n > BUFSIZE ? *n - BUFSIZE : *n;
+	const size_t	t = *n > PR_BUF_SIZE ? *n - PR_BUF_SIZE : *n;
 
-	if (*n > BUFSIZE)
+	if (*n > PR_BUF_SIZE)
 		pr_join_str(aq, s, t);
 	pr_refresh(aq);
-	if (*n <= BUFSIZE)
+	if (*n <= PR_BUF_SIZE)
 		pr_join_str(aq, s, t);
 	*n -= t;
 	return (t);
@@ -34,19 +34,19 @@ static size_t	pr_overflow_str(t_print *aq, char *s, size_t *n)
 
 static void		pr_overflow(t_print *aq, char c, size_t *n)
 {
-	const size_t	t = *n > BUFSIZE ? *n - BUFSIZE : *n;
+	const size_t	t = *n > PR_BUF_SIZE ? *n - PR_BUF_SIZE : *n;
 
-	if (*n > BUFSIZE)
+	if (*n > PR_BUF_SIZE)
 		pr_join(aq, c, t);
 	pr_refresh(aq);
-	if (*n <= BUFSIZE)
+	if (*n <= PR_BUF_SIZE)
 		pr_join(aq, c, t);
 	*n -= t;
 }
 
 void			pr_join_str(t_print *aq, char *s, size_t n)
 {
-	if (aq->i + n >= BUFSIZE)
+	if (aq->i + n >= PR_BUF_SIZE)
 		s += pr_overflow_str(aq, s, &n);
 	while (*s && n--)
 		aq->out[aq->i++] = *(s++);
@@ -54,7 +54,7 @@ void			pr_join_str(t_print *aq, char *s, size_t n)
 
 void			pr_join(t_print *aq, char c, size_t n)
 {
-	if (aq->i + n >= BUFSIZE)
+	if (aq->i + n >= PR_BUF_SIZE)
 		pr_overflow(aq, c, &n);
 	while (n--)
 		aq->out[aq->i++] = c;

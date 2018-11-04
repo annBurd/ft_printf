@@ -4,22 +4,22 @@
 
 #include "../inc/ft_printf.h"
 
-intmax_t	extract_i(t_print *aq)
+intmax_t	extract_i(t_print *aq, va_list va)
 {
 	if (S.length == l || S.ty == 'D')
-		return (va_arg(aq->va, long int));
+		return (va_arg(va, long int));
 	else if (!S.length)
-		return (va_arg(aq->va, int));
+		return (va_arg(va, int));
 	else if (S.length == h)
-		return (short)(va_arg(aq->va, void*));
+		return (short)(va_arg(va, void*));
 	else if (S.length == hh)
-		return (signed char)(va_arg(aq->va, void*));
+		return (signed char)(va_arg(va, void*));
 	else if (S.length == ll)
-		return (va_arg(aq->va, long long int));
+		return (va_arg(va, long long int));
 	else if (S.length == j)
-		return (va_arg(aq->va, intmax_t));
+		return (va_arg(va, intmax_t));
 	else if (S.length == z)
-		return (size_t)(va_arg(aq->va, void*));
+		return (size_t)(va_arg(va, void*));
 	else
 		return (0);
 }

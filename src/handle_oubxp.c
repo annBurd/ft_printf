@@ -4,22 +4,22 @@
 
 #include "../inc/ft_printf.h"
 
-uintmax_t	extract_ui(t_print *aq)
+uintmax_t	extract_ui(t_print *aq, va_list va)
 {
 	if (S.ty == 'p' || S.length == j)
-		return (va_arg(aq->va, uintmax_t));
+		return (va_arg(va, uintmax_t));
 	else if (!S.length)
-		return (unsigned int)(va_arg(aq->va, void*));
+		return (unsigned int)(va_arg(va, void*));
 	else if (S.length == h)
-		return (unsigned short)(va_arg(aq->va, void*));
+		return (unsigned short)(va_arg(va, void*));
 	else if (S.length == hh)
-		return (unsigned char)(va_arg(aq->va, void*));
+		return (unsigned char)(va_arg(va, void*));
 	else if (S.length == l)
-		return (unsigned long int)(va_arg(aq->va, void*));
+		return (unsigned long int)(va_arg(va, void*));
 	else if (S.length == ll)
-		return (unsigned long long int)(va_arg(aq->va, void*));
+		return (unsigned long long int)(va_arg(va, void*));
 	else if (S.length == z)
-		return (size_t)(va_arg(aq->va, void*));
+		return (size_t)(va_arg(va, void*));
 	else
 		return (0);
 }

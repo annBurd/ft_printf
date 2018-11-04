@@ -97,8 +97,8 @@ int main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-//	setlocale(LC_CTYPE, "");
-	setlocale(LC_ALL, "en_US.UTF-8");
+	setlocale(LC_CTYPE, "");
+//	setlocale(LC_ALL, "en_US.UTF-8");
 
 
 //	HERE WE HAVE SOME TESTS
@@ -289,6 +289,7 @@ int main(int argc, char **argv)
 	//	WCHAR_T *
 //	****************************************************
 //	wchar_t *ww = L"ΛᚫᨖẄꚩ";
+//	wchar_t *ww = L"ЇᚫẄ";
 //		ft_printf("> WCHAR_T *\n");
 //	printf("\t\t[%S]\n", ww);
 //	ft_printf("\t\t[%S]\n", ww);
@@ -708,10 +709,9 @@ int main(int argc, char **argv)
 //	 ft_printf("7	\t[%7d]\n", i);
 //	 printf("+7	\t[%+7d]\n", i);
 //	 ft_printf("+7	\t[%+7d]\n", i);
-////
-////
-//////	int size;
-////	int i = 0;
+
+
+//	int i = 0;
 //	ft_printf("________[_______] !minus & !width\n");
 //	printf(" .7	[% .7d]\n", i);
 //	ft_printf(" .7	[% .7d]\n", i);

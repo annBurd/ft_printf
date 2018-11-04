@@ -38,6 +38,7 @@ void			handle_c(t_print *aq, wchar_t arg)
 		pr_join_3b(aq, arg);
 	else if (S.ln == 4)
 		pr_join_4b(aq, arg);
+//	pr_join_byte(aq, arg);
 	if (S.minus && S.free)
 		pr_join(aq, ' ', (size_t)S.free);
 }
@@ -80,23 +81,26 @@ static void		setting_ws(t_print *aq, wchar_t *arg, size_t i)
 
 void			handle_ws(t_print *aq, wchar_t *arg)
 {
-	size_t	size;
+//	size_t	size;
 
 	if (!arg)
 		arg = L"(null)\0";
 	setting_ws(aq, arg, 0);
 	while (*arg && S.ln)
 	{
-		size = count_bytes(*arg);
-		if (size == 1)
-			pr_join(aq, *(arg++), 1);
-		else if (size == 2)
-			pr_join_2b(aq, *(arg++));
-		else if (size == 3)
-			pr_join_3b(aq, *(arg++));
-		else
-			pr_join_4b(aq, *(arg++));
-		S.ln -= size;
+//		size = count_bytes(*arg);
+//		if (size == 1)
+//			pr_join(aq, *(arg++), 1);
+//		else if (size == 2)
+//			pr_join_2b(aq, *(arg++));
+//		else if (size == 3)
+//			pr_join_3b(aq, *(arg++));
+//		else
+//			pr_join_4b(aq, *(arg++));
+//		S.ln -= size;
+
+		pr_join_byte(aq, *arg);
+		S.ln -= count_bytes(*(arg++));
 	}
 	if (S.minus && S.free)
 		pr_join(aq, ' ', (size_t)S.free);
