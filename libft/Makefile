@@ -26,18 +26,19 @@ SRC = \
  
 OBJ = $(SRC:.c=.o)
 
+all: $(NAME)
+	@echo "got ""\033[2;36m""$(NAME)""\033[0m"
+
 $(NAME):
 	@$(CC) $(CFLAGS) -c $(NAME:.a=.h) $(SRC)
 	@ar rc $(NAME) $(OBJ)
 
-all: $(NAME)
-
 clean:
 	@$(RM) $(OBJ)
-	@$(RM) $(NAME:.a=.h.gch)
 	
-fclean:
+fclean: clean
 	@$(RM) $(NAME)
+	@echo "\033[2;36m""libft""\033[0m"" was fcleaned"
 
 re: fclean all
 
