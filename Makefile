@@ -37,11 +37,12 @@ OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 all: 
 	@rm -rf $(OBJ_DIR)
 	@mkdir $(OBJ_DIR)
+	@make -C $(LIBFT_DIR)
+	@echo "start compilation""\033[2;35m"
 	@make $(NAME)
-	@echo "\n\033[35mft_printf\033[0m got $(NAME)"
+	@echo "\n\033[0m""got ""\033[2;36m""$(NAME)""\033[0m"
 
 $(NAME): $(OBJ)
-	@make -C $(LIBFT_DIR)
 	@ar rc $(NAME) $(OBJ) $(LIBFT_DIR)*.o
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
