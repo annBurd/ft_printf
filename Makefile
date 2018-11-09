@@ -35,8 +35,6 @@ SRC = ft_printf.c \
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 all: 
-	@rm -rf $(OBJ_DIR)
-	@mkdir $(OBJ_DIR)
 	@make -C $(LIBFT_DIR)
 	@echo "start compilation""\033[2;35m"
 	@make $(NAME)
@@ -51,14 +49,13 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 
 clean:
 	@rm -rf $(OBJ)
-	@rm -rf $(OBJ_DIR)
 	@make -C $(LIBFT_DIR) clean
 	
 fclean:	
 	@make clean
 	@rm -rf $(NAME)
 	@make -C $(LIBFT_DIR) fclean
-	@echo "\033[2; 36m""ft_printf""\033[0m"" was fcleaned"
+	@echo "\033[2;36m""ft_printf""\033[0m"" was fcleaned"
 
 re: fclean all
 
