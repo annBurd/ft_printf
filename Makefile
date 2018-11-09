@@ -26,7 +26,6 @@ SRC = ft_printf.c \
 	handle_cs.c \
 	handle_id.c \
 	handle_oubxp.c \
-	handle_xp.c \
 	pr_refresh_buf.c \
 	pr_define_flags.c \
 	pr_join.c \
@@ -57,9 +56,8 @@ clean:
 fclean:	
 	@make clean
 	@rm -rf $(NAME)
-	@rm -rf test_me
 	@make -C $(LIBFT_DIR) fclean
-	@echo "\033[35mft_printf\033[0m was fcleaned"
+	@echo "\033[2; 36m""ft_printf""\033[0m"" was fcleaned"
 
 re: fclean all
 
