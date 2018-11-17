@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:26:16 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/14 00:35:14 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/11/17 15:48:26 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void		start_handle(t_print *aq, va_list va)
 	else if (S.ty == 's' || S.ty == 'S')
 		handle_ws(aq, va_arg(va, wchar_t*));
 	if (S.color)
-		pr_join_str(aq, "\e[0m", 4);
+		pr_join_str(aq, RESET, 4);
 }
 
 static void		explore(t_print *aq, va_list va,
@@ -42,7 +42,7 @@ static void		explore(t_print *aq, va_list va,
 			if (line - point > 0)
 				pr_join_str(aq, (char*)point, line - point);
 			*(line++) == '<' ? pr_color(aq, &line)
-							: pr_join_str(aq, "\e[0m", 4);
+							: pr_join_str(aq, RESET, 4);
 			point = ++line;
 		}
 		if (*line == '%')
@@ -67,7 +67,7 @@ int				ft_printf(const char *format, ...)
 
 	aq.i = 0;
 	aq.size = 0;
-	ft_bzero(&aq.out, PR_BUF_SIZE);
+	ft_bzero(&aq.out, PRF_BUF_SIZE);
 	if (format)
 	{
 		va_start(va, format);

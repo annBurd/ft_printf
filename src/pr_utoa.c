@@ -26,7 +26,7 @@ void	pr_utoa(t_print *aq, uintmax_t value, short base)
 
 	len = S.ln ? S.ln : ft_nbrulen(value, base);
 	len_p = --len;
-	if (aq->i + len + 1 >= PR_BUF_SIZE)
+	if (aq->i + len + 1 >= PRF_BUF_SIZE)
 		pr_refresh(aq);
 	while (value)
 	{

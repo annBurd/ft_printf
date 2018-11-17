@@ -112,7 +112,7 @@ static void	set_color(t_print *aq, char mod, char value)
 
 void		pr_color(t_print *aq, const char **line)
 {
-	if (aq->i + 12 >= PR_BUF_SIZE)
+	if (aq->i + 12 >= PRF_BUF_SIZE)
 		pr_refresh(aq);
 	aq->out[aq->i++] = 033;
 	aq->out[aq->i++] = '[';

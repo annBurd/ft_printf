@@ -6,7 +6,7 @@
 /*   By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:32:45 by aburdeni          #+#    #+#             */
-/*   Updated: 2018/10/14 19:30:46 by aburdeni         ###   ########.fr       */
+/*   Updated: 2018/11/17 15:53:15 by aburdeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 # define FT_PRINTF_H
 
 # include "../libft/libft.h"
+# include "color.h"
 # include <stdarg.h>
 # include <wchar.h>
 
 # define S aq->sp
-# define PR_BUF_SIZE 666
+# define PRF_BUF_SIZE 666
 
 /*
 ** v >>> for ̶ ̶v̶e̶n̶d̶e̶t̶t̶a̶  value sign [-1, 0, 1]
 ** free >>> for counting free space when length > width
-** color >>> usage details see pr_color_me.c
+** color >>> usage see pr_color_me.c
 **
 ** pr_refresh			| for strange & mystic cases
 ** pr_overflow		>>>	| when buf is full
@@ -31,26 +32,13 @@
 **
 **
 ** EVALUATED BY MOULINETTE 70%
-**
-** test_c: [ko] **
-** test_i: [ko] **
-** test_d: [ko] **
-** test_D: [ko] **
-** test_o: [ko] **
-** test_u: [ko] **
-** test_x: [ko] **
-**
-** test_C: [ok]
-** test_s: [ok]
-** test_S: [ok]
-** test_p: [ok]
-** test_hhhllljz: [ok]
-** test_sharp: [ok]
-** test_precision: [ok]
-** test_zero: [ok]
-** test_minus: [ok]
-** test_plus: [ok]
-** test_space: [ok]
+** test_c: [ko]
+** test_i: [ko]
+** test_d: [ko]
+** test_D: [ko]
+** test_o: [ko]
+** test_u: [ko]
+** test_x: [ko]
 */
 
 typedef struct	s_sp
@@ -78,7 +66,7 @@ typedef struct	s_sp
 typedef struct	s_print
 {
 	t_sp		sp;
-	char		out[PR_BUF_SIZE];
+	char		out[PRF_BUF_SIZE];
 	short		i;
 	int			size;
 }				t_print;
@@ -101,8 +89,4 @@ void			pr_utoa(t_print *aq, uintmax_t value, short base);
 void			pr_refresh(t_print *aq);
 void			pr_join(t_print *aq, char c, size_t n);
 void			pr_join_str(t_print *aq, char *s, size_t n);
-void			pr_join_bytes(t_print *aq, unsigned int arg);
-void			pr_join_2b(t_print *aq, unsigned int c);
-void			pr_join_3b(t_print *aq, unsigned int c);
-void			pr_join_4b(t_print *aq, unsigned int c);
 #endif

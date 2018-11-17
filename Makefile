@@ -6,7 +6,7 @@
 #    By: aburdeni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 18:22:11 by aburdeni          #+#    #+#              #
-#    Updated: 2018/10/10 00:58:09 by aburdeni         ###   ########.fr        #
+#    Updated: 2018/11/17 15:46:09 by aburdeni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,12 @@ OBJ_DIR = ./obj/
 INC_DIR = ./inc/
 LIBFT_DIR = ./libft/
 
-HEADER = $(addprefix $(INC_DIR), ft_printf.h)
+HEADER = $(wildcard $(INC_DIR)*.h)
 
 SRC = ft_printf.c \
 	handle_cs.c \
 	handle_id.c \
 	handle_oubxp.c \
-	pr_refresh_buf.c \
 	pr_define_flags.c \
 	pr_join.c \
 	pr_color.c \

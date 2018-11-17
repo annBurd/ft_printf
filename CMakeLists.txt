@@ -5,12 +5,12 @@ project(_ft_printf)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Ipthreads")
 #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Werror -Ipthreads")
 set(SOURCE_FILES
+        inc/color.h
         inc/ft_printf.h
         src/ft_printf.c
         src/handle_cs.c
         src/handle_id.c
         src/handle_oubxp.c
-        src/pr_refresh_buf.c
         src/pr_define_flags.c
         src/pr_join.c
         src/pr_color.c
