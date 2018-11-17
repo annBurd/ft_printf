@@ -26,9 +26,9 @@ SRC = ft_printf.c \
 	handle_cs.c \
 	handle_id.c \
 	handle_oubxp.c \
+	pr_color.c \
 	pr_define_flags.c \
 	pr_join.c \
-	pr_color.c \
 	pr_utoa.c
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
@@ -44,7 +44,7 @@ $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ) $(LIBFT_DIR)*.o
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@$(CC) $(CFLAGS) -I $(HEADER) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo -n ' <@>'
 
 clean:
