@@ -22,15 +22,6 @@
 # define PRF_BUF_SIZE 666
 
 /*
-** v >>> for ̶ ̶v̶e̶n̶d̶e̶t̶t̶a̶  value sign [-1, 0, 1]
-** free >>> for counting free space when length > width
-** color >>> usage see pr_color_me.c
-**
-** pr_refresh			| for strange & mystic cases
-** pr_overflow		>>>	| when buf is full
-** pr_overflow_str		| ̶ ̶̶o̶f̶ ̶d̶a̶r̶k̶n̶e̶s̶s̶
-**
-**
 ** EVALUATED BY MOULINETTE 70%
 ** test_c: [ko]
 ** test_i: [ko]
